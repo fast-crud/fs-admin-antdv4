@@ -5,11 +5,11 @@ import "@fast-crud/fast-crud/dist/style.css";
 import { FsExtendsCopyable, FsExtendsEditor, FsExtendsJson, FsExtendsTime, FsExtendsUploader } from "@fast-crud/fast-extends";
 import "@fast-crud/fast-extends/dist/style.css";
 import UiAntdv from "@fast-crud/ui-antdv4";
+import "@fast-crud/ui-antdv4/dist/style.css";
 import _ from "lodash-es";
 import { useCrudPermission } from "../permission";
 import { GetSignedUrl } from "/@/views/crud/component/uploader/s3/api";
 import { notification } from "ant-design-vue";
-import { useI18n } from "vue-i18n";
 
 function install(app: any, options: any = {}) {
   app.use(UiAntdv);
@@ -30,8 +30,6 @@ function install(app: any, options: any = {}) {
      */
     commonOptions(props: UseCrudProps): CrudOptions {
       const crudBinding = props.crudExpose?.crudBinding;
-      const { ui } = useUi();
-      const { t } = useI18n();
       const opts: CrudOptions = {
         table: {
           size: "small",
