@@ -7,16 +7,17 @@
 <script lang="ts">
 import zhCN from "ant-design-vue/es/locale/zh_CN";
 import enUS from "ant-design-vue/es/locale/en_US";
-import { provide, ref, nextTick, getCurrentInstance } from "vue";
+import { nextTick, provide, ref } from "vue";
 import { usePageStore } from "/src/store/modules/page";
 import { useResourceStore } from "/src/store/modules/resource";
 import { useSettingStore } from "/@/store/modules/settings";
 import "dayjs/locale/zh-cn";
 import "dayjs/locale/en";
 import dayjs from "dayjs";
+
 export default {
   name: "App",
-  setup(props: any, ctx: any) {
+  setup() {
     //刷新页面方法
     const routerEnabled = ref(true);
     const locale = ref(zhCN);

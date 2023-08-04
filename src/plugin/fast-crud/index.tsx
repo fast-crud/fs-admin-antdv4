@@ -4,7 +4,7 @@ import { ColumnCompositionProps, CrudOptions, FastCrud, PageQuery, PageRes, setL
 import "@fast-crud/fast-crud/dist/style.css";
 import { FsExtendsCopyable, FsExtendsEditor, FsExtendsJson, FsExtendsTime, FsExtendsUploader } from "@fast-crud/fast-extends";
 import "@fast-crud/fast-extends/dist/style.css";
-import UiAntdv from "@fast-crud/ui-antdv";
+import UiAntdv from "@fast-crud/ui-antdv4";
 import _ from "lodash-es";
 import { useCrudPermission } from "../permission";
 import { GetSignedUrl } from "/@/views/crud/component/uploader/s3/api";
