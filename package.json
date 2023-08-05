@@ -28,7 +28,7 @@
     "@aws-sdk/s3-request-presigner": "^3.383.0",
     "@fast-crud/fast-crud": "^1.15.1",
     "@fast-crud/fast-extends": "^1.15.1",
-    "@fast-crud/ui-antdv4": "^1.15.1",
+    "@fast-crud/ui-antdv4": "^1.14.0",
     "@fast-crud/ui-interface": "^1.15.1",
     "@iconify/iconify": "^3.1.1",
     "@iconify/json": "^2.2.98",
