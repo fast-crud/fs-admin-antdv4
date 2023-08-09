@@ -185,7 +185,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         daterange: {
           title: "日期范围",
           type: "daterange",
-          search: { show: true, width: 300 },
+          search: { show: true, width: 300, col: { span: 6 } },
           valueBuilder({ row, key }) {
             if (!utils.strings.hasEmpty(row.daterangeStart, row.daterangeEnd)) {
               row[key] = [dayjs(row.daterangeStart), dayjs(row.daterangeEnd)];
@@ -195,7 +195,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         datetimerange: {
           title: "日期时间范围",
           type: "datetimerange",
-          search: { show: true, width: 300 },
+          search: { show: true, width: 300, col: { span: 8 } },
           valueBuilder({ row, key }) {
             if (!utils.strings.hasEmpty(row.datetimerangeStart, row.datetimerangeEnd)) {
               row[key] = [dayjs(row.datetimerangeStart), dayjs(row.datetimerangeEnd)];
