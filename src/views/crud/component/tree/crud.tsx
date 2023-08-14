@@ -56,7 +56,8 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           form: {
             component: {
               "tree-checkable": true
-            }
+            },
+            rules: [{ required: true, message: "请选择" }]
           }
         },
         fieldReplace: {
