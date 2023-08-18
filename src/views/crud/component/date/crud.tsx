@@ -31,6 +31,11 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         scroll: { x: 3000 }
       },
       rowHandle: { fixed: "right" },
+      search: {
+        initialForm: {
+          // datetimerange: [dayjs().subtract(1, "month").startOf("day"), dayjs().endOf("day")]
+        }
+      },
       columns: {
         id: {
           title: "ID",
