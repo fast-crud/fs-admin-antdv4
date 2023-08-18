@@ -16,6 +16,25 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
     return await api.AddObj(form);
   };
 
+  const lazyloadDictRef = dict({
+    data: [
+      {
+        id: "0",
+        label: "Root",
+        value: "0"
+      }
+    ]
+  });
+  const genTreeNode = (parentId: number, isLeaf = false) => {
+    const random = Math.random().toString(36).substring(2, 6);
+    return {
+      id: random,
+      pId: parentId,
+      value: random,
+      label: isLeaf ? "Tree Node" : "Expand to load",
+      isLeaf
+    };
+  };
   return {
     crudOptions: {
       request: {
@@ -73,6 +92,26 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           form: {
             component: {
               fieldNames: { label: "name", key: "code", value: "code" }
+            }
+          }
+        },
+        lazy: {
+          title: "懒加载",
+          search: { show: false },
+          type: "dict-tree",
+          dict: lazyloadDictRef,
+          form: {
+            component: {
+              "tree-data-simple-mode": true,
+              loadData: (treeNode: any) => {
+                return new Promise((resolve: (value?: unknown) => void) => {
+                  const { id } = treeNode.dataRef;
+                  setTimeout(() => {
+                    lazyloadDictRef.data = lazyloadDictRef.data.concat([genTreeNode(id, false), genTreeNode(id, true)]);
+                    resolve();
+                  }, 300);
+                });
+              }
             }
           }
         }
