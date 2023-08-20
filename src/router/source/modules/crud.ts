@@ -436,6 +436,12 @@ export const crudResources = [
             name: "FormView",
             path: "/crud/form/view",
             component: "/crud/form/view/index.vue"
+          },
+          {
+            title: "initialForm",
+            name: "FormInitial",
+            path: "/crud/form/initial",
+            component: "/crud/form/initial/index.vue"
           }
         ]
       },
