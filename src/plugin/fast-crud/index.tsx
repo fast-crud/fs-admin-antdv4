@@ -112,6 +112,18 @@ function install(app: any, options: any = {}) {
           wrapperCol: {
             span: null
           }
+        },
+        columns: {
+          createdAt: {
+            title: "创建时间",
+            type: "datetime",
+            form: {
+              show: false
+            },
+            column: {
+              order: 1000
+            }
+          }
         }
       };
 
