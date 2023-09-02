@@ -1,6 +1,7 @@
 import * as api from "./api";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import { ref } from "vue";
+import dayjs from "dayjs";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -51,6 +52,18 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         time: {
           title: "时间",
           type: "datetime",
+          column: {
+            width: 180
+          },
+          valueBuilder({ row, key, value }) {
+            if (value) {
+              row[key] = dayjs(value);
+            }
+          }
+        },
+        data: {
+          title: "data",
+          type: "text",
           column: {
             width: 180
           }
