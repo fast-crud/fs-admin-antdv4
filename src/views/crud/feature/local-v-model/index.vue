@@ -22,9 +22,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive } from "vue";
+import { defineComponent, reactive } from "vue";
 import { message } from "ant-design-vue";
 import FeatureLocalModelValueInput from "./local.vue";
+
 export default defineComponent({
   name: "FeatureLocalVModel",
   components: { FeatureLocalModelValueInput },
