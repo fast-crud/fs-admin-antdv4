@@ -39,8 +39,7 @@ import { defineOptions, reactive, ref } from "vue";
 import { message } from "ant-design-vue";
 import { dict, useUi } from "@fast-crud/fast-crud";
 import dayjs from "dayjs";
-import { FsUploaderAlioss, FsUploaderS3, loadUploader, useUploader } from "@fast-crud/fast-extends";
-import { buildSignedUrl } from "@fast-crud/fast-extends/src/uploader/components/libs/uploader-s3";
+import { FsUploaderS3, loadUploader, useUploader } from "@fast-crud/fast-extends";
 
 defineOptions({
   name: "ComponentIndependent"
