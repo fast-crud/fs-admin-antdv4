@@ -16,6 +16,7 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
     return await api.AddObj(form);
   };
 
+  context.test = 111;
   return {
     crudOptions: {
       // 自定义crudOptions配置

@@ -34,6 +34,7 @@ export default defineComponent({
     //  =======你可以简写为下面这一行========
     const { crudRef, crudBinding, crudExpose, context } = useFs({ createCrudOptions, context: {} });
 
+    console.log("test", context.test);
     // 页面打开后获取列表数据
     onMounted(() => {
       crudExpose.doRefresh();
