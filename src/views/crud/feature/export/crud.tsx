@@ -1,7 +1,7 @@
 import * as api from "./api";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
-import { Modal } from "ant-design-vue";
 import dayjs from "dayjs";
+
 export default function ({ crudExpose, context }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
@@ -53,7 +53,9 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
             //以下不传，以当前查询条件为准
             // form: {},
             // sort: {}
-          }
+          },
+          //仅导出显示的列
+          onlyShow: true
         }
       },
       columns: {
