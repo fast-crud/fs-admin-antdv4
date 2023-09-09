@@ -1,17 +1,19 @@
 import mockUtil from "/src/mock/base";
 const options: any = {
-  name: "FeatureSelectionRadio",
+  name: "ComponentTableSelect",
   idGenerator: 0
 };
 const list = [
   {
-    radio: "1"
+    single: 1,
+    multi: [1, 2]
   },
   {
-    radio: "2"
+    single: 3,
+    multi: [1, 2, 3]
   },
   {
-    radio: "0"
+    single: 2
   }
 ];
 options.list = list;
