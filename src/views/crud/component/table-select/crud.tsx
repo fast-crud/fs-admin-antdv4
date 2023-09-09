@@ -2,6 +2,7 @@ import * as api from "./api";
 import * as textTableApi from "../text/api";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import createCrudOptionsText from "../text/crud";
+import { GetByIds } from "../text/api";
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
@@ -45,17 +46,8 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           dict: dict({
             value: "id",
             label: "name",
-            prototype: true,
             getNodesByValues: async (values: any[]) => {
-              const ret = [];
-              if (Array.isArray(values) === false) {
-                values = [values];
-              }
-              for (const value of values) {
-                const obj = await textTableApi.GetObj(value);
-                ret.push(obj);
-              }
-              return ret;
+              return await textTableApi.GetByIds(values);
             }
           }),
           form: {
@@ -81,17 +73,8 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           dict: dict({
             value: "id",
             label: "name",
-            prototype: true,
             getNodesByValues: async (values: any[]) => {
-              const ret = [];
-              if (Array.isArray(values) === false) {
-                values = [values];
-              }
-              for (const value of values) {
-                const obj = await textTableApi.GetObj(value);
-                ret.push(obj);
-              }
-              return ret;
+              return await textTableApi.GetByIds(values);
             }
           }),
           form: {
