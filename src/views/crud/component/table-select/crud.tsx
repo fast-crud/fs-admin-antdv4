@@ -2,7 +2,7 @@ import * as api from "./api";
 import * as textTableApi from "../text/api";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import createCrudOptionsText from "../text/crud";
-import { GetByIds } from "../text/api";
+
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
@@ -52,6 +52,15 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           }),
           form: {
             component: {
+              crossPage: true,
+              valuesFormat: {
+                labelFormatter: (item: any) => {
+                  return `${item.id}.${item.name}`;
+                }
+              },
+              select: {
+                placeholder: "点击选择"
+              },
               createCrudOptions: createCrudOptionsText,
               crudOptionsOverride: {
                 table: {
@@ -79,7 +88,16 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           }),
           form: {
             component: {
+              crossPage: true,
               multiple: true,
+              valuesFormat: {
+                labelFormatter: (item: any) => {
+                  return `${item.id}.${item.name}`;
+                }
+              },
+              select: {
+                placeholder: "点击选择"
+              },
               createCrudOptions: createCrudOptionsText,
               crudOptionsOverride: {
                 table: {
@@ -90,6 +108,13 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
                 rowHandle: {
                   fixed: "right"
                 }
+              }
+            }
+          },
+          column: {
+            component: {
+              labelFormatter: (item: any) => {
+                return `${item.id}.${item.name}`;
               }
             }
           }
