@@ -46,15 +46,6 @@ function install(app: any, options: any = {}) {
     commonOptions(props: UseCrudProps): CrudOptions {
       const crudBinding = props.crudExpose?.crudBinding;
       const opts: CrudOptions = {
-        search: {
-          onReset() {
-            //重置后清空排序
-            crudBinding.value.table.sort = {};
-            forEachTableColumns(crudBinding.value.table.columns, (column: ColumnCompositionProps) => {
-              column.sortOrder = null;
-            });
-          }
-        },
         table: {
           size: "small",
           pagination: false,
