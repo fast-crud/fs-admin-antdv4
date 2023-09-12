@@ -28,6 +28,7 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
         delRequest
       },
       form: {
+        layout: context.labelLayoutRef,
         labelCol: {
           //固定label宽度
           span: null,
@@ -72,6 +73,10 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
       columns: {
         name: {
           title: "姓名",
+          type: "text"
+        },
+        long: {
+          title: "演示Label很长时如何很好的展示",
           type: "text"
         },
         renderLabel: {
