@@ -154,6 +154,7 @@ function install(app: any, options: any = {}) {
   app.use(FsExtendsUploader, {
     defaultType: "cos",
     cos: {
+      keepName: true,
       domain: "https://d2p-demo-1251260344.cos.ap-guangzhou.myqcloud.com",
       bucket: "d2p-demo-1251260344",
       region: "ap-guangzhou",
@@ -181,6 +182,7 @@ function install(app: any, options: any = {}) {
       }
     },
     alioss: {
+      keepName: true,
       domain: "https://d2p-demo.oss-cn-shenzhen.aliyuncs.com",
       bucket: "d2p-demo",
       region: "oss-cn-shenzhen",
@@ -206,6 +208,7 @@ function install(app: any, options: any = {}) {
       }
     },
     qiniu: {
+      keepName: true,
       bucket: "d2p-demo",
       async getToken(options: any) {
         const ret = await request({
@@ -222,6 +225,7 @@ function install(app: any, options: any = {}) {
       domain: "http://d2p.file.handsfree.work/"
     },
     s3: {
+      keepName: true,
       //同时也支持minio
       bucket: "fast-crud",
       sdkOpts: {
@@ -248,6 +252,7 @@ function install(app: any, options: any = {}) {
       }
     },
     form: {
+      keepName: true,
       action: "http://www.docmirror.cn:7070/api/upload/form/upload",
       name: "file",
       withCredentials: false,

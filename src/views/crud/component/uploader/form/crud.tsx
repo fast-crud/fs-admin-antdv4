@@ -54,7 +54,8 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             component: {
               multiple: true, //可选择多个
               uploader: {
-                type: "form"
+                type: "form",
+                keepName: true
               }
             }
           },
