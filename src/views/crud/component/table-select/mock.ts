@@ -6,7 +6,8 @@ const options: any = {
 const list = [
   {
     single: 1,
-    multi: [1, 2]
+    multi: [1, 2],
+    valueType: { id: 1, name: "王小虎" }
   },
   {
     single: 3,

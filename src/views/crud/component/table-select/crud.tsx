@@ -19,6 +19,16 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
     return await api.AddObj(form);
   };
 
+  const crudOptionsOverride = {
+    table: {
+      scroll: {
+        x: 2000
+      }
+    },
+    rowHandle: {
+      fixed: "right"
+    }
+  };
   return {
     crudOptions: {
       request: {
@@ -62,16 +72,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
                 placeholder: "点击选择"
               },
               createCrudOptions: createCrudOptionsText,
-              crudOptionsOverride: {
-                table: {
-                  scroll: {
-                    x: 2000
-                  }
-                },
-                rowHandle: {
-                  fixed: "right"
-                }
-              }
+              crudOptionsOverride
             }
           }
         },
@@ -99,16 +100,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
                 placeholder: "点击选择"
               },
               createCrudOptions: createCrudOptionsText,
-              crudOptionsOverride: {
-                table: {
-                  scroll: {
-                    x: 2000
-                  }
-                },
-                rowHandle: {
-                  fixed: "right"
-                }
-              }
+              crudOptionsOverride: crudOptionsOverride
             }
           },
           column: {
@@ -116,6 +108,75 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
               labelFormatter: (item: any) => {
                 return `${item.id}.${item.name}`;
               }
+            }
+          }
+        },
+        valueType: {
+          title: "object类型",
+          search: { show: true },
+          type: "table-select",
+          dict: dict({
+            value: "id",
+            label: "name",
+            getNodesByValues: async (values: any[]) => {
+              return await textTableApi.GetByIds(values);
+            }
+          }),
+          column: {
+            component: {
+              valueType: "object"
+            }
+          },
+          form: {
+            helper: "这里提交的值是整个对象",
+            component: {
+              valueType: "object",
+              crossPage: true,
+              valuesFormat: {
+                labelFormatter: (item: any) => {
+                  return `${item.id}.${item.name}`;
+                }
+              },
+              select: {
+                placeholder: "点击选择"
+              },
+              createCrudOptions: createCrudOptionsText,
+              crudOptionsOverride
+            }
+          }
+        },
+        valueTypeMulti: {
+          title: "object类型多选",
+          search: { show: true },
+          type: "table-select",
+          dict: dict({
+            value: "id",
+            label: "name",
+            getNodesByValues: async (values: any[]) => {
+              return await textTableApi.GetByIds(values);
+            }
+          }),
+          column: {
+            component: {
+              valueType: "object"
+            }
+          },
+          form: {
+            helper: "这里提交的值是对象数组",
+            component: {
+              valueType: "object",
+              crossPage: true,
+              multiple: true,
+              valuesFormat: {
+                labelFormatter: (item: any) => {
+                  return `${item.id}.${item.name}`;
+                }
+              },
+              select: {
+                placeholder: "点击选择"
+              },
+              createCrudOptions: createCrudOptionsText,
+              crudOptionsOverride
             }
           }
         }
