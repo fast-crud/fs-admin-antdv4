@@ -26,7 +26,13 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
       },
       form: {
         wrapper: {
-          is: "a-drawer"
+          is: "a-drawer",
+          onClosed(e) {
+            console.log("onClosed", e);
+          },
+          onOpened(e) {
+            console.log("onOpened", e);
+          }
         }
       },
       columns: {
