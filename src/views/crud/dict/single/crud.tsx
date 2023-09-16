@@ -109,7 +109,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           }),
           type: "dict-select"
         },
-        cache1: {
+        cache2: {
           title: "全局缓存2",
           search: { show: false },
           column: {
