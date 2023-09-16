@@ -1,6 +1,6 @@
 import * as api from "./api";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { message } from "ant-design-vue";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -22,6 +22,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
   const statusRef = dict({
     url: "/mock/dicts/OpenStatusEnum?single"
   });
+  const formLayoutRef = ref("inline");
   return {
     crudOptions: {
       request: {
@@ -36,9 +37,19 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           //查询默认值
           radio: "1"
         },
+        options: {
+          layout: formLayoutRef
+        },
+        container: {
+          action: {
+            col: {
+              span: 6
+            }
+          }
+        },
         buttons: {
           custom: {
-            text: "自定义",
+            text: "label上置",
             show: true,
             order: 3,
             class: "fs-test",
@@ -49,7 +60,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
               }
             },
             click() {
-              console.log("点击了自定义按钮");
+              formLayoutRef.value = formLayoutRef.value === "vertical" ? "inline" : "vertical";
             }
           }
         }
