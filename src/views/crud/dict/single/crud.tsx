@@ -99,6 +99,28 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
               }
             }
           }
+        },
+        cache1: {
+          title: "全局缓存1",
+          search: { show: false },
+          dict: dict({
+            url: "/mock/dicts/OpenStatusEnum?cache_flat=1",
+            cache: true
+          }),
+          type: "dict-select"
+        },
+        cache1: {
+          title: "全局缓存2",
+          search: { show: false },
+          column: {
+            show: false
+          },
+          dict: dict({
+            url: "/mock/dicts/OpenStatusEnum?cache_flat=1",
+            immediate: false,
+            cache: true
+          }),
+          type: "dict-select"
         }
       }
     }
