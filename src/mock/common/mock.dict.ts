@@ -28,7 +28,7 @@ let manyStatus = [
   { value: "0", label: "关闭", color: "red", icon: "ion:radio-button-off" }
 ];
 let tempManyStatus = [];
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 100; i++) {
   tempManyStatus = tempManyStatus.concat(_.cloneDeep(manyStatus));
 }
 manyStatus = tempManyStatus;

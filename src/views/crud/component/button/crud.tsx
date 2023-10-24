@@ -48,6 +48,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           type: "button",
           column: {
             component: {
+              icon: "ion:search",
               show: compute(({ value }) => {
                 //当value为null时，不显示
                 return value != null;
