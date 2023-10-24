@@ -104,7 +104,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           type: "text",
           search: {
             show: true,
-            value: "1"
+            value: "2"
           }
         },
         customRender: {
