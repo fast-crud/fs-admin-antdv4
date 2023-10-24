@@ -44,6 +44,8 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
           },
           fileType: context.fileType, //导出类型为excel
           dataFrom: context.dataFrom, //search查询获取， local 当前页数据
+          //仅导出显示的列
+          onlyShow: true,
           searchParams: {
             //查询条件
             page: {
@@ -53,9 +55,7 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
             //以下不传，以当前查询条件为准
             // form: {},
             // sort: {}
-          },
-          //仅导出显示的列
-          onlyShow: true
+          }
         }
       },
       columns: {

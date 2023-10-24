@@ -56,6 +56,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           dict: dict({
             value: "id",
             label: "name",
+            //重要，根据value懒加载数据
             getNodesByValues: async (values: any[]) => {
               return await textTableApi.GetByIds(values);
             }
@@ -83,6 +84,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           dict: dict({
             value: "id",
             label: "name",
+            //重要，根据value懒加载数据
             getNodesByValues: async (values: any[]) => {
               return await textTableApi.GetByIds(values);
             }
@@ -118,6 +120,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           dict: dict({
             value: "id",
             label: "name",
+            //重要，根据value懒加载数据
             getNodesByValues: async (values: any[]) => {
               return await textTableApi.GetByIds(values);
             }
@@ -145,6 +148,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             }
           }
         },
+        //值是object类型
         valueTypeMulti: {
           title: "object类型多选",
           search: { show: true },
