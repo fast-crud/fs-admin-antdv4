@@ -48,7 +48,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           key: "id",
           type: "number",
           column: {
-            width: 50
+            width: 140
           },
           form: {
             show: false
