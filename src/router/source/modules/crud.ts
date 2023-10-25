@@ -97,6 +97,12 @@ export const crudResources = [
             name: "BasisReset",
             path: "/crud/basis/reset",
             component: "/crud/basis/reset/index.vue"
+          },
+          {
+            title: "CrudOptions插件",
+            name: "BasisPlugin",
+            path: "/crud/basis/plugin",
+            component: "/crud/basis/plugin/index.vue"
           }
         ]
       },
