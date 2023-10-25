@@ -1,21 +1,6 @@
 import { request, requestForMock } from "/src/api/service";
 // import "/src/mock";
-import {
-  ColumnCompositionProps,
-  CrudOptions,
-  FastCrud,
-  forEachColumns,
-  forEachTableColumns,
-  PageQuery,
-  PageRes,
-  setLogger,
-  TransformResProps,
-  useColumns,
-  UseCrudProps,
-  UserPageQuery,
-  useTypes,
-  useUi
-} from "@fast-crud/fast-crud";
+import { ColumnCompositionProps, CrudOptions, FastCrud, PageQuery, PageRes, setLogger, TransformResProps, useColumns, UseCrudProps, UserPageQuery, useTypes, utils } from "@fast-crud/fast-crud";
 import "@fast-crud/fast-crud/dist/style.css";
 import { FsExtendsCopyable, FsExtendsEditor, FsExtendsJson, FsExtendsTime, FsExtendsUploader, FsUploaderS3SignedUrlType } from "@fast-crud/fast-extends";
 import "@fast-crud/fast-extends/dist/style.css";
@@ -44,6 +29,7 @@ function install(app: any, options: any = {}) {
      * @param props，useCrud的参数
      */
     commonOptions(props: UseCrudProps): CrudOptions {
+      utils.logger.debug("commonOptions:", props);
       const crudBinding = props.crudExpose?.crudBinding;
       const opts: CrudOptions = {
         table: {
