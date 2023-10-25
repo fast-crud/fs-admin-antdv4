@@ -6,7 +6,7 @@
         <span class="sub">用于合并CrudOptions，做一些可配置化的公共参数；此处演示使用rowSelectionPlugin生成行选择配置,支持跨页选择</span>
       </div>
       <div class="more">
-        <!--        <a target="_blank" href="http://fast-crud.docmirror.cn/api/crud-options/table.html#对应ui库的table组件的参数">文档</a>-->
+        <a target="_blank" href="http://fast-crud.docmirror.cn/api/crud-options/settings.html#plugins">文档</a>
       </div>
     </template>
     <fs-crud ref="crudRef" v-bind="crudBinding">
