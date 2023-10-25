@@ -38,6 +38,9 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             class: clazz
           };
         },
+        onExpand(open, row) {
+          console.log("expand事件：", open, row);
+        },
         slots: {
           expandedRowRender: (scope: any) => {
             return (

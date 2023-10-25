@@ -21,7 +21,7 @@ import _ from "lodash-es";
 export default defineComponent({
   name: "BasisReset",
   setup() {
-    const { crudBinding, crudRef, crudExpose, context, crudOptions, resetCrudOptions, appendBindingOptions } = useFs({ createCrudOptions, context: {} });
+    const { crudBinding, crudRef, crudExpose, context, crudOptions, resetCrudOptions, appendBindingOptions } = useFs({ createCrudOptions, context: { text: 111 } });
 
     setTimeout(() => {
       //合并新的crudOptions

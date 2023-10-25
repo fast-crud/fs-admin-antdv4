@@ -63,9 +63,6 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             prototype: true,
             getNodesByValues(values: any) {
               //给cell展示组件调用，根据value值获取节点，每行都会请求一次
-              if (values == null) {
-                return [];
-              }
               return requestForMock({
                 url: "/mock/tree/GetNodesByValues",
                 params: { values }
