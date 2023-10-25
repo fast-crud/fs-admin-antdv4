@@ -26,6 +26,15 @@
           <input type="file" @change="fileUploaderChange" />
           <a v-if="signedUrl" :href="signedUrl" target="_blank">下载</a>
         </a-form-item>
+        <a-form-item label="表格选择">
+          <fs-table-select v-model="form.tableSelect" v-bind="tableSelectBinding" />
+          <fs-label label="切换value">
+            <a-radio-group v-model:value="form.tableSelect">
+              <a-radio :value="1">王小虎</a-radio>
+              <a-radio :value="2">id为2的记录</a-radio>
+            </a-radio-group>
+          </fs-label>
+        </a-form-item>
         <a-form-item>
           <a-button @click="submit">提交</a-button>
         </a-form-item>
@@ -40,6 +49,8 @@ import { message } from "ant-design-vue";
 import { dict, useUi } from "@fast-crud/fast-crud";
 import dayjs from "dayjs";
 import { FsUploaderS3, loadUploader, useUploader } from "@fast-crud/fast-extends";
+import createCrudOptionsText from "/@/views/crud/component/text/crud";
+import * as textTableApi from "/@/views/crud/component/text/api";
 
 defineOptions({
   name: "ComponentIndependent"
@@ -49,7 +60,8 @@ const form = reactive({
   avatar: undefined,
   copyable: "可复制的内容",
   select: 1,
-  humanizeTime: dayjs(new Date().getTime() - 100000)
+  humanizeTime: dayjs(new Date().getTime() - 100000),
+  tableSelect: 1
 });
 
 const uploader = ref({
@@ -79,6 +91,26 @@ const dictRef = dict({
     { label: "选项2", value: 2 },
     { label: "选项3", value: 3 }
   ]
+});
+
+const tableSelectBinding = ref({
+  dict: dict({
+    value: "id",
+    label: "name",
+    getNodesByValues: async (values: any[]) => {
+      return await textTableApi.GetByIds(values);
+    }
+  }),
+  crossPage: true,
+  valuesFormat: {
+    labelFormatter: (item: any) => {
+      return `${item.id}.${item.name}`;
+    }
+  },
+  select: {
+    placeholder: "点击选择"
+  },
+  createCrudOptions: createCrudOptionsText
 });
 
 const signedUrl = ref();

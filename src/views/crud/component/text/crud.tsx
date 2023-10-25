@@ -27,6 +27,11 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         delRequest
       },
       columns: {
+        id: {
+          title: "ID",
+          type: "number",
+          form: { show: false }
+        },
         name: {
           title: "姓名",
           type: "text", //虽然不写也能正确显示组件，但不建议省略它
