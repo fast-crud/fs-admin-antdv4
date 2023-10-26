@@ -27,7 +27,10 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
       },
       toolbar: {
         columnsFilter: {
-          mode: "default"
+          mode: "default",
+          container: {
+            width: "500px"
+          }
         }
       },
       actionbar: {
