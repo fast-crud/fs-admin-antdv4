@@ -3,6 +3,8 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import visualizer from "rollup-plugin-visualizer";
 import viteCompression from "vite-plugin-compression";
 import PurgeIcons from "vite-plugin-purge-icons";
+import { createHtmlPlugin } from "vite-plugin-html";
+import { loadEnv } from "vite";
 import * as path from "path";
 import DefineOptions from "unplugin-vue-define-options/vite";
 // import WindiCSS from "vite-plugin-windicss";
@@ -17,7 +19,7 @@ process.env.VITE_APP_BUILD_TIME = require("dayjs")().format("YYYY-M-D HH:mm:ss")
 
 export default ({ command, mode }) => {
   console.log("args", command, mode);
-
+  const env = loadEnv(mode, process.cwd());
   let devServerFs: any = {};
   let devAlias: any[] = [];
   if (mode.startsWith("debug")) {
@@ -36,13 +38,20 @@ export default ({ command, mode }) => {
     };
     console.log("devAlias", devAlias);
   }
-
   return {
     base: "/antdv4/",
     plugins: [
       DefineOptions(),
       vueJsx(),
       vue(),
+      createHtmlPlugin({
+        inject: {
+          data: {
+            title: env.VITE_APP_TITLE,
+            projectPath: env.VITE_APP_PROJECT_PATH
+          }
+        }
+      }),
       // 压缩build后的代码
       viteCompression(),
       PurgeIcons({

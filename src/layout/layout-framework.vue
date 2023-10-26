@@ -2,8 +2,8 @@
   <a-layout class="fs-framework">
     <a-layout-sider v-model:collapsed="asideCollapsed" :trigger="null" collapsible>
       <div class="header-logo">
-        <img src="/images/logo/rect-black.svg" />
-        <span v-if="!asideCollapsed" class="title">FsAdmin</span>
+        <img :src="envRef.LOGO_PATH" />
+        <span v-if="!asideCollapsed" class="title">{{ envRef.TITLE }}</span>
       </div>
       <div class="aside-menu">
         <fs-menu :scroll="true" :menus="asideMenus" :expand-selected="!asideCollapsed" />
@@ -70,6 +70,7 @@ import { usePageStore } from "/@/store/modules/page";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons-vue";
 import FsThemeSet from "/@/layout/components/theme/index.vue";
 import { notification } from "ant-design-vue";
+import { env } from "../utils/util.env";
 export default {
   name: "LayoutFramework",
   // eslint-disable-next-line vue/no-unused-components
@@ -100,6 +101,8 @@ export default {
       return false;
     });
     const version = ref(import.meta.env.VITE_APP_VERSION);
+
+    const envRef = ref(env);
     return {
       version,
       frameworkMenus,
@@ -107,7 +110,8 @@ export default {
       asideMenus,
       keepAlive,
       asideCollapsed,
-      asideCollapsedToggle
+      asideCollapsedToggle,
+      envRef
     };
   }
 };
