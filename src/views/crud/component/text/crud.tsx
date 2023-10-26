@@ -40,6 +40,13 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             component: {
               maxlength: 20
             }
+          },
+          column: {
+            type: "text",
+            formatter(scope) {
+              console.log("formatter scope", scope);
+              return scope.value;
+            }
           }
         },
         trim: {
