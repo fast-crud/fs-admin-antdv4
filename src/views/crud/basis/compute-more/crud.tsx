@@ -1,5 +1,5 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import { computed, ref } from "vue";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -20,13 +20,9 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
 
   //普通的ref引用，可以动态切换配置
   const defValueRef = ref("我是动态的默认值");
-  const defValueComputed = computed(() => {
-    return defValueRef.value;
-  });
   return {
     output: {
-      defValueRef,
-      defValueComputed
+      defValueRef
     },
     crudOptions: {
       request: {
@@ -65,10 +61,36 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           type: "text",
           search: { show: true, value: null },
           form: {
-            // form.value不支持asyncCompute
-            // 假如你的默认值异步获取的，那么你自己必须保证先异步计算完成之后，才能打开对话框。
-            // 因为在打开对话框时，默认值就必须得设置好。
+            // form.value不支持asyncCompute/Compute, 因为上下文动态计算要先有上下文，上下文需要先有form数据
             value: defValueRef
+          }
+        },
+        switch: {
+          title: "切换动态组件",
+          type: "dict-switch",
+          dict: dict({
+            data: [
+              { value: "radio", label: "radio" },
+              { value: "select", label: "select" }
+            ]
+          })
+        },
+        componentName: {
+          title: "动态组件",
+          type: "dict-select",
+          search: { show: true, value: null },
+          dict: dict({
+            data: [
+              { value: "1", label: "开启" },
+              { value: "2", label: "关闭" }
+            ]
+          }),
+          form: {
+            component: {
+              name: compute(({ form }) => {
+                return form.switch === "radio" ? "fs-dict-radio" : "fs-dict-select";
+              })
+            }
           }
         }
       }
