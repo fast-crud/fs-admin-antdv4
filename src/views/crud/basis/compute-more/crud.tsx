@@ -89,6 +89,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           }),
           form: {
             component: {
+              value: "2",
               name: compute(({ form }) => {
                 return form.switch === "select" ? "fs-dict-select" : form.switch === "radio" ? "fs-dict-radio" : ShallowComponent;
               })
