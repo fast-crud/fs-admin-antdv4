@@ -1,6 +1,7 @@
 import * as api from "./api";
 import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
-import { computed, ref } from "vue";
+import { computed, ref, shallowRef } from "vue";
+import ShallowComponent from "/@/views/crud/basis/compute-more/shallow-component.vue";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -67,11 +68,12 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         },
         switch: {
           title: "切换动态组件",
-          type: "dict-switch",
+          type: "dict-radio",
           dict: dict({
             data: [
               { value: "radio", label: "radio" },
-              { value: "select", label: "select" }
+              { value: "select", label: "select" },
+              { value: "shallow", label: "shallowComponent" }
             ]
           })
         },
@@ -88,7 +90,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           form: {
             component: {
               name: compute(({ form }) => {
-                return form.switch === "radio" ? "fs-dict-radio" : "fs-dict-select";
+                return form.switch === "select" ? "fs-dict-select" : form.switch === "radio" ? "fs-dict-radio" : shallowRef(ShallowComponent);
               })
             }
           }
