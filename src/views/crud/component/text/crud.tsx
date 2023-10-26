@@ -42,7 +42,6 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             }
           },
           column: {
-            type: "text",
             formatter(scope) {
               console.log("formatter scope", scope);
               return scope.value;
