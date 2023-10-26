@@ -91,7 +91,7 @@ function install(app: any, options: any = {}) {
             if (res.offset % pageSize === 0) {
               currentPage++;
             }
-            return { currentPage, pageSize, records: res.records, total: res.total };
+            return { currentPage, pageSize, records: res.records, total: res.total, ...res };
           }
         },
         form: {
