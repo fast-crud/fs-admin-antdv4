@@ -1,5 +1,7 @@
 import { message } from "ant-design-vue";
-import { CreateCrudOptionsProps, CreateCrudOptionsRet } from "@fast-crud/fast-crud";
+import { CreateCrudOptionsProps, CreateCrudOptionsRet, dict } from "@fast-crud/fast-crud";
+import * as textTableApi from "/@/views/crud/component/text/api";
+import createCrudOptionsText from "/@/views/crud/component/text/crud";
 
 export default function ({}: CreateCrudOptionsProps): CreateCrudOptionsRet {
   return {
@@ -60,6 +62,25 @@ export default function ({}: CreateCrudOptionsProps): CreateCrudOptionsRet {
               // render() {
               //   return <div style={"color:red"}>在label通过tooltip方式显示的helper</div>;
               // }
+            }
+          }
+        },
+        tableSelect: {
+          title: "表格选择",
+          type: "table-select",
+          dict: dict({
+            value: "id",
+            label: "name",
+            //重要，根据value懒加载数据
+            getNodesByValues: async (values: any[]) => {
+              return await textTableApi.GetByIds(values);
+            }
+          }),
+          form: {
+            value: 1,
+            component: {
+              crossPage: true,
+              createCrudOptions: createCrudOptionsText
             }
           }
         }
