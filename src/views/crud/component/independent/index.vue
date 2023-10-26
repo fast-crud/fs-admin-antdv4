@@ -61,7 +61,7 @@ const form = reactive({
   copyable: "可复制的内容",
   select: 1,
   humanizeTime: dayjs(new Date().getTime() - 100000),
-  tableSelect: 1
+  tableSelect: null
 });
 
 const uploader = ref({
