@@ -170,8 +170,15 @@ function useCrudBindingForm() {
       //覆盖提交方法
       console.log("form submit:", form);
       message.info("自定义表单提交:" + JSON.stringify(form));
-      message.warn("抛出异常可以阻止表单关闭");
-      throw new Error("抛出异常可以阻止表单关闭");
+      //模拟后端返回错误
+      return { error: true };
+    },
+    afterSubmit(ctx: any) {
+      console.log("form after submit:", ctx);
+      if (ctx.res.error === true) {
+        message.warn("模拟后端返回错误，不关闭对话框");
+        return false;
+      }
     },
     initialForm: { name: "初始值" }
   });
