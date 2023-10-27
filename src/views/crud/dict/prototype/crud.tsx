@@ -31,6 +31,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
     }
   });
   const dynamicDict = dict({
+    cache: true,
     prototype: true, //这个dict只是一个原型，引用它的dict组件初始化时都会把此dict对象clone一份
     url({ row }) {
       return row.switch ? "/mock/dicts/moreOpenStatusEnum" : "/mock/dicts/OpenStatusEnum";
