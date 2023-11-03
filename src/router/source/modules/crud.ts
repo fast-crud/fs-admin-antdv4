@@ -307,6 +307,12 @@ export const crudResources = [
             component: "/crud/component/json/index.vue"
           },
           {
+            title: "手机号输入框",
+            name: "ComponentPhone",
+            path: "/crud/component/phone",
+            component: "/crud/component/phone/index.vue"
+          },
+          {
             title: "组件独立使用",
             name: "ComponentIndependent",
             path: "/crud/component/independent",

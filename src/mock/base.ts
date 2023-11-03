@@ -1,7 +1,8 @@
 import _ from "lodash-es";
 function copyList(originList: any, newList: any, options: any, parentId?: any) {
   for (const item of originList) {
-    const newItem = { ...item, parentId };
+    const newItem: any = _.cloneDeep(item);
+    newItem.parentId = parentId;
     newItem.id = ++options.idGenerator;
     newList.push(newItem);
     if (item.children != null) {
