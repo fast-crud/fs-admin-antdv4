@@ -2,11 +2,11 @@
   <fs-page>
     <template #header>
       <div class="title">
-        文本类型
-        <span class="sub">
-          <span>type='text'</span>
-          <fs-copyable :inline="true" model-value="文本复制组件测试" style="width: 200px; margin-left: 100px" :button="{ showOnHover: false, show: true, text: '点我复制' }" />
-        </span>
+        国际手机号输入
+        <span class="sub"> </span>
+      </div>
+      <div class="more">
+        <a target="_blank" href="http://fast-crud.docmirror.cn/api/components/extends/input/components/fs-phone-input">文档</a>
       </div>
     </template>
     <fs-crud ref="crudRef" v-bind="crudBinding" />

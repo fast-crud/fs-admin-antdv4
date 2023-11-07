@@ -34,7 +34,8 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         },
         phone: {
           title: "手机号码",
-          type: "phone"
+          type: "phone",
+          search: { show: true }
         },
         phoneNumber: {
           title: "区号手机号分开",
