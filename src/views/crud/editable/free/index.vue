@@ -51,7 +51,6 @@ export default defineComponent({
         crudExpose.editable.inactive();
       },
       async save() {
-        debugger;
         const res = await crudExpose.editable.validate();
         if (res !== true) {
           console.error("validate error:", res);
