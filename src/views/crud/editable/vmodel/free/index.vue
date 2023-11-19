@@ -1,5 +1,7 @@
 <template>
-  <fs-crud ref="crudRef" v-bind="crudBinding"> </fs-crud>
+  <div style="height: 500px; position: relative">
+    <fs-crud ref="crudRef" v-bind="crudBinding"> </fs-crud>
+  </div>
 </template>
 
 <script lang="ts">
