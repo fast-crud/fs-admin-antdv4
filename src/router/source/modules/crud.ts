@@ -642,6 +642,35 @@ export const crudResources = [
         ]
       },
       {
+        title: "可编辑",
+        name: "Editable",
+        path: "/crud/editable",
+        redirect: "/crud/editable/free",
+        meta: {
+          icon: "ion:extension-puzzle-outline"
+        },
+        children: [
+          {
+            title: "自由编辑",
+            name: "EditableFree",
+            path: "/crud/editable/free",
+            component: "/crud/editable/free/index.vue"
+          },
+          {
+            title: "行编辑",
+            name: "EditableRow",
+            path: "/crud/editable/row",
+            component: "/crud/editable/row/index.vue"
+          },
+          {
+            title: "单元格编辑",
+            name: "EditableCell",
+            path: "/crud/editable/cell",
+            component: "/crud/editable/cell/index.vue"
+          }
+        ]
+      },
+      {
         title: "插槽",
         name: "Slots",
         path: "/crud/slots",

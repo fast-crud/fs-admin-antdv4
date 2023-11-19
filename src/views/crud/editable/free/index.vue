@@ -7,7 +7,7 @@
     <fs-crud ref="crudRef" v-bind="crudBinding">
       <template #actionbar-right>
         <!--      <fs-button class="ml-1" @click="addRow">添加行</fs-button>-->
-        <a-radio-group value="crudBinding.table.editable.enabled" class="ml-1" @update:value="enabledChanged">
+        <a-radio-group v-model:value="crudBinding.table.editable.enabled" class="ml-5">
           <a-radio-button :value="true">启用编辑</a-radio-button>
           <a-radio-button :value="false">退出编辑</a-radio-button>
         </a-radio-group>
@@ -16,14 +16,8 @@
         <!--              <a-radio-button label="row">行编辑模式</a-radio-button>-->
         <!--            </a-radio-group>-->
         <template v-if="crudBinding.table.editable.enabled">
-          <fs-button class="ml-1" @click="active">激活全部编辑</fs-button>
-
-          <fs-button class="ml-1" @click="inactive">反激活全部</fs-button>
-          <fs-button class="ml-1" @click="editCol">编辑列</fs-button>
-          <fs-button class="ml-1" @click="cancel">取消/恢复原状</fs-button>
-          <fs-button class="ml-1" @click="save">保存</fs-button>
-
-          <fs-button class="ml-1" @click="log">log</fs-button>
+          <fs-button class="ml-5" @click="save">保存</fs-button>
+          <fs-button class="ml-5" @click="log">log</fs-button>
         </template>
       </template>
     </fs-crud>
@@ -44,28 +38,12 @@ export default defineComponent({
     // 页面打开后获取列表数据
     onMounted(() => {
       crudExpose.doRefresh();
-      crudExpose.editable.enable({ mode: "free" });
+      crudExpose.editable.enable({ mode: "free", activeDefault: true });
     });
-
-    function enable() {
-      crudExpose.editable.enable({ enabled: true, mode: "free" });
-    }
-    function disable() {
-      crudExpose.editable.disable();
-    }
 
     return {
       crudBinding,
       crudRef,
-      enabledChanged(event: boolean) {
-        if (event) {
-          enable();
-        } else {
-          disable();
-        }
-      },
-      enable,
-      disable,
       active() {
         crudExpose.editable.active();
       },
@@ -73,14 +51,7 @@ export default defineComponent({
         crudExpose.editable.inactive();
       },
       save() {
-        crudExpose.getTableRef().editable.submit(({ changed, removed, setData }: any) => {
-          console.log("changed", changed);
-          console.log("removed", removed);
-
-          console.log("table data:", crudBinding.value.data, crudExpose.getTableData());
-          // setData({ 0: {id:1} }); //设置data
-          message.success("保存,修改行：" + JSON.stringify(changed) + "；删除行：" + JSON.stringify(removed));
-        });
+        message.success("保存,修改行：" + JSON.stringify(crudBinding.value.data));
       },
       log() {
         console.log("table data:", crudBinding.value.data, crudExpose.getTableData());

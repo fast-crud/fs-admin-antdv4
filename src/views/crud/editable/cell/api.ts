@@ -1,6 +1,7 @@
+// @ts-ignore
 import { requestForMock } from "/src/api/service";
 const request = requestForMock;
-const apiPrefix = "/mock/FeatureHeader";
+const apiPrefix = "/mock/EditableCell";
 export function GetList(query: any) {
   return request({
     url: apiPrefix + "/page",
@@ -41,7 +42,7 @@ export function GetObj(id: any) {
   });
 }
 
-export function BatchDelete(ids: any[]) {
+export function BatchDelete(ids: any) {
   return request({
     url: apiPrefix + "/batchDelete",
     method: "post",
@@ -49,10 +50,17 @@ export function BatchDelete(ids: any[]) {
   });
 }
 
-export function ColumnUpdate(key: string, value: any) {
+export function UpdateCell(id: number, key: string, value: any) {
+  return request({
+    url: apiPrefix + "/cellUpdate",
+    method: "post",
+    data: { id, key, value }
+  });
+}
+export function UpdateColumn(data) {
   return request({
     url: apiPrefix + "/columnUpdate",
     method: "post",
-    data: { key, value }
+    data
   });
 }
