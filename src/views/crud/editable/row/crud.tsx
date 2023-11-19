@@ -92,10 +92,11 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             })
           }
         },
-        name: {
+        "user.name": {
           title: "姓名",
           type: "text",
           form: {
+            key: ["user", "name"],
             rules: [
               { required: true, message: "请输入姓名" },
               {

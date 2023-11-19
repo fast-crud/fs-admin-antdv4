@@ -50,7 +50,13 @@ export default defineComponent({
       inactive() {
         crudExpose.editable.inactive();
       },
-      save() {
+      async save() {
+        debugger;
+        const res = await crudExpose.editable.validate();
+        if (res !== true) {
+          console.error("validate error:", res);
+          return;
+        }
         message.success("保存,修改行：" + JSON.stringify(crudBinding.value.data));
       },
       log() {

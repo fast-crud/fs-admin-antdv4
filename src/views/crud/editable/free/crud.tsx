@@ -40,6 +40,10 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           mode: "free"
         }
       },
+      pagination: {
+        pageSize: 5,
+        pageSizes: [5, 10, 20, 50, 100]
+      },
       columns: {
         id: {
           title: "ID",
@@ -71,7 +75,13 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         },
         name: {
           title: "姓名",
-          type: "text"
+          type: "text",
+          form: {
+            rules: [
+              { required: true, message: "请输入姓名" },
+              { min: 2, max: 10, message: "长度在 2 到 10 个字符" }
+            ]
+          }
         },
         address: {
           title: "地址",

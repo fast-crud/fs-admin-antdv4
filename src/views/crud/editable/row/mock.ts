@@ -5,7 +5,12 @@ const options: any = {
 };
 const list = [
   {
-    radio: "1"
+    radio: "1",
+    children: [
+      {
+        radio: "2"
+      }
+    ]
   },
   {
     radio: "2"
