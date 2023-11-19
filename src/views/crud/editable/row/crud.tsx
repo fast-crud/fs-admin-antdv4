@@ -82,7 +82,10 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         },
         name: {
           title: "姓名",
-          type: "text"
+          type: "text",
+          form: {
+            rules: [{ required: true, message: "请输入姓名" }]
+          }
         },
         address: {
           title: "地址",
