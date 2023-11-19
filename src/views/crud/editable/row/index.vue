@@ -7,7 +7,11 @@
       </div>
       <div class="more"><a target="_blank" href="http://fast-crud.docmirror.cn/api/expose.html">文档</a></div>
     </template>
-    <fs-crud ref="crudRef" v-bind="crudBinding" />
+    <fs-crud ref="crudRef" v-bind="crudBinding">
+      <template #actionbar-right>
+        <fs-button class="ml-5" @click="log">log</fs-button>
+      </template>
+    </fs-crud>
   </fs-page>
 </template>
 
@@ -29,7 +33,10 @@ export default defineComponent({
 
     return {
       crudBinding,
-      crudRef
+      crudRef,
+      log() {
+        console.log("table data:", crudBinding.value.data, crudExpose.getTableData());
+      }
     };
   }
 });

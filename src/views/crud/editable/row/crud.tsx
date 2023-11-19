@@ -60,7 +60,19 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           type: "dict-radio",
           dict: dict({
             url: "/mock/dicts/OpenStatusEnum?single"
-          })
+          }),
+          column: {
+            width: 300
+          },
+          form: {
+            rules: {
+              async asyncValidator(context) {
+                console.log("context", context);
+                return true;
+              },
+              message: "远程校验测试"
+            }
+          }
         },
         target: {
           title: "根据状态动态显隐",
@@ -84,7 +96,15 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           title: "姓名",
           type: "text",
           form: {
-            rules: [{ required: true, message: "请输入姓名" }]
+            rules: [
+              { required: true, message: "请输入姓名" },
+              {
+                type: "string",
+                min: 2,
+                max: 10,
+                message: "长度在 2 到 10 个字符"
+              }
+            ]
           }
         },
         address: {
@@ -93,7 +113,10 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             province: {
               title: "省份",
               search: { show: true },
-              type: "text"
+              type: "text",
+              form: {
+                rules: [{ required: true, message: "请输入省份" }]
+              }
             },
             city: {
               title: "城市",

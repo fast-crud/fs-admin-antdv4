@@ -162,7 +162,15 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           title: "姓名",
           type: "text",
           form: {
-            rules: [{ required: true, message: "请输入姓名" }]
+            rules: [
+              { required: true, message: "请输入姓名" },
+              {
+                type: "string",
+                min: 2,
+                max: 10,
+                message: "长度在 2 到 10 个字符"
+              }
+            ]
           }
         },
         address: {
