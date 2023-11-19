@@ -31,7 +31,7 @@ import { useFs } from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 
 export default defineComponent({
-  name: "FeatureEditable",
+  name: "EditableFree",
   setup() {
     const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
 

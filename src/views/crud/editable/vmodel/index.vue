@@ -1,10 +1,7 @@
 <template>
   <fs-page>
     <template #header>
-      <div class="title">
-        行编辑模式
-        <span class="sub">在表格内编辑每行数据</span>
-      </div>
+      <div class="title">vModel编辑</div>
       <div class="more"><a target="_blank" href="http://fast-crud.docmirror.cn/api/expose.html">文档</a></div>
     </template>
     <fs-crud ref="crudRef" v-bind="crudBinding">
@@ -19,23 +16,23 @@
 import { defineComponent, onMounted } from "vue";
 import createCrudOptions from "./crud";
 import { useFs } from "@fast-crud/fast-crud";
+import { message } from "ant-design-vue";
 
 export default defineComponent({
-  name: "EditableRow",
+  name: "EditableVModel",
   setup() {
     const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
 
     // 页面打开后获取列表数据
     onMounted(() => {
       crudExpose.doRefresh();
-      crudExpose.editable.enable();
     });
 
     return {
       crudBinding,
       crudRef,
       log() {
-        console.log("table data:", crudBinding.value.data, crudExpose.getTableData());
+        console.log("table data:", crudBinding.value.data);
       }
     };
   }

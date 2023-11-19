@@ -667,6 +667,12 @@ export const crudResources = [
             name: "EditableCell",
             path: "/crud/editable/cell",
             component: "/crud/editable/cell/index.vue"
+          },
+          {
+            title: "子表格编辑",
+            name: "EditableVModel",
+            path: "/crud/editable/vmodel",
+            component: "/crud/editable/vmodel/index.vue"
           }
         ]
       },

@@ -1,6 +1,6 @@
 import { requestForMock } from "/src/api/service";
 const request = requestForMock;
-const apiPrefix = "/mock/EditableRow";
+const apiPrefix = "/mock/EditableFreeSub";
 export function GetList(query: any) {
   return request({
     url: apiPrefix + "/page",
