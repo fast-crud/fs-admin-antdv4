@@ -556,18 +556,6 @@ export const crudResources = [
             component: "/crud/feature/height/index.vue"
           },
           {
-            title: "可编辑",
-            name: "FeatureEditable",
-            path: "/crud/feature/editable",
-            component: "/crud/feature/editable/index.vue"
-          },
-          {
-            title: "行编辑",
-            name: "FeatureEditableRow",
-            path: "/crud/feature/editable-row",
-            component: "/crud/feature/editable-row/index.vue"
-          },
-          {
             title: "查询框",
             name: "FeatureSearch",
             path: "/crud/feature/search",
