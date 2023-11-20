@@ -47,6 +47,7 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
         },
         wrapper: {
           zIndex: 1003,
+          fullscreen: true,
           buttons: {
             ok: {
               text: "保存"
