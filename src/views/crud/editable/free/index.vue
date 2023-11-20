@@ -45,7 +45,7 @@ export default defineComponent({
       crudBinding,
       crudRef,
       active() {
-        crudExpose.editable.active();
+        crudExpose.editable.active({});
       },
       inactive() {
         crudExpose.editable.inactive();

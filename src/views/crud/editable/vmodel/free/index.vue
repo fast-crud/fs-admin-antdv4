@@ -26,7 +26,7 @@ export default defineComponent({
     const { ui } = useUi();
     let formItemContext = ui.formItem.injectFormItemContext();
 
-    function emit(data) {
+    function emit(data:any) {
       console.log("emit:", data);
       ctx.emit("update:modelValue", data);
       formItemContext.onBlur();

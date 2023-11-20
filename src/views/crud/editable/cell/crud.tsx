@@ -33,6 +33,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
       const { key, cell, rowData } = opts;
       if (key === "radio") {
         if (cell.isEditing) {
+          //@ts-ignore
           rowData.radio = event.target.value;
         }
       }
