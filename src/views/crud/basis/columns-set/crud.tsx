@@ -1,6 +1,7 @@
 import * as api from "./api.js";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
+import { computed } from "vue";
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const { crudBinding } = crudExpose;
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -79,7 +80,12 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           type: "dict-radio",
           dict: dict({
             url: "/mock/dicts/OpenStatusEnum?single"
-          })
+          }),
+          column: {
+            show: computed(() => {
+              return true;
+            })
+          }
         },
         disabled: {
           title: "列设置禁用",
