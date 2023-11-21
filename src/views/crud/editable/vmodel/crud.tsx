@@ -53,7 +53,7 @@ export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
           type: "dict-radio",
           dict: dict({
             url: "/mock/dicts/OpenStatusEnum?single"
-          })
+          }),
         },
         subTable: {
           title: "子表格",
@@ -63,12 +63,12 @@ export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
               name: EditableFreeSub,
               vModel: "modelValue"
             },
+            col: {
+              span: 24
+            },
             valueResolve({form}){
               form.subTable = crudExpose.editable.getTableData(form.subTable)
             },
-            col: {
-              span: 24
-            }
           },
           column: {
             formatter: ({ row }) => {
