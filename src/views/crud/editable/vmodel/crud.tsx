@@ -67,6 +67,7 @@ export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
               span: 24
             },
             valueResolve({form}){
+              //重要，移除$editable_id字段，返回干净的tableData数据
               form.subTable = crudExpose.editable.getTableData(form.subTable)
             },
           },
