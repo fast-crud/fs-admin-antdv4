@@ -63,6 +63,9 @@ export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
               name: EditableFreeSub,
               vModel: "modelValue"
             },
+            valueResolve({form}){
+              form.subTable = crudExpose.editable.getTableData(form.subTable)
+            },
             col: {
               span: 24
             }
