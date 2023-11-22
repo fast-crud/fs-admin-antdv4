@@ -661,6 +661,12 @@ export const crudResources = [
             name: "EditableVModel",
             path: "/crud/editable/vmodel",
             component: "/crud/editable/vmodel/index.vue"
+          },
+          {
+            title: "子CRUD",
+            name: "EditableSubCrud",
+            path: "/crud/editable/sub-crud",
+            component: "/crud/editable/sub-crud/index.vue"
           }
         ]
       },
