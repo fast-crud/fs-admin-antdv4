@@ -36,6 +36,12 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           }
         }
       },
+      mode: {
+        //本地模式
+        name: "local",
+        isMergeWhenUpdate: true,
+        isAppendWhenAdd: true
+      },
       table: {
         editable: {
           mode: "free"
