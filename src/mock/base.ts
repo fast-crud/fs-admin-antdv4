@@ -218,7 +218,7 @@ const mockUtil: any = {
           return {
             code: 0,
             msg: "success",
-            data: req.body.id
+            data: _.cloneDeep(req.body)
           };
         }
       },

@@ -31,12 +31,6 @@ export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
         wrapper: {
           width: "80%"
         },
-        async beforeSubmit() {
-          const validate = await crudExpose.getFormComponentRef("subTable")?.validate();
-          if (validate !== true) {
-            return false;
-          }
-        }
       },
       columns: {
         id: {
@@ -54,6 +48,9 @@ export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
           dict: dict({
             url: "/mock/dicts/OpenStatusEnum?single"
           }),
+          form:{
+            rules: [{ required: true, message: "请选择状态" }]
+          }
         },
         subTable: {
           title: "子表格",
@@ -63,7 +60,14 @@ export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
               name: EditableRowSub,
               id:compute(({form})=>{
                 return form.id
-              })
+              }),
+              on:{
+                async saveMain({form}){
+                  //保存主表
+                  const ret = await crudExpose.getFormRef().submit()
+                  form.id = ret.res.id
+                }
+              }
             },
             col: {
               span: 24
