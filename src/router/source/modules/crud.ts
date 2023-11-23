@@ -635,7 +635,7 @@ export const crudResources = [
         path: "/crud/editable",
         redirect: "/crud/editable/free",
         meta: {
-          icon: "ion:extension-puzzle-outline"
+          icon: "ion:create-outline"
         },
         children: [
           {

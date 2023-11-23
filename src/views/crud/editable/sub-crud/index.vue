@@ -1,7 +1,10 @@
 <template>
   <fs-page>
     <template #header>
-      <div class="title">子表crud</div>
+      <div class="title">
+        子表crud
+        <span class="sub"> 外键关联子表，子表有自己的crud接口 </span>
+      </div>
       <div class="more"><a target="_blank" href="http://fast-crud.docmirror.cn/api/crud-options/table.html#editable">文档</a></div>
     </template>
     <fs-crud ref="crudRef" v-bind="crudBinding">
