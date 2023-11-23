@@ -2,13 +2,15 @@ import * as api from "./api";
 import { dict, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, UserPageQuery, UserPageRes, EditReq, DelReq, AddReq } from "@fast-crud/fast-crud";
 import EditableRowSub from "/@/views/crud/editable/sub-crud/row/index.vue";
 export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
-  const { crudBinding } = props.crudExpose;
+  const { crudBinding,crudRef } = props.crudExpose;
   const { crudExpose } = props;
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
   };
   const editRequest = async ({ form, row }: EditReq) => {
-    form.id = row.id;
+    if(form.id==null){
+      form.id = row.id;
+    };
     return await api.UpdateObj(form);
   };
   const delRequest = async ({ row }: DelReq) => {
@@ -64,8 +66,13 @@ export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
               on:{
                 async saveMain({form}){
                   //保存主表
-                  const ret = await crudExpose.getFormRef().submit()
-                  form.id = ret.res.id
+                  const formRef = crudExpose.getFormRef()
+                  const ret = await formRef.submit()
+                  //将form改为编辑模式
+                  let formWrapperRef = crudExpose.getFormWrapperRef();
+                  formWrapperRef.setFormData(ret.res)
+                  crudRef.value.formWrapperRef.formOptions.mode = "edit"
+                  crudRef.value.formWrapperRef.title="编辑"
                 }
               }
             },
