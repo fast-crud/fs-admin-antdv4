@@ -1,5 +1,5 @@
 import * as api from "./api";
-import { dict, compute } from "@fast-crud/fast-crud";
+import {dict, compute, utils} from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -44,7 +44,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             type: "link",
             order: 0, //数字越小，越靠前,默认排序号为1
             click(opts) {
-              console.log("自定义操作列按钮点击", opts);
+              utils.logger.log("自定义操作列按钮点击", opts);
               message.success("自定义操作列按钮点击");
             }
           }

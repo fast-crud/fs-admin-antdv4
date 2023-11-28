@@ -45,7 +45,6 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
     editing: false,
     loading: false,
     onSubmit: async () => {
-      console.log("onSubmit");
       radioColumnEditor.loading = true;
       try {
         const data: any[] = [];
@@ -60,7 +59,6 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
       }
     },
     onCancel: () => {
-      console.log("cancel");
       crudExpose.editable.cancel();
       radioColumnEditor.editing = false;
     },

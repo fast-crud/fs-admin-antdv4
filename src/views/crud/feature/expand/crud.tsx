@@ -1,5 +1,15 @@
 import * as api from "./api.js";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import {
+  AddReq,
+  CreateCrudOptionsProps,
+  CreateCrudOptionsRet,
+  DelReq,
+  dict,
+  EditReq,
+  UserPageQuery,
+  UserPageRes,
+  utils
+} from "@fast-crud/fast-crud";
 import { ref } from "vue";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -41,7 +51,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           };
         },
         onExpand(open: boolean, row: any) {
-          console.log("expand事件：", open, row);
+          utils.logger.info("expand事件：", open, row);
         },
         slots: {
           expandedRowRender: (scope: any) => {

@@ -46,7 +46,7 @@
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
 import { message } from "ant-design-vue";
-import { dict, useUi } from "@fast-crud/fast-crud";
+import {dict, useUi, utils} from "@fast-crud/fast-crud";
 import dayjs from "dayjs";
 import { FsUploaderS3, loadUploader, useUploader } from "@fast-crud/fast-extends";
 import createCrudOptionsText from "/@/views/crud/component/text/crud";
@@ -78,7 +78,7 @@ const cropperUploader = ref({
     viewMode: 1
   },
   async onReady(context: any) {
-    console.log("onReady", context);
+    utils.logger.info("onReady", context);
     context.zoom(-0.1);
     context.zoom(-0.1);
     context.zoom(-0.1);
@@ -122,7 +122,7 @@ async function fileUploaderChange(event: any) {
     file,
     fileName: file.name,
     onProgress(progress: any) {
-      console.log("progress:" + progress.percent + "%");
+      utils.logger.info("progress:" + progress.percent + "%");
     }
   });
   const { ui } = useUi();
@@ -136,6 +136,6 @@ async function fileUploaderChange(event: any) {
 
 function submit() {
   message.info("submit:" + JSON.stringify(form));
-  console.log("submit:", form);
+  utils.logger.info("submit:", form);
 }
 </script>

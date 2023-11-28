@@ -2,7 +2,6 @@ import * as api from "./api";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, ScopeContext, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
 import dayjs from "dayjs";
 
-console.log("utils", utils);
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
@@ -59,7 +58,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             component: {}
           },
           valueBuilder({ value, row, key }) {
-            console.log("value builder:", key, value, row);
+            utils.logger.info("value builder:", key, value, row);
             if (value != null) {
               row[key] = dayjs(value);
             }
@@ -81,7 +80,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             }
           },
           valueBuilder({ value, row, key }) {
-            console.log("value builder:", key, value, row);
+            utils.logger.info("value builder:", key, value, row);
             if (value != null) {
               row[key] = dayjs(value);
             }
@@ -126,7 +125,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
               valueFormat: "YYYY-MM-DD HH:mm:ss", //输入值的格式
               on: {
                 onChange(context: ScopeContext) {
-                  console.log("change", context);
+                  utils.logger.info("change", context);
                 }
               }
             }

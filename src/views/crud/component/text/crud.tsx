@@ -1,5 +1,15 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, ScopeContext, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import {
+  AddReq,
+  CreateCrudOptionsProps,
+  CreateCrudOptionsRet,
+  DelReq,
+  EditReq,
+  ScopeContext,
+  UserPageQuery,
+  UserPageRes,
+  utils
+} from "@fast-crud/fast-crud";
 import { SearchOutlined } from "@ant-design/icons-vue";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -45,7 +55,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           },
           column: {
             formatter(scope) {
-              console.log("formatter scope", scope);
+              utils.logger.info("formatter scope", scope);
               return scope.value;
             }
           }
@@ -161,7 +171,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             title: "复杂输入",
             component: {
               render(context: ScopeContext) {
-                console.log("context scope", context);
+                utils.logger.info("context scope", context);
                 return (
                   <a-input-group compact>
                     <a-input placeholder={"render1 input"} style="width: 50%" v-model={[context.form.render, "value"]} />

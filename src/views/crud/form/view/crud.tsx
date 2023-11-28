@@ -1,5 +1,14 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import {
+  AddReq,
+  CreateCrudOptionsRet,
+  DelReq,
+  dict,
+  EditReq,
+  UserPageQuery,
+  UserPageRes,
+  utils
+} from "@fast-crud/fast-crud";
 
 export default function (): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -35,10 +44,10 @@ export default function (): CreateCrudOptionsRet {
           gutter: 20
         },
         beforeSubmit(context) {
-          console.log("beforeSubmit", context);
+          utils.logger.log("beforeSubmit", context);
         },
         afterSubmit(context) {
-          console.log("afterSubmit", context);
+          utils.logger.log("afterSubmit", context);
         }
       },
       columns: {

@@ -1,5 +1,5 @@
 import { message } from "ant-design-vue";
-import { CreateCrudOptionsProps, CreateCrudOptionsRet, dict } from "@fast-crud/fast-crud";
+import {CreateCrudOptionsProps, CreateCrudOptionsRet, dict, utils} from "@fast-crud/fast-crud";
 import * as textTableApi from "/@/views/crud/component/text/api";
 import createCrudOptionsText from "/@/views/crud/component/text/crud";
 
@@ -9,21 +9,21 @@ export default function ({}: CreateCrudOptionsProps): CreateCrudOptionsRet {
       form: {
         wrapper: {
           onClosed(e) {
-            console.log("onClosed", e);
+            utils.logger.info("onClosed", e);
           },
           onOpened(e) {
-            console.log("onOpened", e);
+            utils.logger.log("onOpened", e);
           }
         },
         doSubmit({ form }: any) {
           //覆盖提交方法
-          console.log("form submit:", form);
+          utils.logger.log("form submit:", form);
           message.info("自定义表单提交:" + JSON.stringify(form));
           //模拟后端返回错误
           return { error: true };
         },
         afterSubmit(ctx: any) {
-          console.log("form after submit:", ctx);
+          utils.logger.log("form after submit:", ctx);
           if (ctx.res.error === true) {
             message.warn("模拟后端返回错误，不关闭对话框");
             return false;

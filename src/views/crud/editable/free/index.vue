@@ -27,7 +27,7 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import createCrudOptions from "./crud";
-import { useFs } from "@fast-crud/fast-crud";
+import {useFs, utils} from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 
 export default defineComponent({
@@ -59,7 +59,7 @@ export default defineComponent({
         message.success("保存,修改行：" + JSON.stringify(crudBinding.value.data));
       },
       log() {
-        console.log("table data:", crudBinding.value.data, crudExpose.getTableData());
+        utils.logger.info("table data:", crudBinding.value.data, crudExpose.getTableData());
       },
       cancel() {
         crudExpose.editable.resume();

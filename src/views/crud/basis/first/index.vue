@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
-import { useFs } from "@fast-crud/fast-crud";
+import {useFs, utils} from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
 
 //此处为组件定义
@@ -34,7 +34,7 @@ export default defineComponent({
     //  =======你可以简写为下面这一行========
     const { crudRef, crudBinding, crudExpose, context } = useFs({ createCrudOptions, context: {} });
 
-    console.log("test", context.test);
+    utils.logger.info("test", context.test);
     // 页面打开后获取列表数据
     onMounted(() => {
       crudExpose.doRefresh();

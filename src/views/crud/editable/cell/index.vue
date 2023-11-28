@@ -38,7 +38,7 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import createCrudOptions from "./crud";
-import { useFs } from "@fast-crud/fast-crud";
+import {useFs, utils} from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 
 export default defineComponent({
@@ -64,10 +64,7 @@ export default defineComponent({
       },
       save() {
         crudExpose.getTableRef().editable.submit(({ changed, removed, setData }: any) => {
-          console.log("changed", changed);
-          console.log("removed", removed);
-
-          console.log("table data:", crudBinding.value.data, crudExpose.getTableData());
+          utils.logger.info("table data:", crudBinding.value.data, crudExpose.getTableData());
           // setData({ 0: {id:1} }); //设置data
           message.success("保存,修改行：" + JSON.stringify(changed) + "；删除行：" + JSON.stringify(removed));
         });

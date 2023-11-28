@@ -1,5 +1,15 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import {
+  AddReq,
+  CreateCrudOptionsProps,
+  CreateCrudOptionsRet,
+  DelReq,
+  dict,
+  EditReq,
+  UserPageQuery,
+  UserPageRes,
+  utils
+} from "@fast-crud/fast-crud";
 import { ref } from "vue";
 import dayjs from "dayjs";
 
@@ -24,7 +34,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
   const selectedRowKeys = ref([]);
 
   const onSelectChange = (changed: any) => {
-    console.log("selection", changed);
+    utils.logger.info("selection", changed);
     selectedRowKeys.value = changed;
   };
   return {

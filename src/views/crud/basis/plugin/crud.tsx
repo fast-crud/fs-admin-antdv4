@@ -1,5 +1,14 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import {
+  AddReq,
+  CreateCrudOptionsProps,
+  CreateCrudOptionsRet,
+  DelReq,
+  EditReq,
+  UserPageQuery,
+  UserPageRes,
+  utils
+} from "@fast-crud/fast-crud";
 import { ref } from "vue";
 
 export default function ({ crudExpose, context }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -38,7 +47,7 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
               crossPage: true,
               selectedRowKeys,
               onSelectedChanged(selected) {
-                console.log("已选择变化：", selected);
+                utils.logger.info("已选择变化：", selected);
               }
             }
           }

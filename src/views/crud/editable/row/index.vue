@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import createCrudOptions from "./crud";
-import { useFs } from "@fast-crud/fast-crud";
+import {useFs, utils} from "@fast-crud/fast-crud";
 
 export default defineComponent({
   name: "EditableRow",
@@ -35,7 +35,7 @@ export default defineComponent({
       crudBinding,
       crudRef,
       log() {
-        console.log("table data:", crudBinding.value.data, crudExpose.getTableData());
+        utils.logger.info("table data:", crudBinding.value.data, crudExpose.getTableData());
       }
     };
   }

@@ -1,5 +1,15 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import {
+  AddReq,
+  CreateCrudOptionsProps,
+  CreateCrudOptionsRet,
+  DelReq,
+  dict,
+  EditReq,
+  UserPageQuery,
+  UserPageRes,
+  utils
+} from "@fast-crud/fast-crud";
 import { ref } from "vue";
 export default function ({ crudExpose, context }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -23,7 +33,7 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
   context.selectedRowKeys = selectedRowKeys;
 
   const onSelectChange = (changed: any) => {
-    console.log("selection", changed);
+    utils.logger.info("selection", changed);
     selectedRowKeys.value = changed;
   };
   return {

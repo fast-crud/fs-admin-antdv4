@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, watch } from "vue";
 import createCrudOptions from "./crud";
-import { useFs, useUi } from "@fast-crud/fast-crud";
+import {useFs, useUi, utils} from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 
 export default defineComponent({
@@ -35,7 +35,7 @@ export default defineComponent({
     let formItemContext = ui.formItem.injectFormItemContext();
 
     function emit(data:any) {
-      console.log("emit:", data);
+      utils.logger.info("emit:", data);
       ctx.emit("update:modelValue", data);
       formItemContext.onBlur();
       formItemContext.onChange();

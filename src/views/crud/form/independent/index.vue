@@ -47,7 +47,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { message } from "ant-design-vue";
-import { CreateCrudOptionsProps, useColumns, useFormWrapper, useFs } from "@fast-crud/fast-crud";
+import {CreateCrudOptionsProps, useColumns, useFormWrapper, useFs, utils} from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
 
 function createFormOptionsFromCrudOptions() {
@@ -72,7 +72,7 @@ function createFormOptions() {
             allowClear: true
           },
           valueBuilder(context) {
-            console.log("value builder :", context);
+            utils.logger.log("value builder :", context);
           },
           rules: [{ required: true, message: "此项必填" }]
         }
@@ -100,7 +100,7 @@ function createFormOptions() {
         }
       },
       doSubmit({ form }) {
-        console.log("form submit:", form);
+        utils.logger.log("form submit:", form);
         message.info("自定义表单提交:" + JSON.stringify(form));
         message.success("保存成功");
       }
@@ -168,13 +168,13 @@ function useCrudBindingForm() {
     ...crudBinding.value.addForm, // 你也可以用editForm
     doSubmit({ form }: any) {
       //覆盖提交方法
-      console.log("form submit:", form);
+      utils.logger.log("form submit:", form);
       message.info("自定义表单提交:" + JSON.stringify(form));
       //模拟后端返回错误
       return { error: true };
     },
     afterSubmit(ctx: any) {
-      console.log("form after submit:", ctx);
+      utils.logger.log("form after submit:", ctx);
       if (ctx.res.error === true) {
         message.warn("模拟后端返回错误，不关闭对话框");
         return false;
@@ -219,7 +219,7 @@ function useFormProvider() {
   async function openFormWrapperNoTag() {
     const opts = createFormOptionsFromCrudOptions();
     const wrapperRef = await openDialog(opts);
-    console.log("对话框已打开", wrapperRef);
+    utils.logger.log("对话框已打开", wrapperRef);
   }
   return {
     openFormWrapperNoTag

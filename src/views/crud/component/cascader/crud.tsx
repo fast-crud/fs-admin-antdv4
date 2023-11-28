@@ -1,6 +1,16 @@
 import * as api from "./api";
 import { requestForMock } from "/src/api/service";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import {
+  AddReq,
+  CreateCrudOptionsProps,
+  CreateCrudOptionsRet,
+  DelReq,
+  dict,
+  EditReq,
+  UserPageQuery,
+  UserPageRes,
+  utils
+} from "@fast-crud/fast-crud";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -87,7 +97,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
                 }
               ],
               loadData: async (selectedOptions: any) => {
-                console.log("lazyLoad", selectedOptions);
+                utils.logger.info("lazyLoad", selectedOptions);
                 const targetOption = selectedOptions[selectedOptions.length - 1];
                 targetOption.loading = true;
 

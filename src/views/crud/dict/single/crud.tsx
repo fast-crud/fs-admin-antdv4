@@ -1,5 +1,5 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes ,utils} from "@fast-crud/fast-crud";
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
@@ -67,7 +67,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           column: {
             component: {
               onDictChange(opts: any) {
-                console.log("字典变化：", opts);
+                utils.logger.info("字典变化：", opts);
               }
             }
           }
@@ -82,7 +82,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
               vModel: "checked"
             },
             valueChange({ form }) {
-              console.log("changed", form.modifyDict);
+              utils.logger.info("changed", form.modifyDict);
               remoteDict.url = form.modifyDict ? "/mock/dicts/moreOpenStatusEnum?remote" : "/mock/dicts/OpenStatusEnum?remote";
               // 由于remoteDict.cloneable =false,所以全局公用一个实例，修改会影响全部地方
               remoteDict.reloadDict();

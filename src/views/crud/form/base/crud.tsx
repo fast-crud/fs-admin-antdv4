@@ -87,7 +87,7 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
           type: "text",
           form: {
             title(context: ScopeContext) {
-              console.log("render label context:", context);
+              utils.logger.info("render label context:", context);
               return <div style={{ color: "red" }}>LabelRender</div>;
             },
             helper: {

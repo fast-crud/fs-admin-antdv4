@@ -14,7 +14,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, watch,ref } from "vue";
 import createCrudOptions from "./crud";
-import { useFs, useUi } from "@fast-crud/fast-crud";
+import {useFs, useUi, utils} from "@fast-crud/fast-crud";
 
 export default defineComponent({
   name: "EditableSubCrudTarget",
@@ -44,7 +44,7 @@ export default defineComponent({
     let formItemContext = ui.formItem.injectFormItemContext();
 
     function emit(data:any) {
-      console.log("emit:", data);
+      utils.logger.info("emit:", data);
       formItemContext.onBlur();
       formItemContext.onChange();
     }

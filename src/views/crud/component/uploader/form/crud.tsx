@@ -1,5 +1,14 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import {
+  AddReq,
+  CreateCrudOptionsProps,
+  CreateCrudOptionsRet,
+  DelReq,
+  EditReq,
+  UserPageQuery,
+  UserPageRes,
+  utils
+} from "@fast-crud/fast-crud";
 import { createUploaderRules } from "@fast-crud/fast-extends";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -33,7 +42,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           async onOpened() {
             // 异步组件实例的获取
             const componentRef = await crudExpose.getFormComponentRef("file", true);
-            console.log("componentRef", componentRef);
+            utils.logger.info("componentRef", componentRef);
           }
         }
       },
