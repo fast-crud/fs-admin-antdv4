@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import createCrudOptions from "./crud";
-import {useFs, utils} from "@fast-crud/fast-crud";
+import { useFs, utils } from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 
 export default defineComponent({
