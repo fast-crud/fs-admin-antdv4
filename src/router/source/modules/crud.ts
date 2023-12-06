@@ -466,6 +466,12 @@ export const crudResources = [
             name: "FormInitial",
             path: "/crud/form/initial",
             component: "/crud/form/initial/index.vue"
+          },
+          {
+            title: "表单Watch",
+            name: "FormWatch",
+            path: "/crud/form/watch",
+            component: "/crud/form/watch/index.vue"
           }
         ]
       },

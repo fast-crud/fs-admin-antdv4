@@ -16,14 +16,14 @@ module.exports = {
       tsx: true
     }
   },
-  extends: ["plugin:vue/vue3-recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended", "prettier"],
+  extends: ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended", "prettier", "plugin:vue/vue3-recommended"],
   rules: {
     //"max-len": [0, 200, 2, { ignoreUrls: true }],
     "@typescript-eslint/no-unused-vars": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-use-before-define": "off",
