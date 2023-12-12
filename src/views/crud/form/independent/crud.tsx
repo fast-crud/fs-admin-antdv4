@@ -1,5 +1,5 @@
 import { message } from "ant-design-vue";
-import {CreateCrudOptionsProps, CreateCrudOptionsRet, dict, utils} from "@fast-crud/fast-crud";
+import { CreateCrudOptionsProps, CreateCrudOptionsRet, dict, utils } from "@fast-crud/fast-crud";
 import * as textTableApi from "/@/views/crud/component/text/api";
 import createCrudOptionsText from "/@/views/crud/component/text/crud";
 
@@ -43,6 +43,10 @@ export default function ({}: CreateCrudOptionsProps): CreateCrudOptionsRet {
           form: {
             helper: "最简单的helper"
           }
+        },
+        date: {
+          title: "日期",
+          type: "date"
         },
         age: {
           title: "jsx",

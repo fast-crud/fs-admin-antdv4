@@ -3,40 +3,53 @@
     <template #header>
       <div class="title">独立使用表单</div>
       <div class="more">
-        <a target="_blank" href="http://fast-crud.docmirror.cn/api/use.html#useformwrapper">文档</a>
+        <a target="_blank"
+href="http://fast-crud.docmirror.cn/api/use.html#useformwrapper">文档</a>
       </div>
     </template>
     <div style="padding: 20px">
       <a-row :gutter="10">
         <a-col :span="12">
-          <a-card class="mt-10" title="直接显示表单">
-            <fs-form ref="formRef" v-bind="formOptions"> </fs-form>
+          <a-card class="mt-10"
+title="直接显示表单">
+            <fs-form
+ref="formRef" v-bind="formOptions" />
             <div style="margin-top: 10px">
-              <a-button @click="formSubmit">提交表单</a-button>
-              <a-button @click="formReset">重置表单</a-button>
-              <a-button class="ml-10" @click="setFormDataTest">setFormData</a-button>
+              <a-button @click="formSubmit"> 提交表单 </a-button>
+              <a-button @click="formReset"> 重置表单 </a-button>
+              <a-button
+class="ml-10" @click="setFormDataTest"> setFormData </a-button>
             </div>
           </a-card>
         </a-col>
         <a-col span="12">
-          <a-card class="mt-10" title="直接打开对话框,无需写 fs-form-wrapper 标签">
+          <a-card class="mt-10"
+title="直接打开对话框,无需写 fs-form-wrapper 标签">
             <div style="margin-top: 10px">
-              <a-button @click="openFormWrapperNoTag">打开对话框</a-button>
+              <a-button @click="openFormWrapperNoTag"> 打开对话框 </a-button>
+
+              <div>需要在app.vue使用fs-form-context包裹router-view</div>
             </div>
           </a-card>
-          <a-card class="mt-10" title="打开表单对话框">
-            <a-button @click="openFormWrapper">打开表单对话框</a-button>
-            <fs-form-wrapper ref="formWrapperRef" v-bind="formWrapperOptions" />
+          <a-card class="mt-10"
+title="打开表单对话框">
+            <a-button @click="openFormWrapper"> 打开表单对话框 </a-button>
+            <fs-form-wrapper ref="formWrapperRef"
+v-bind="formWrapperOptions" />
           </a-card>
 
-          <a-card class="mt-10" title="打开表单对话框（复用crudOptions）">
-            <a-button @click="openFormWrapper2">打开表单对话框</a-button>
-            <fs-form-wrapper ref="formWrapper2Ref" v-bind="formWrapper2Options" />
+          <a-card class="mt-10"
+title="打开表单对话框（复用crudOptions）">
+            <a-button @click="openFormWrapper2"> 打开表单对话框 </a-button>
+            <fs-form-wrapper ref="formWrapper2Ref"
+v-bind="formWrapper2Options" />
           </a-card>
 
-          <a-card class="mt-10" title="打开表单对话框【复用crudBinding】">
-            <a-button @click="openFormWrapper2">打开表单对话框</a-button>
-            <fs-form-wrapper ref="formWrapperRef2" v-bind="formWrapperOptions2" />
+          <a-card class="mt-10"
+title="打开表单对话框【复用crudBinding】">
+            <a-button @click="openFormWrapper2"> 打开表单对话框 </a-button>
+            <fs-form-wrapper ref="formWrapperRef2"
+v-bind="formWrapperOptions2" />
           </a-card>
         </a-col>
       </a-row>
@@ -47,7 +60,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { message } from "ant-design-vue";
-import {CreateCrudOptionsProps, useColumns, useFormWrapper, useFs, utils} from "@fast-crud/fast-crud";
+import { CreateCrudOptionsProps, useColumns, useFormWrapper, useFs, utils } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
 
 function createFormOptionsFromCrudOptions() {
@@ -76,6 +89,10 @@ function createFormOptions() {
           },
           rules: [{ required: true, message: "此项必填" }]
         }
+      },
+      date: {
+        title: "日期",
+        type: "date"
       },
       groupField: {
         title: "分组字段",
