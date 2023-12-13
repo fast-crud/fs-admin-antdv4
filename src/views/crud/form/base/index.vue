@@ -3,12 +3,15 @@
     <template #header>
       <div class="title">基本表单</div>
     </template>
-    <fs-crud ref="crudRef" v-bind="crudBinding">
+    <fs-crud
+ref="crudRef" v-bind="crudBinding"
+>
       <template #form-body-top>
         <div style="display: flex">
           <div>
             <span>label宽度设置:</span>
-            <a-slider v-model:value="labelWidthRef" style="width: 200px" :min="40" :max="300"></a-slider>
+            <a-slider
+v-model:value="labelWidthRef" style="width: 200px" :min="40" :max="300" />
           </div>
           <div>
             <span>label位置:</span>
@@ -24,7 +27,7 @@
                   label: '左置'
                 }
               ]"
-            ></a-radio-group>
+            />
           </div>
         </div>
       </template>
@@ -41,7 +44,7 @@ export default defineComponent({
   name: "FormBase",
   setup() {
     const labelWidthRef = ref(100);
-    const labelLayoutRef = ref("");
+    const labelLayoutRef = ref(undefined);
     const context = {
       labelWidthRef,
       labelLayoutRef

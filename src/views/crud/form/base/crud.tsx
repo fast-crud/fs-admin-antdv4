@@ -40,12 +40,21 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
             })
           }
         },
+        beforeValidate(context) {
+          console.log("beforeValidate", context);
+        },
+        beforeSubmit(context) {
+          console.log("beforeSubmit", context);
+        },
         afterSubmit(context) {
           // context.res 是add或update请求返回结果
           if (context.form.id === 1) {
             message.error("模拟保存失败，阻止弹窗关闭");
             throw new Error("模拟失败，阻止弹窗关闭");
           }
+        },
+        onSuccess(context) {
+          message.success("保存成功");
         },
         wrapper: {
           zIndex: 1003,
