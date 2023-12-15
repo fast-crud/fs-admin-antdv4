@@ -103,6 +103,21 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
               text: "配置form.title为一个render方法即可自定义label"
             }
           }
+        },
+        intro: {
+          title: "无label",
+          type: "editor-wang5",
+          form: {
+            labelCol: {
+              style: {
+                width: "0px"
+              }
+            },
+            col: {
+              span: 24
+            },
+            helper: "不显示label"
+          }
         }
       }
     }
