@@ -68,7 +68,8 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
                 type: "form",
                 keepName: true
               }
-            }
+            },
+            helper: "可以同时选择多个文件"
           },
           column: {
             component: {
