@@ -3,9 +3,18 @@
     <template #header>
       <div class="title">table-select</div>
       <div class="more">
-        <fs-label label="设置值">
+        <fs-label label="直接设置值">
           <fs-table-select v-model="value" :dict="singleDictRef" :create-crud-options="createCrudOptionsText" />
-          <a-button @click="setValue">设置值</a-button>
+          <a-button @click="setValue"> 设置值 </a-button>
+        </fs-label>
+
+        <fs-label label="自定义插槽">
+          【{{ value }}】
+          <fs-table-select v-model="value" :dict="singleDictRef" :create-crud-options="createCrudOptionsText">
+            <template #default="scope">
+              <fs-button @click="scope.open()"> 选择 </fs-button>
+            </template>
+          </fs-table-select>
         </fs-label>
       </div>
     </template>
