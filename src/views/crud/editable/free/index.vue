@@ -11,10 +11,14 @@
           <a-radio-button :value="true">启用编辑</a-radio-button>
           <a-radio-button :value="false">退出编辑</a-radio-button>
         </a-radio-group>
-        <!--            <a-radio-group class="ml-1" v-model="crudBinding.table.editable.mode">-->
-        <!--              <a-radio-button label="free">自由模式</a-radio-button>-->
-        <!--              <a-radio-button label="row">行编辑模式</a-radio-button>-->
-        <!--            </a-radio-group>-->
+        <a-radio-group v-model:value="crudBinding.table.editable.showAction" class="ml-1">
+          <a-radio-button :value="true">显示操作按钮</a-radio-button>
+          <a-radio-button :value="false">不显示</a-radio-button>
+        </a-radio-group>
+        <a-radio-group v-model:value="crudBinding.table.editable.activeDefault" class="ml-1">
+          <a-radio-button :value="true">默认激活</a-radio-button>
+          <a-radio-button :value="false">默认不激活</a-radio-button>
+        </a-radio-group>
         <template v-if="crudBinding.table.editable.enabled">
           <fs-button class="ml-5" @click="save">保存</fs-button>
           <fs-button class="ml-5" @click="log">log</fs-button>
@@ -25,9 +29,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import createCrudOptions from "./crud";
-import {useFs, utils} from "@fast-crud/fast-crud";
+import { useFs, utils } from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 
 export default defineComponent({
@@ -38,7 +42,7 @@ export default defineComponent({
     // 页面打开后获取列表数据
     onMounted(() => {
       crudExpose.doRefresh();
-      crudExpose.editable.enable({ mode: "free", activeDefault: true });
+      crudExpose.editable.enable({ mode: "free" });
     });
 
     return {
