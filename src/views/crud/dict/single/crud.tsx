@@ -1,5 +1,5 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes ,utils} from "@fast-crud/fast-crud";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
@@ -55,7 +55,15 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         },
         status: {
           title: "本地字典",
-          search: { show: false },
+          search: {
+            show: true,
+            component: {
+              transformDictData(data: any[]) {
+                data.unshift({ value: "", label: "全部" });
+                return data;
+              }
+            }
+          },
           dict: statusDict,
           type: "dict-select"
         },

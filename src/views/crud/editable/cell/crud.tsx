@@ -157,7 +157,10 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           type: "dict-radio",
           dict: radioDictRef,
           column: {
-            width: 300
+            width: 300,
+            valueChange({ value, getComponentRef }) {
+              console.log("value changed:", value, getComponentRef("radio"));
+            }
           }
         },
         name: {
