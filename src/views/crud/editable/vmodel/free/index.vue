@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, watch } from "vue";
 import createCrudOptions from "./crud";
-import {useFs, useUi, utils} from "@fast-crud/fast-crud";
+import { useFs, useUi, utils } from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 
 export default defineComponent({
@@ -19,14 +19,14 @@ export default defineComponent({
         return undefined;
       }
     },
-    disabled:{
-      type:Boolean,
-      default:false
+    disabled: {
+      type: Boolean,
+      default: false
     },
-    readonly:{
-      type:Boolean,
-      default:false
-    },
+    readonly: {
+      type: Boolean,
+      default: false
+    }
   },
   emits: ["update:modelValue"],
   setup(props, ctx) {
@@ -34,14 +34,12 @@ export default defineComponent({
     const { ui } = useUi();
     let formItemContext = ui.formItem.injectFormItemContext();
 
-    function emit(data:any) {
+    function emit(data: any) {
       utils.logger.info("emit:", data);
       ctx.emit("update:modelValue", data);
       formItemContext.onBlur();
       formItemContext.onChange();
     }
-
-
 
     // 页面打开后获取列表数据
     onMounted(() => {
@@ -64,21 +62,25 @@ export default defineComponent({
         }
       );
 
-      watch(()=>{
-        return props.disabled || props.readonly
-      },(value)=>{
-        if(value){
-          crudBinding.value.table.editable.readonly=true
-          crudBinding.value.actionbar.buttons.addRow.show=false
-          crudBinding.value.rowHandle.show=false
-        }else{
-          crudBinding.value.table.editable.readonly=false
-          crudBinding.value.actionbar.buttons.addRow.show=true
-          crudBinding.value.rowHandle.show=true
+      watch(
+        () => {
+          return props.disabled || props.readonly;
+        },
+        (value) => {
+          if (value) {
+            crudBinding.value.table.editable.readonly = true;
+            crudBinding.value.actionbar.buttons.addRow.show = false;
+            crudBinding.value.rowHandle.show = false;
+          } else {
+            crudBinding.value.table.editable.readonly = false;
+            crudBinding.value.actionbar.buttons.addRow.show = true;
+            crudBinding.value.rowHandle.show = true;
+          }
+        },
+        {
+          immediate: true
         }
-      },{
-        immediate:true
-      })
+      );
       // crudExpose.editable.enable({ mode: "free", activeDefault: true });
     });
 

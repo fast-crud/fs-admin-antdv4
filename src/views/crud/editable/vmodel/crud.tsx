@@ -55,7 +55,7 @@ export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
           type: "dict-radio",
           dict: dict({
             url: "/mock/dicts/OpenStatusEnum?single"
-          }),
+          })
         },
         subTable: {
           title: "子表格",
@@ -68,10 +68,10 @@ export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
             col: {
               span: 24
             },
-            valueResolve({form}){
+            valueResolve({ form }) {
               //重要，移除$editable_id字段，返回干净的tableData数据
-              form.subTable = crudExpose.editable.getTableData(form.subTable)
-            },
+              form.subTable = crudExpose.editable.getTableData(form.subTable);
+            }
           },
           column: {
             formatter: ({ row }) => {
