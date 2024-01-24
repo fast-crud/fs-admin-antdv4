@@ -44,7 +44,14 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           title: "省",
           type: "dict-select",
           search: {
-            show: true
+            show: true,
+            valueChange({ form, value, getComponentRef }) {
+              form.city = undefined; // 将“city”的值置空
+              form.county = undefined; // 将“county”的值置空
+              if (value) {
+                getComponentRef("city").reloadDict(); // 执行city的select组件的reloadDict()方法，触发“city”重新加载字典
+              }
+            }
           },
           dict: dict({
             url: "/mock/linkage/province",
