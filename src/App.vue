@@ -24,9 +24,9 @@ export default {
     const routerEnabled = ref(true);
     const locale = ref(zhCN);
     async function reload() {
-      routerEnabled.value = false;
-      await nextTick();
-      routerEnabled.value = true;
+      // routerEnabled.value = false;
+      // await nextTick();
+      // routerEnabled.value = true;
     }
     function localeChanged(value: any) {
       console.log("locale changed:", value);
