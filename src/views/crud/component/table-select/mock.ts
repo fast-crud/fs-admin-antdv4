@@ -11,7 +11,8 @@ const list = [
   },
   {
     single: 3,
-    multi: [1, 2, 3]
+    multi: [1, 2, 3],
+    dynamicShow: false
   },
   {
     single: 2

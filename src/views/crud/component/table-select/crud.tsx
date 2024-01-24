@@ -1,6 +1,6 @@
 import * as api from "./api";
 import * as textTableApi from "../text/api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import createCrudOptionsText from "../text/crud";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -51,6 +51,16 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             show: false
           }
         },
+        dynamicShow: {
+          title: "动态显隐",
+          type: "dict-switch",
+          dict: dict({
+            data: [
+              { value: true, label: "显示" },
+              { value: false, label: "隐藏" }
+            ]
+          })
+        },
         single: {
           title: "单选",
           search: { show: true },
@@ -64,6 +74,9 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             }
           }),
           form: {
+            show: compute(({ form }) => {
+              return form.dynamicShow;
+            }),
             component: {
               crossPage: true,
               valuesFormat: {
