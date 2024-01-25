@@ -1,16 +1,5 @@
 import * as api from "./api";
-import {
-  AddReq,
-  compute,
-  CreateCrudOptionsProps,
-  CreateCrudOptionsRet,
-  DelReq,
-  dict,
-  EditReq,
-  UserPageQuery,
-  UserPageRes,
-  utils
-} from "@fast-crud/fast-crud";
+import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
@@ -26,8 +15,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
   };
 
   const addRequest = async ({ form }: AddReq) => {
-    const id = await api.AddObj(form);
-    return { id };
+    return await api.AddObj(form);
   };
 
   return {
@@ -43,7 +31,8 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
       table: {
         editable: {
           enabled: true,
-          mode: "row"
+          mode: "row",
+          exclusive: true //排他式激活
         }
       },
       columns: {
