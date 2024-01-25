@@ -90,12 +90,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             url: "/mock/dicts/littlePca",
             value: "code",
             label: "name"
-          }),
-          form: {
-            component: {
-              fieldNames: { label: "name", key: "code", value: "code" }
-            }
-          }
+          })
         },
         lazy: {
           title: "懒加载",
