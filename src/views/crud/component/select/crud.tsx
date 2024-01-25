@@ -1,17 +1,6 @@
 import * as api from "./api";
 import { requestForMock } from "/src/api/service";
-import {
-  AddReq,
-  CreateCrudOptionsProps,
-  CreateCrudOptionsRet,
-  DelReq,
-  dict,
-  DictOnReadyContext,
-  EditReq,
-  UserPageQuery,
-  UserPageRes,
-  utils
-} from "@fast-crud/fast-crud";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, DictOnReadyContext, EditReq, UserPageQuery, UserPageRes, useUi, utils } from "@fast-crud/fast-crud";
 import { ref } from "vue";
 import _ from "lodash-es";
 function useSearchRemote() {
@@ -87,6 +76,8 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
     //dictRef.toMap();
   }
 
+  const { ui } = useUi();
+
   const { fetchUser, searchState } = useSearchRemote();
   return {
     dynamicUpdateDictOptions,
@@ -128,7 +119,24 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         statusLocal: {
           title: "单选本地",
           type: "dict-select",
-          dict: dictRef
+          dict: dictRef,
+          form: {
+            component: {
+              onChange(args) {
+                utils.logger.info("onChange", args);
+              },
+              on: {
+                selectedChange({ form, $event }) {
+                  // $event就是原始的事件值，也就是选中的 option对象
+                  utils.logger.info("onSelectedChange", form, $event);
+                  ui.message.info(`你选择了${JSON.stringify($event)}`);
+                  // 你还可以将选中的label值赋值给表单里其他字段
+                  // context.form.xxxLabel = context.$event.label
+                }
+              }
+            },
+            helper: "selected-change事件可以获取选中的option对象"
+          }
         },
         statusRemote: {
           title: "单选远程",
