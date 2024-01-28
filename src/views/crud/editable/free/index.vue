@@ -58,6 +58,7 @@ export default defineComponent({
         const res = await crudExpose.editable.validate();
         if (res !== true) {
           console.error("validate error:", res);
+          message.error("validate error：" + JSON.stringify(res));
           return;
         }
         message.success("保存,修改行：" + JSON.stringify(crudBinding.value.data));
