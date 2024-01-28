@@ -184,6 +184,7 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
           search: { show: false },
           type: "text",
           column: {
+            order: 1000,
             fixed: "right",
             component: {
               name: "a-switch",
