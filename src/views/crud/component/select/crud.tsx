@@ -122,7 +122,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           dict: dictRef,
           form: {
             component: {
-              onChange(args) {
+              onChange(args: any) {
                 utils.logger.info("onChange", args);
               },
               on: {

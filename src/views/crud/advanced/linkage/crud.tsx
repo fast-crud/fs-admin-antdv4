@@ -45,7 +45,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           type: "dict-select",
           search: {
             show: true,
-            valueChange({ form, value, getComponentRef }) {
+            valueChange({ form: any, value: any, getComponentRef: any }) {
               form.city = undefined; // 将“city”的值置空
               form.county = undefined; // 将“county”的值置空
               if (value) {
