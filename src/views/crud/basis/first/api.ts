@@ -1,7 +1,14 @@
 import { requestForMock } from "/src/api/service";
 const request = requestForMock;
 const apiPrefix = "/mock/FsCrudFirst";
-export function GetList(query: any) {
+
+export type FirstRow = {
+  id?: number;
+  name?: string;
+  type?: number;
+};
+
+export function GetList(query: FirstRow) {
   return request({
     url: apiPrefix + "/page",
     method: "get",
@@ -9,7 +16,7 @@ export function GetList(query: any) {
   });
 }
 
-export function AddObj(obj: any) {
+export function AddObj(obj: FirstRow) {
   return request({
     url: apiPrefix + "/add",
     method: "post",
@@ -17,7 +24,7 @@ export function AddObj(obj: any) {
   });
 }
 
-export function UpdateObj(obj: any) {
+export function UpdateObj(obj: FirstRow) {
   return request({
     url: apiPrefix + "/update",
     method: "post",

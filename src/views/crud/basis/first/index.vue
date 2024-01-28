@@ -15,8 +15,9 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
 import { useFs, utils } from "@fast-crud/fast-crud";
-import createCrudOptions from "./crud";
+import createCrudOptions, { FirstContext } from "./crud";
 import { TourProps } from "ant-design-vue";
+import { FirstRow } from "./api";
 
 //此处为组件定义
 export default defineComponent({
@@ -35,7 +36,7 @@ export default defineComponent({
 
     //  =======以上为fs的初始化代码=========
     //  =======你可以简写为下面这一行========
-    const { crudRef, crudBinding, crudExpose, context } = useFs({ createCrudOptions, context: {} });
+    const { crudRef, crudBinding, crudExpose, context } = useFs<FirstRow, FirstContext>({ createCrudOptions, context: {} });
 
     utils.logger.info("test", context.test);
 
