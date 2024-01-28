@@ -2,6 +2,9 @@ import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, Edi
 import * as api from "./api";
 import { FirstRow } from "./api";
 
+/**
+ * 定义context参数类型
+ */
 export type FirstContext = {
   test?: number;
 };

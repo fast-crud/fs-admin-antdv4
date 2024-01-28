@@ -2,6 +2,9 @@ import { requestForMock } from "/src/api/service";
 const request = requestForMock;
 const apiPrefix = "/mock/FsCrudFirst";
 
+/**
+ * 定义行数据模型
+ */
 export type FirstRow = {
   id?: number;
   name?: string;

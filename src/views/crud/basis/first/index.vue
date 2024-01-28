@@ -43,6 +43,7 @@ export default defineComponent({
     function useTour() {
       const open = ref<boolean>(false);
       const current = ref(0);
+      //帮助向导
       const steps: TourProps["steps"] = [
         {
           title: "查询",
