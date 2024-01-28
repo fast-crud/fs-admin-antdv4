@@ -33,6 +33,7 @@ export default defineComponent({
   },
   emits: ["save-main"],
   setup(props, ctx) {
+    // eslint-disable-next-line vue/no-setup-props-destructure
     const parentIdRef = ref(props.id);
     const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions, context: { parentIdRef } });
     const { ui } = useUi();
