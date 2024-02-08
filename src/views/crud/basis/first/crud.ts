@@ -1,4 +1,4 @@
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery } from "@fast-crud/fast-crud";
+import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery } from "@fast-crud/fast-crud";
 import * as api from "./api";
 import { FirstRow } from "./api";
 
@@ -38,7 +38,10 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps<FirstRo
           search: { show: true },
           column: {
             resizable: true,
-            width: 200
+            width: 200,
+            value: compute(({ row }) => {
+              row.
+            })
           }
         },
         type: {
