@@ -64,7 +64,13 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           dict: dict({
             isTree: true,
             url: "/mock/dicts/cascaderData?single"
-          })
+          }),
+          form: {
+            valueChange({ getComponentRef }) {
+              const compRef = getComponentRef("tree");
+              console.log("tree ref:", compRef.treeRef);
+            }
+          }
         },
         multiple: {
           title: "多选",

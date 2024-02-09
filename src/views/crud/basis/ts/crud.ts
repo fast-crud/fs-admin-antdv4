@@ -32,11 +32,11 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps<TsTestR
               { value: 0, label: "停止", color: "red" }
             ]
           }),
-          valueResolve: ({ row }) => {
-            console.log("valueResolve", row.type);
+          valueResolve: ({ form }) => {
+            console.log("valueResolve", form.type);
           },
-          valueBuilder: ({ form }) => {
-            console.log("valueBuilder", form.type);
+          valueBuilder: ({ row }) => {
+            console.log("valueBuilder", row.type);
           }
         },
         compute: {
