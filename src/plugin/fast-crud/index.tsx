@@ -43,7 +43,7 @@ function install(app: any, options: any = {}) {
           conditionalRender: {
             match(scope) {
               //不能用 !scope.value ， 否则switch组件设置为关之后就消失了
-              const { value, key } = scope;
+              const { value, key, props } = scope;
               return !value && key != "_index" && value != false;
             },
             render() {
@@ -59,6 +59,7 @@ function install(app: any, options: any = {}) {
         rowHandle: {
           buttons: {
             view: { type: "link", text: null, icon: "ion:eye-outline" },
+            copy: { show: true, type: "link", text: null, icon: "ion:copy-outline" },
             edit: { type: "link", text: null, icon: "ion:create-outline" },
             remove: { type: "link", style: { color: "red" }, text: null, icon: "ion:trash-outline" }
           },

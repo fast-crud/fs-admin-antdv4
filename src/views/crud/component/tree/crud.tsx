@@ -68,7 +68,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           form: {
             valueChange({ getComponentRef }) {
               const compRef = getComponentRef("tree");
-              console.log("tree ref:", compRef.treeRef);
+              console.log("tree ref:", compRef, compRef.$refs.treeRef);
             }
           }
         },
