@@ -32,7 +32,8 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         editable: {
           enabled: true,
           mode: "row",
-          exclusive: true //排他式激活
+          exclusive: true, //排他式激活
+          exclusiveEffect: "save" //排他式激活时，其他行的编辑状态的处理方式
         }
       },
       columns: {
