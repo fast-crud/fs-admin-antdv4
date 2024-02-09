@@ -103,6 +103,12 @@ export const crudResources = [
             name: "BasisPlugin",
             path: "/crud/basis/plugin",
             component: "/crud/basis/plugin/index.vue"
+          },
+          {
+            title: "Ts定义测试",
+            name: "BasisTsTest",
+            path: "/crud/basis/ts",
+            component: "/crud/basis/ts/index.vue"
           }
         ]
       },
