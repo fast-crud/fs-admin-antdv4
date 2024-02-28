@@ -38,10 +38,7 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps<FirstRo
           search: { show: true },
           column: {
             resizable: true,
-            width: 200,
-            value: compute(({ row }) => {
-              row.
-            })
+            width: 200
           }
         },
         type: {
