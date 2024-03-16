@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import { theme } from "ant-design-vue";
+import _ from "lodash-es";
 // @ts-ignore
 import { LocalStorage } from "/src/utils/util.storage";
 // import { replaceStyleVariables } from "vite-plugin-theme/es/client";
@@ -22,42 +24,62 @@ import { LocalStorage } from "/src/utils/util.storage";
 //     colorVariables: [...getThemeColors(color), ...colors]
 //   });
 // }
-
-interface SettingState {
-  theme: any;
+export type ThemeToken = {
+  token: {
+    colorPrimary: string;
+  };
+  algorithm: any;
+};
+export type ThemeConfig = {
+  colorPrimary: string;
+  mode: string;
+};
+export interface SettingState {
+  themeConfig: ThemeConfig;
+  themeToken: ThemeToken;
 }
 
 const SETTING_THEME_KEY = "SETTING_THEME";
 export const useSettingStore = defineStore({
   id: "app.setting",
   state: (): SettingState => ({
-    // user info
-    theme: null
+    theme: null,
+    themeToken: {
+      token: {},
+      algorithm: theme.defaultAlgorithm
+    }
   }),
   getters: {
-    getTheme(): any {
-      return this.theme || LocalStorage.get(SETTING_THEME_KEY) || {};
+    getThemeConfig(): any {
+      return this.themeConfig || LocalStorage.get(SETTING_THEME_KEY) || {};
     }
   },
   actions: {
-    persistTheme() {
-      LocalStorage.set(SETTING_THEME_KEY, this.getTheme);
+    persistThemeConfig() {
+      LocalStorage.set(SETTING_THEME_KEY, this.getThemeConfig);
     },
-    async setTheme(theme?: Object) {
-      if (theme == null) {
-        theme = this.getTheme;
+    async setThemeConfig(themeConfig?: ThemeConfig = this.themeConfig) {
+      this.themeConfig = themeConfig;
+      this.persistThemeConfig();
+      this.setPrimaryColor(themeConfig.colorPrimary);
+      this.setDarkMode(themeConfig.mode);
+    },
+    setPrimaryColor(color: any) {
+      this.themeConfig.colorPrimary = color;
+      _.set(this.themeToken, "token.colorPrimary", color);
+      this.persistThemeConfig();
+    },
+    setDarkMode(mode: "dark" | "light") {
+      this.themeConfig.mode = mode;
+      if (mode === "dark") {
+        this.themeToken.algorithm = theme.darkAlgorithm;
+      } else {
+        this.themeToken.algorithm = theme.defaultAlgorithm;
       }
-      this.theme = theme;
-      this.persistTheme();
-      // await changeTheme(this.theme.primaryColor);
-    },
-    async setPrimaryColor(color: any) {
-      const theme = this.theme;
-      theme.primaryColor = color;
-      await this.setTheme();
+      this.persistThemeConfig();
     },
     async init() {
-      await this.setTheme(this.getTheme);
+      await this.setThemeConfig(this.getThemeConfig);
     }
   }
 });

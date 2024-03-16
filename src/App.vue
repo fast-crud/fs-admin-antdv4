@@ -1,5 +1,5 @@
 <template>
-  <a-config-provider :locale="locale">
+  <a-config-provider :locale="locale" :theme="settingStore.themeToken">
     <fs-form-provider>
       <router-view v-if="routerEnabled" />
     </fs-form-provider>
@@ -52,7 +52,8 @@ export default {
 
     return {
       routerEnabled,
-      locale
+      locale,
+      settingStore
     };
   }
 };

@@ -16,6 +16,12 @@ import DefineOptions from "unplugin-vue-define-options/vite";
 process.env.VITE_APP_VERSION = require("./package.json").version;
 process.env.VITE_APP_BUILD_TIME = require("dayjs")().format("YYYY-M-D HH:mm:ss");
 
+import { theme } from "ant-design-vue";
+
+const { defaultAlgorithm, defaultSeed } = theme;
+
+const mapToken = defaultAlgorithm(defaultSeed);
+
 export default ({ command, mode }) => {
   console.log("args", command, mode);
   const env = loadEnv(mode, process.cwd());
@@ -85,7 +91,8 @@ export default ({ command, mode }) => {
         less: {
           // 修改默认主题颜色，配置less变量
           // modifyVars: generateModifyVars(),
-          javascriptEnabled: true
+          javascriptEnabled: true,
+          modifyVars: mapToken
         }
       }
     },
