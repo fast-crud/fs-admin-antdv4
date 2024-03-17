@@ -91,8 +91,8 @@ export default ({ command, mode }) => {
         less: {
           // 修改默认主题颜色，配置less变量
           // modifyVars: generateModifyVars(),
-          javascriptEnabled: true,
-          modifyVars: mapToken
+          javascriptEnabled: true
+          // modifyVars: mapToken
         }
       }
     },

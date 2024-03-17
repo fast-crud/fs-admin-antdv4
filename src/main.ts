@@ -8,7 +8,6 @@ import i18n from "./i18n";
 import store from "./store";
 import components from "./components";
 import plugin from "./plugin/";
-
 // 正式项目请删除mock，避免影响性能
 import "./mock";
 

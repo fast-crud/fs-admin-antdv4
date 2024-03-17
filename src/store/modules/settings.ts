@@ -3,27 +3,7 @@ import { theme } from "ant-design-vue";
 import _ from "lodash-es";
 // @ts-ignore
 import { LocalStorage } from "/src/utils/util.storage";
-// import { replaceStyleVariables } from "vite-plugin-theme/es/client";
-
-// import { getThemeColors, generateColors } from "/src/../build/theme-colors";
-//
-// import { mixLighten, mixDarken, tinycolor } from "vite-plugin-theme/es/colorUtils";
-
-// export async function changeTheme(color?: string) {
-//   if (color == null) {
-//     return;
-//   }
-//   const colors = generateColors({
-//     mixDarken,
-//     mixLighten,
-//     tinycolor,
-//     color
-//   });
-//
-//   return await replaceStyleVariables({
-//     colorVariables: [...getThemeColors(color), ...colors]
-//   });
-// }
+import less from "less";
 export type ThemeToken = {
   token: {
     colorPrimary: string;
@@ -73,8 +53,21 @@ export const useSettingStore = defineStore({
       this.themeConfig.mode = mode;
       if (mode === "dark") {
         this.themeToken.algorithm = theme.darkAlgorithm;
+        const defaultSeed = theme.defaultSeed;
+        const mapToken = theme.darkAlgorithm(defaultSeed);
+        less.modifyVars(mapToken);
+        less.modifyVars({
+          "@colorPrimaryBg": "#111a2c",
+          colorPrimaryBg: "#111a2c"
+        });
+        less.refreshStyles();
+        debugger;
       } else {
         this.themeToken.algorithm = theme.defaultAlgorithm;
+
+        const defaultSeed = theme.defaultSeed;
+        const mapToken = theme.defaultAlgorithm(defaultSeed);
+        less.modifyVars(mapToken);
       }
       this.persistThemeConfig();
     },
