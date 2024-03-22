@@ -14,7 +14,6 @@
     "preview": "vite preview",
     "pretty-quick": "pretty-quick",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue src/",
-    "tslint": "tslint --fix src/",
     "upgrade": "yarn upgrade-interactive --latest",
     "tsc": "vue-tsc --noEmit --skipLibCheck",
     "circle:check": "pnpm dependency-cruise --validate --output-type err-html -f dependency-report.html src",
