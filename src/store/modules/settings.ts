@@ -18,14 +18,15 @@ export interface SettingState {
   themeToken: ThemeToken;
 }
 
+const defaultThemeConfig = {
+  colorPrimary: "#1890ff",
+  mode: "light"
+};
 const SETTING_THEME_KEY = "SETTING_THEME";
 export const useSettingStore = defineStore({
   id: "app.setting",
   state: (): SettingState => ({
-    themeConfig: {
-      colorPrimary: "#1890ff",
-      mode: "light"
-    },
+    themeConfig: null,
     themeToken: {
       token: {},
       algorithm: theme.defaultAlgorithm
@@ -33,7 +34,7 @@ export const useSettingStore = defineStore({
   }),
   getters: {
     getThemeConfig(): any {
-      return this.themeConfig || LocalStorage.get(SETTING_THEME_KEY) || {};
+      return this.themeConfig || _.merge({}, defaultThemeConfig, LocalStorage.get(SETTING_THEME_KEY) || {});
     }
   },
   actions: {
@@ -44,8 +45,8 @@ export const useSettingStore = defineStore({
       this.themeConfig = _.merge({}, this.themeConfig, themeConfig);
 
       this.persistThemeConfig();
-      this.setPrimaryColor(themeConfig.colorPrimary);
-      this.setDarkMode(themeConfig.mode);
+      this.setPrimaryColor(this.themeConfig.colorPrimary);
+      this.setDarkMode(this.themeConfig.mode);
     },
     setPrimaryColor(color: any) {
       this.themeConfig.colorPrimary = color;
