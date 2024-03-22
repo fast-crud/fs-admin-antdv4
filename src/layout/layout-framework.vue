@@ -34,9 +34,9 @@
           <div class="header-btn">
             <fs-locale />
           </div>
-<!--          <div class="header-btn">-->
-<!--            <fs-theme-mode-set />-->
-<!--          </div>-->
+          <!--          <div class="header-btn">-->
+          <!--            <fs-theme-mode-set />-->
+          <!--          </div>-->
           <div class="header-btn">
             <fs-theme-set />
           </div>

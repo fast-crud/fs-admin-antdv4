@@ -3,10 +3,9 @@ import { theme } from "ant-design-vue";
 import _ from "lodash-es";
 // @ts-ignore
 import { LocalStorage } from "/src/utils/util.storage";
-import less from "less";
 export type ThemeToken = {
   token: {
-    colorPrimary: string;
+    colorPrimary?: string;
   };
   algorithm: any;
 };
@@ -15,7 +14,7 @@ export type ThemeConfig = {
   mode: string;
 };
 export interface SettingState {
-  themeConfig: ThemeConfig;
+  themeConfig?: ThemeConfig;
   themeToken: ThemeToken;
 }
 
@@ -23,7 +22,10 @@ const SETTING_THEME_KEY = "SETTING_THEME";
 export const useSettingStore = defineStore({
   id: "app.setting",
   state: (): SettingState => ({
-    theme: null,
+    themeConfig: {
+      colorPrimary: "#1890ff",
+      mode: "light"
+    },
     themeToken: {
       token: {},
       algorithm: theme.defaultAlgorithm
@@ -39,11 +41,7 @@ export const useSettingStore = defineStore({
       LocalStorage.set(SETTING_THEME_KEY, this.getThemeConfig);
     },
     async setThemeConfig(themeConfig?: ThemeConfig) {
-      if (themeConfig == null) {
-        themeConfig = this.themeConfig;
-      } else {
-        this.themeConfig = themeConfig;
-      }
+      this.themeConfig = _.merge({}, this.themeConfig, themeConfig);
 
       this.persistThemeConfig();
       this.setPrimaryColor(themeConfig.colorPrimary);
@@ -54,25 +52,24 @@ export const useSettingStore = defineStore({
       _.set(this.themeToken, "token.colorPrimary", color);
       this.persistThemeConfig();
     },
-    setDarkMode(mode: "dark" | "light") {
+    setDarkMode(mode: string) {
       this.themeConfig.mode = mode;
       if (mode === "dark") {
         this.themeToken.algorithm = theme.darkAlgorithm;
-        const defaultSeed = theme.defaultSeed;
-        const mapToken = theme.darkAlgorithm(defaultSeed);
-        less.modifyVars(mapToken);
-        less.modifyVars({
-          "@colorPrimaryBg": "#111a2c",
-          colorPrimaryBg: "#111a2c"
-        });
-        less.refreshStyles();
-        debugger;
+        // const defaultSeed = theme.defaultSeed;
+        // const mapToken = theme.darkAlgorithm(defaultSeed);
+        // less.modifyVars(mapToken);
+        // less.modifyVars({
+        //   "@colorPrimaryBg": "#111a2c",
+        //   colorPrimaryBg: "#111a2c"
+        // });
+        // less.refreshStyles();
       } else {
         this.themeToken.algorithm = theme.defaultAlgorithm;
 
-        const defaultSeed = theme.defaultSeed;
-        const mapToken = theme.defaultAlgorithm(defaultSeed);
-        less.modifyVars(mapToken);
+        // const defaultSeed = theme.defaultSeed;
+        // const mapToken = theme.defaultAlgorithm(defaultSeed);
+        // less.modifyVars(mapToken);
       }
       this.persistThemeConfig();
     },
