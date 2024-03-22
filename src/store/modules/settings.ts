@@ -38,8 +38,13 @@ export const useSettingStore = defineStore({
     persistThemeConfig() {
       LocalStorage.set(SETTING_THEME_KEY, this.getThemeConfig);
     },
-    async setThemeConfig(themeConfig?: ThemeConfig = this.themeConfig) {
-      this.themeConfig = themeConfig;
+    async setThemeConfig(themeConfig?: ThemeConfig) {
+      if (themeConfig == null) {
+        themeConfig = this.themeConfig;
+      } else {
+        this.themeConfig = themeConfig;
+      }
+
       this.persistThemeConfig();
       this.setPrimaryColor(themeConfig.colorPrimary);
       this.setDarkMode(themeConfig.mode);

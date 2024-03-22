@@ -1,14 +1,5 @@
 import * as api from "./api";
-import {
-  AddReq,
-  CreateCrudOptionsProps,
-  CreateCrudOptionsRet,
-  DelReq,
-  EditReq,
-  UserPageQuery,
-  UserPageRes,
-  utils
-} from "@fast-crud/fast-crud";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
 import { ref } from "vue";
 
 export default function ({ crudExpose, context }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -29,7 +20,7 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
     return await api.AddObj(form);
   };
 
-  const selectedRowKeys = ref([]);
+  const selectedRowKeys: Ref<any[]> = ref([]);
   context.selectedRowKeys = selectedRowKeys;
 
   return {

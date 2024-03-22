@@ -72,7 +72,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         show: true,
         type: "card",
         options: computed(() => {
-          return statusRef.data;
+          return statusRef.data as TabsFilterOption[];
         })
       },
       columns: {
