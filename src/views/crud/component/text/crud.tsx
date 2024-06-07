@@ -1,15 +1,5 @@
 import * as api from "./api";
-import {
-  AddReq,
-  CreateCrudOptionsProps,
-  CreateCrudOptionsRet,
-  DelReq,
-  EditReq,
-  ScopeContext,
-  UserPageQuery,
-  UserPageRes,
-  utils
-} from "@fast-crud/fast-crud";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, ScopeContext, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
 import { SearchOutlined } from "@ant-design/icons-vue";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -59,6 +49,11 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
               return scope.value;
             }
           }
+        },
+        classId: {
+          title: "班级id",
+          type: "number", //虽然不写也能正确显示组件，但不建议省略它
+          search: { show: true }
         },
         trim: {
           title: "trim空格",
