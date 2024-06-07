@@ -1,6 +1,6 @@
 import * as api from "./api";
 import * as textTableApi from "../text/api";
-import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes, useUi } from "@fast-crud/fast-crud";
 import createCrudOptionsText from "../text/crud";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -31,6 +31,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
       fixed: "right"
     }
   };
+  const { ui } = useUi();
   return {
     crudOptions: {
       request: {
@@ -88,7 +89,13 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
                 placeholder: "点击选择"
               },
               createCrudOptions: createCrudOptionsText,
-              crudOptionsOverride
+              crudOptionsOverride,
+              on: {
+                selectedChange({ $event }) {
+                  console.log("selectedChange", $event);
+                  ui.message.info(`你选择了${JSON.stringify($event)}`);
+                }
+              }
             }
           }
         },
