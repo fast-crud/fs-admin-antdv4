@@ -33,6 +33,9 @@ function install(app: any, options: any = {}) {
       const crudBinding = props.crudExpose?.crudBinding;
       const opts: CrudOptions = {
         table: {
+          scroll: {
+            x: 960
+          },
           size: "small",
           pagination: false,
           onResizeColumn: (w: number, col: any) => {
