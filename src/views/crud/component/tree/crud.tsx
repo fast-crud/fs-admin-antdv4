@@ -80,6 +80,12 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
                   // 你还可以将选中的label值赋值给表单里其他字段
                   // context.form.xxxLabel = context.$event.label
                 }
+              },
+              slots: {
+                title({ scope }) {
+                  //自定义选项text
+                  return `${scope.label}(${scope.value})`;
+                }
               }
             }
           }
