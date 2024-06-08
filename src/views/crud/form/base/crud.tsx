@@ -1,5 +1,5 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, FormWrapperContext, ScopeContext, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
+import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, FormScopeContext, FormWrapperContext, ScopeContext, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
 import { computed } from "vue";
 import { message } from "ant-design-vue";
 
@@ -57,14 +57,27 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
           message.success("保存成功");
         },
         wrapper: {
-          zIndex: 1003,
-          fullscreen: true,
+          title: compute(({ form }) => {
+            return form.draft ? "草稿" : "编辑";
+          }),
+          fullscreen: false,
           buttons: {
+            draft: {
+              text: "保存草稿",
+              type: "primary",
+              show: compute(({ form }) => {
+                return !!form?.draft;
+              })
+            },
             ok: {
-              text: "保存"
+              text: "保存",
+              show: compute(({ form }) => {
+                return !form?.draft;
+              })
             },
             custom: {
               text: "自定义按钮",
+              order: -1,
               click: async (context: FormWrapperContext) => {
                 utils.logger.info("btn context", context);
                 message.info("通过自定义按钮，触发保存");
@@ -90,6 +103,18 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
         long: {
           title: "演示Label很长时如何很好的展示",
           type: "text"
+        },
+        draft: {
+          title: "草稿",
+          type: "switch",
+          value: false,
+          form: {
+            component: {
+              name: "a-switch",
+              vModel: "checked"
+            },
+            helper: "开启后，保存按钮将变为保存草稿"
+          }
         },
         renderLabel: {
           title: "labelRender",

@@ -1,4 +1,6 @@
-import { CreateCrudOptionsProps, CreateCrudOptionsRet, dict } from "@fast-crud/fast-crud";
+import { compute, CreateCrudOptionsProps, CreateCrudOptionsRet, dict } from "@fast-crud/fast-crud";
+import createCrudOptionsText from "/@/views/crud/component/text/crud";
+import * as textTableApi from "/@/views/crud/component/text/api";
 
 export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
   const { crudBinding } = crudExpose;
@@ -64,6 +66,27 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
               { required: true, message: "请输入姓名" },
               { min: 2, max: 10, message: "长度在 2 到 10 个字符" }
             ]
+          }
+        },
+        tableSelect: {
+          title: "tableSelect",
+          type: "table-select",
+          dict: dict({
+            value: "id",
+            label: "name",
+            //重要，根据value懒加载数据
+            getNodesByValues: async (values: any[]) => {
+              return await textTableApi.GetByIds(values);
+            }
+          }),
+          form: {
+            show: compute(({ form }) => {
+              return form.dynamicShow;
+            }),
+            component: {
+              crossPage: true,
+              createCrudOptions: createCrudOptionsText
+            }
           }
         },
         createdAt: {

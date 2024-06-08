@@ -25,6 +25,7 @@ export default function ({ crudExpose, context: { asideTableRef } }: CreateCrudO
 
   const onCurrentRowChange = (id: number) => {
     currentRow.value = id;
+    asideTableRef.value.crudBinding.search.initialForm = { gradeId: id };
     asideTableRef.value.setSearchFormData({ form: { gradeId: id } });
     asideTableRef.value.doRefresh();
   };
