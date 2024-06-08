@@ -18,7 +18,11 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   // 进度条
   NProgress.start();
-
+  // 修复三级以上路由页面无法缓存的问题
+  if (to.matched && to.matched.length > 2) {
+    to.matched.splice(1, to.matched.length - 2);
+  }
+  debugger;
   // 验证当前路由所有的匹配中是否需要有登录验证的
   if (
     to.matched.some((r) => {
@@ -54,6 +58,9 @@ router.afterEach((to: any) => {
   NProgress.done();
   // 多页控制 打开新的页面
   const pageStore = usePageStore();
+  // for (const item of to.matched) {
+  //   pageStore.keepAlivePush(item.name);
+  // }
   pageStore.open(to);
   // 更改标题
   site.title(to.meta.title);

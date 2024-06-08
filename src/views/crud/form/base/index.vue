@@ -3,15 +3,12 @@
     <template #header>
       <div class="title">基本表单</div>
     </template>
-    <fs-crud
-ref="crudRef" v-bind="crudBinding"
->
+    <fs-crud ref="crudRef" v-bind="crudBinding">
       <template #form-body-top>
         <div style="display: flex">
           <div>
             <span>label宽度设置:</span>
-            <a-slider
-v-model:value="labelWidthRef" style="width: 200px" :min="40" :max="300" />
+            <a-slider v-model:value="labelWidthRef" style="width: 200px" :min="40" :max="300" />
           </div>
           <div>
             <span>label位置:</span>
