@@ -119,6 +119,8 @@ function install(app: any, options: any = {}) {
           },
           wrapper: {
             saveRemind: true
+            // inner: true,
+            // innerContainerSelector: "main.fs-framework-content"
           }
         },
         columns: {
