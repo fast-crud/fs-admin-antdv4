@@ -36,7 +36,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
       if (key === "radio") {
         if (cell.isEditing) {
           //@ts-ignore
-          rowData.radio = event.target.value;
+          rowData.radio = event;
         }
       }
     });

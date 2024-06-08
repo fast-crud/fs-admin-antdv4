@@ -22,7 +22,6 @@ router.beforeEach(async (to, from, next) => {
   if (to.matched && to.matched.length > 2) {
     to.matched.splice(1, to.matched.length - 2);
   }
-  debugger;
   // 验证当前路由所有的匹配中是否需要有登录验证的
   if (
     to.matched.some((r) => {
