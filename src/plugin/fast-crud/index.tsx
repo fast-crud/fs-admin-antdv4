@@ -116,6 +116,9 @@ function install(app: any, options: any = {}) {
           },
           wrapperCol: {
             span: null
+          },
+          wrapper: {
+            saveRemind: true
           }
         },
         columns: {
