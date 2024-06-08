@@ -33,6 +33,9 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
         editRequest,
         delRequest
       },
+      toolbar: {
+        compact: false
+      },
       table: {
         scroll: {
           x: 1500
