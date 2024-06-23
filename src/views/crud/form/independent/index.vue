@@ -237,7 +237,6 @@ function useFormProvider() {
   async function openFormWrapperNoTag() {
     const opts = createFormOptionsFromCrudOptions();
     const wrapperRef = await openDialog(opts);
-    debugger;
     utils.logger.log("对话框已打开", wrapperRef);
   }
   return {
