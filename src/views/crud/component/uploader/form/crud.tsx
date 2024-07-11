@@ -59,7 +59,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
                 type: "form",
                 keepName: true,
                 successHandle(res: any) {
-                  //我的后台返回的数据是一个key 字符串
+                  //这里我的后台返回res是一个key 字符串
                   //此方法需要返回的数据结构为 {key:"string",url:"string"...}
                   // 如果 有返回url，那么buildUrl将不会被执行
                   return { key: res };
