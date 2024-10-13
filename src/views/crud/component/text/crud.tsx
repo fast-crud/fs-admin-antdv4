@@ -105,6 +105,14 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
             }
           }
         },
+        long: {
+          title: "演示Text很长时如何很好的展示",
+          type: "text",
+          column: {
+            ellipsis: true,
+            showTitle: true
+          }
+        },
         search: {
           title: "搜索",
           type: "text",
