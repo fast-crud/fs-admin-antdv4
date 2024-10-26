@@ -682,6 +682,12 @@ export const crudResources = [
             name: "EditableSubCrud",
             path: "/crud/editable/sub-crud",
             component: "/crud/editable/sub-crud/index.vue"
+          },
+          {
+            title: "行编辑VModel",
+            name: "EditableRowVModel",
+            path: "/crud/editable/menus",
+            component: "/crud/editable/menus/index.vue"
           }
         ]
       },
