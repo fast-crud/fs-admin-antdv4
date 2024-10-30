@@ -1,5 +1,5 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, TabsFilterOption, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import { computed, ref } from "vue";
 import { message } from "ant-design-vue";
 
@@ -41,6 +41,15 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         },
         options: {
           layout: formLayoutRef
+        },
+        formItem: {
+          labelCol: {
+            //固定label宽度
+            span: null,
+            style: {
+              width: "100px"
+            }
+          }
         },
         container: {
           action: {
