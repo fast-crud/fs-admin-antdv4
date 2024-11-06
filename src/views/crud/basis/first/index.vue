@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, Ref } from "vue";
+import { nextTick, onMounted, ref, Ref } from "vue";
 import { CrudBinding, useFsAsync } from "@fast-crud/fast-crud";
 import createCrudOptions, { FirstContext } from "./crud";
 import { FirstRow } from "./api";
@@ -32,6 +32,8 @@ const { open, current, steps, handleOpen } = useTour();
 onMounted(async () => {
   const { crudExpose } = await useFsAsync<FirstRow, FirstContext>({ crudRef, crudBinding, createCrudOptions, context });
   await crudExpose.doRefresh();
+  await nextTick();
+  await nextTick();
   handleOpen(true);
 });
 </script>
