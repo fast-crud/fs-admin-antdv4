@@ -25,7 +25,7 @@
 import { defineComponent, reactive } from "vue";
 import { message } from "ant-design-vue";
 import FeatureLocalModelValueInput from "./local.vue";
-import {utils} from "@fast-crud/fast-crud";
+import { utils } from "@fast-crud/fast-crud";
 
 export default defineComponent({
   name: "FeatureLocalVModel",

@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
-import { useFs, utils } from "@fast-crud/fast-crud";
+import { defineComponent, onMounted } from "vue";
+import { useFsAsync, useFsRef, utils } from "@fast-crud/fast-crud";
 import createCrudOptions, { TsTestContext } from "./crud";
 import { TsTestRow } from "./api";
 
@@ -18,25 +18,13 @@ import { TsTestRow } from "./api";
 export default defineComponent({
   name: "FsCrudTsTest",
   setup() {
-    // // crud组件的ref
-    // const crudRef: Ref = ref();
-    // // crud 配置的ref
-    // const crudBinding: Ref<CrudBinding> = ref();
-    // // 暴露的方法
-    // const { crudExpose } = useExpose({ crudRef, crudBinding });
-    // // 你的crud配置
-    // const { crudOptions, customExport } = createCrudOptions({ crudExpose, customValue });
-    // // 初始化crud配置
-    // const { resetCrudOptions, appendCrudBinding } = useCrud({ crudExpose, crudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
 
-    //  =======以上为fs的初始化代码=========
-    //  =======你可以简写为下面这一行========
-    const { crudRef, crudBinding, crudExpose, context } = useFs<TsTestRow, TsTestContext>({ createCrudOptions, context: {} });
-
-    utils.logger.info("test", context.test);
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      const { crudExpose } = await useFsAsync<TsTestRow, TsTestContext>({ crudRef, crudBinding, createCrudOptions, context });
+      utils.logger.info("test", context.test);
+      await crudExpose.doRefresh();
     });
     return {
       crudBinding,

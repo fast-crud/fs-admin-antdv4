@@ -12,17 +12,18 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
-import { useCrud, useFs } from "@fast-crud/fast-crud";
+import { useFsRef, useFsAsync } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
-import { useExpose } from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 export default defineComponent({
   name: "FeatureSearch",
   setup() {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
+
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+      await crudExpose.doRefresh();
     });
 
     return {

@@ -12,17 +12,18 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
-import { useFs, UseFsProps } from "@fast-crud/fast-crud";
+import { useFsRef, useFsAsync } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud.js";
 
 export default defineComponent({
   name: "FormCustomForm",
   setup(props, ctx) {
     // 页面打开后获取列表数据
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
 
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+      await crudExpose.doRefresh();
     });
 
     return {

@@ -13,19 +13,22 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import createCrudOptions from "./crud";
-import { useExpose, useCrud, useFs } from "@fast-crud/fast-crud";
+import { useExpose, useCrud, useFs, useFsRef, useFsAsync } from "@fast-crud/fast-crud";
 import { message, Modal } from "ant-design-vue";
 import { BatchDelete } from "./api";
 export default defineComponent({
   name: "FeatureTree",
   setup() {
-    const { crudBinding, crudRef, crudExpose, selectedRowKeys } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
+
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+      await crudExpose.doRefresh();
     });
 
     const handleBatchDelete = () => {
+      const selectedRowKeys = context.selectedRowKeys;
       if (selectedRowKeys.value?.length > 0) {
         Modal.confirm({
           title: "确认",

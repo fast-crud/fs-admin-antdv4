@@ -1,6 +1,6 @@
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import * as api from "./api";
-export default function ({ crudExpose, context }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose, context }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const { crudBinding } = crudExpose;
   const { parentIdRef } = context;
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {

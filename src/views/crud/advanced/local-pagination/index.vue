@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
-import { useCrud, useExpose, useFs } from "@fast-crud/fast-crud";
+import { useCrud, useExpose, useFs, useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
 import { GetList } from "./api";
 
@@ -24,21 +24,17 @@ import { GetList } from "./api";
 export default defineComponent({
   name: "AdvanceLocalPagination",
   setup() {
-    // crud组件的ref
-    const crudRef = ref();
-    // crud 配置的ref
-    const crudBinding = ref();
-
+    const { crudRef, crudBinding, crudExpose } = useFsRef();
     const localDataRef = ref();
-
+    const context = { localDataRef };
+    // 页面打开后获取列表数据
     onMounted(async () => {
       //先加载后台数据
       const ret = await GetList({ page: { offset: 0, limit: 99999999 }, query: {}, sort: {} });
       localDataRef.value = ret.records;
 
-      const { crudExpose } = useFs({ crudBinding, crudRef, createCrudOptions, context: { localDataRef } });
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
 
-      // 页面打开后获取列表数据
       await crudExpose.doRefresh();
     });
 

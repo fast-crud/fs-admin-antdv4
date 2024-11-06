@@ -3,7 +3,7 @@ import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, 
 import { computed } from "vue";
 import { message } from "ant-design-vue";
 
-export default function ({ crudExpose, context }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose, context }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
   };

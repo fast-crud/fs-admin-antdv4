@@ -16,15 +16,17 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
 import createCrudOptions from "./crud";
-import { useFs } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 
 defineOptions({
   name: "EditableRowVModel"
 });
-const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+const { crudRef, crudBinding, crudExpose, context } = useFsRef();
 
 // 页面打开后获取列表数据
-onMounted(() => {
+onMounted(async () => {
+  await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+
   // crudExpose.doRefresh();
   crudExpose.crudBinding.value.data = [];
   // crudExpose.editable.enable({});

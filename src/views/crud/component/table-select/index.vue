@@ -26,17 +26,19 @@
 import createCrudOptionsText from "../text/crud";
 import { defineComponent, onMounted, ref } from "vue";
 import createCrudOptions from "./crud.js";
-import { dict, useFs } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef, dict } from "@fast-crud/fast-crud";
 import * as textTableApi from "/@/views/crud/component/text/api";
 
 export default defineComponent({
   name: "ComponentTableSelect",
   setup() {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding } = useFsRef();
 
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      const { crudExpose } = await useFsAsync({ crudBinding, crudRef, createCrudOptions });
+
+      await crudExpose.doRefresh();
     });
 
     const value = ref(null);

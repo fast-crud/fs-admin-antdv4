@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, watch } from "vue";
 import createCrudOptions from "./crud";
-import {useFs, utils} from "@fast-crud/fast-crud";
+import { useFs, useFsAsync, useFsRef, utils } from "@fast-crud/fast-crud";
 
 export default defineComponent({
   name: "SubTable",
@@ -20,11 +20,14 @@ export default defineComponent({
   },
   emits: ["update:modelValue"],
   setup(props, ctx) {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions, context: { props, ctx } });
+    const context = { props, ctx };
+    const { crudRef, crudBinding, crudExpose } = useFsRef();
 
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+
+      await crudExpose.doRefresh();
     });
 
     //你的业务代码

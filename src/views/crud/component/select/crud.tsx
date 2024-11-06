@@ -41,7 +41,7 @@ function useSearchRemote() {
     searchState: state
   };
 }
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose, context }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
   };
@@ -75,6 +75,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
     dictRef.data.push({ id: "xg", text: "香港" });
     //dictRef.toMap();
   }
+  context.dynamicUpdateDictOptions = dynamicUpdateDictOptions;
 
   const { ui } = useUi();
 

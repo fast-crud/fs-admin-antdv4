@@ -7,8 +7,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, watch } from "vue";
 import createCrudOptions from "./crud";
-import { useFs, useUi, utils } from "@fast-crud/fast-crud";
-import { message } from "ant-design-vue";
+import { useFsRef, useFsAsync, useUi, utils } from "@fast-crud/fast-crud";
 
 export default defineComponent({
   name: "EditableFreeSub",
@@ -30,7 +29,8 @@ export default defineComponent({
   },
   emits: ["update:modelValue"],
   setup(props, ctx) {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
+
     const { ui } = useUi();
     let formItemContext = ui.formItem.injectFormItemContext();
 
@@ -42,9 +42,9 @@ export default defineComponent({
     }
 
     // 页面打开后获取列表数据
-    onMounted(() => {
+    onMounted(async () => {
       // crudExpose.doRefresh();
-
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
       watch(
         () => {
           return props.modelValue;

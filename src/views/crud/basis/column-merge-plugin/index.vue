@@ -12,24 +12,17 @@
   </fs-page>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
+<script lang="ts" setup>
+import { onMounted } from "vue";
 import createCrudOptions from "./crud";
-import { useFs, UseFsProps } from "@fast-crud/fast-crud";
-export default defineComponent({
-  name: "BasisColumnMergePlugin",
-  setup() {
-    const context: any = {}; //自定义变量，传给createCrudOptions的额外参数（可以任意命名，任意多个）
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions, context });
-    // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
-    });
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 
-    return {
-      crudBinding,
-      crudRef
-    };
-  }
+const context: any = {}; //自定义变量，传给createCrudOptions的额外参数（可以任意命名，任意多个）
+
+const { crudRef, crudBinding } = useFsRef();
+// 页面打开后获取列表数据
+onMounted(async () => {
+  const { crudExpose } = await useFsAsync({ crudBinding, crudRef, createCrudOptions, context });
+  await crudExpose.doRefresh();
 });
 </script>

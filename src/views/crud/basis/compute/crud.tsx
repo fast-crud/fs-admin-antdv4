@@ -5,7 +5,7 @@ import { message } from "ant-design-vue";
 import { computed } from "vue";
 
 const { asyncCompute, compute } = useCompute();
-export default function ({ crudExpose, context }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose, context }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
   };

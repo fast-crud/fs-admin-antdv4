@@ -6,16 +6,18 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
-import { useFs } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
 
 export default defineComponent({
   name: "FeatureSearchMulti",
   setup() {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
+
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+      await crudExpose.doRefresh();
     });
 
     return {

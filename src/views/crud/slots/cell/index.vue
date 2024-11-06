@@ -34,17 +34,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
-import {useCrud, useExpose, useFs, utils} from "@fast-crud/fast-crud";
+import { defineComponent, onMounted } from "vue";
+import { useFsAsync, useFsRef, utils } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
 import dayjs from "dayjs";
+
 export default defineComponent({
   name: "SlotsCell",
   setup() {
-    const { crudBinding, crudRef, crudExpose, radioDict } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudRef, crudBinding, crudExpose, context, createCrudOptions });
+      await crudExpose.doRefresh();
     });
 
     function dateFormat(time: any, formatter = "YYYY-MM-DD") {
@@ -57,7 +59,7 @@ export default defineComponent({
     return {
       crudBinding,
       crudRef,
-      radioDict,
+      radioDict: context.radioDict,
       dateFormat,
       showScope
     };

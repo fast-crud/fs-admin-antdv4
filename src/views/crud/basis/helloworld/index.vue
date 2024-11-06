@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, Ref } from "vue";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, useFsAsync, UserPageQuery, UserPageRes, CrudBinding } from "@fast-crud/fast-crud";
+import { onMounted } from "vue";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, useFsAsync, useFsRef, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import _ from "lodash-es";
 
 //此处为crudOptions配置
@@ -85,11 +85,7 @@ const createCrudOptions = async function ({}: CreateCrudOptionsProps): Promise<C
 };
 
 //此处为组件定义
-
-// crud组件的ref
-const crudRef: Ref = ref();
-// crud 配置的ref
-const crudBinding: Ref<CrudBinding> = ref();
+const { crudRef, crudBinding } = useFsRef();
 // 自定义变量上下文, 将会传递给createCrudOptions, 比如直接把props,和ctx直接传过去使用
 const context: any = {};
 

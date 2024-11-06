@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, watch } from "vue";
 import createCrudOptions from "./crud";
-import {useFs, utils} from "@fast-crud/fast-crud";
+import { useFsRef, useFsAsync, utils } from "@fast-crud/fast-crud";
 
 export default defineComponent({
   name: "FeatureLocalModelValueInput",
@@ -17,11 +17,13 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
 
-    onMounted(() => {
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+      crudBinding.value.data = props.modelValue || [];
       //启用行编辑模式
-      crudExpose.editable.enable({ mode: "row" });
+      await crudExpose.editable.enable({ mode: "row" });
     });
 
     //通过导出modelValue, 可以导出成为一个input组件
@@ -31,9 +33,6 @@ export default defineComponent({
       },
       (value = []) => {
         crudBinding.value.data = value;
-      },
-      {
-        immediate: true
       }
     );
 

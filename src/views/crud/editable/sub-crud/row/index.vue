@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, watch, ref } from "vue";
 import createCrudOptions from "./crud";
-import { useFs, useUi, utils } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef, useUi, utils } from "@fast-crud/fast-crud";
 
 export default defineComponent({
   name: "EditableSubCrudTarget",
@@ -35,7 +35,9 @@ export default defineComponent({
   setup(props, ctx) {
     // eslint-disable-next-line vue/no-setup-props-destructure
     const parentIdRef = ref(props.id);
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions, context: { parentIdRef } });
+
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
+
     const { ui } = useUi();
 
     let formItemContext = ui.formItem.injectFormItemContext();
@@ -55,7 +57,7 @@ export default defineComponent({
         return props.id;
       },
       (value: any) => {
-        if (value > 0) {
+        if (value > 0 && crudBinding.value) {
           crudExpose.setSearchFormData({
             form: { parentId: value },
             mergeForm: true,
@@ -70,13 +72,20 @@ export default defineComponent({
     );
 
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, createCrudOptions, context: { parentIdRef } });
+      if (props.id > 0) {
+        await crudExpose.doRefresh();
+      }
+
       watch(
         () => {
           return props.disabled || props.readonly;
         },
         (value) => {
+          if (!crudBinding.value) {
+            return;
+          }
           if (value) {
             crudBinding.value.table.editable.readonly = true;
             crudBinding.value.actionbar.buttons.addRow.show = false;

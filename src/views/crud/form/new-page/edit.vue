@@ -15,7 +15,7 @@
 <script lang="ts">
 import { useRoute } from "vue-router";
 import { defineComponent, onMounted, ref } from "vue";
-import {useFs, utils} from "@fast-crud/fast-crud";
+import { useFsRef, utils, useFsAsync } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
 import * as api from "./api";
 import { message } from "ant-design-vue";
@@ -24,10 +24,12 @@ import { usePageStore } from "/@/store/modules/page";
 export default defineComponent({
   name: "FormNewPageEdit",
   setup(props, ctx) {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
+
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef,crudExpose, context, createCrudOptions });
+      await crudExpose.doRefresh();
     });
 
     const formRef = ref();

@@ -17,7 +17,7 @@
 import { defineComponent, onMounted, ref } from "vue";
 import createCrudOptions from "./crud.js";
 import AsideTable from "./aside-table/index.vue";
-import { useFs } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 
 export default defineComponent({
   name: "FeatureNest",
@@ -26,11 +26,14 @@ export default defineComponent({
   setup() {
     const asideTableRef = ref();
 
-    const { crudBinding, crudRef, crudExpose, context } = useFs({ createCrudOptions, context: { asideTableRef } });
+    let context = { asideTableRef };
+    const { crudRef, crudBinding, crudExpose } = useFsRef();
 
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+
+      await crudExpose.doRefresh();
     });
 
     return {

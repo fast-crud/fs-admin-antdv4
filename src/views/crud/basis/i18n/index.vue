@@ -17,16 +17,17 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import createCrudOptions from "./crud.js";
-import { useFs } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 
 export default defineComponent({
   name: "BasisI18n",
   setup() {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
 
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      const { crudExpose } = useFsAsync({ crudBinding, crudRef, context, createCrudOptions });
+      await crudExpose.doRefresh();
     });
 
     return {

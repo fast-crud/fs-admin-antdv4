@@ -1,6 +1,11 @@
 import { CreateCrudOptionsProps, CreateCrudOptionsRet, uiContext } from "@fast-crud/fast-crud";
 
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
+  const { crudBinding } = crudExpose;
+  let idGen = 0;
+  function nextId() {
+    return --idGen;
+  }
   return {
     crudOptions: {
       mode: {
@@ -9,7 +14,14 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         isAppendWhenAdd: true
       },
       //启用addRow按钮
-      actionbar: { buttons: { add: { show: false }, addRow: { show: true } } },
+      actionbar: {
+        buttons: {
+          add: { show: false },
+          addRow: {
+            show: true
+          }
+        }
+      },
       table: {
         remove: {
           //删除数据后不请求后台
@@ -18,7 +30,8 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         editable: {
           enabled: true,
           mode: "row",
-          activeTrigger: false
+          activeTrigger: false,
+          activeDefault: false
         }
       },
       search: {

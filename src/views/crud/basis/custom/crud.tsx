@@ -4,7 +4,7 @@ import { shallowRef } from "vue";
 import VmodelCounter from "./vmodel-counter.vue";
 import { message } from "ant-design-vue";
 
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
   };

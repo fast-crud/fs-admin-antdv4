@@ -33,18 +33,20 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import createCrudOptions from "./crud";
-import {useFs, utils} from "@fast-crud/fast-crud";
+import { useFsRef, utils, useFsAsync } from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 
 export default defineComponent({
   name: "FeatureEditable",
   setup() {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, context, crudExpose } = useFsRef();
 
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
-      crudExpose.editable.enable({ mode: "free" });
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, context, crudExpose, createCrudOptions });
+
+      await crudExpose.doRefresh();
+      await crudExpose.editable.enable({ mode: "free" });
     });
 
     function enable() {

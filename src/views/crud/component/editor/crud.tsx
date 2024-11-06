@@ -2,7 +2,7 @@ import * as api from "./api";
 import { utils, dict, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, UserPageQuery, UserPageRes, EditReq, DelReq, AddReq, ScopeContext } from "@fast-crud/fast-crud";
 import { FsUploaderFormOptions } from "@fast-crud/fast-extends";
 import "./editor.css";
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
   };

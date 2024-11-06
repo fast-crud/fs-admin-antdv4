@@ -2,7 +2,7 @@
   <fs-page>
     <fs-crud ref="crudRef" v-bind="crudBinding">
       <template #header-top>
-        <a-card title="部件显隐控制" style="margin-bottom: 20px">
+        <a-card v-if="crudBinding" title="部件显隐控制" style="margin-bottom: 20px">
           <div style="max-width: 900px">
             <a-row>
               <a-col :span="2"> 搜索框： </a-col>
@@ -93,16 +93,18 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
-import { useFs } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
 
 export default defineComponent({
   name: "FeatureHide",
   setup() {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
+
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+      await crudExpose.doRefresh();
     });
 
     return {

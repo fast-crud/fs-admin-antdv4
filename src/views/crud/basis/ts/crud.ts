@@ -8,7 +8,7 @@ import { TsTestRow } from "./api";
 export type TsTestContext = {
   test?: number;
 };
-export default function ({ crudExpose, context }: CreateCrudOptionsProps<TsTestRow, TsTestContext>): CreateCrudOptionsRet<TsTestRow> {
+export default async function ({ crudExpose, context }: CreateCrudOptionsProps<TsTestRow, TsTestContext>): Promise<CreateCrudOptionsRet<TsTestRow>> {
   context.test = 111;
   return {
     crudOptions: {

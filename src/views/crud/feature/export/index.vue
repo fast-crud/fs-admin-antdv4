@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref, watch } from "vue";
-import { useFs, UserPageQuery, useUi } from "@fast-crud/fast-crud";
+import { useFsRef, useFsAsync, UserPageQuery, useUi } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
 
 export default defineComponent({
@@ -48,10 +48,11 @@ export default defineComponent({
       exportType
     };
 
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions, context });
+    const { crudBinding, crudRef, crudExpose } = useFsRef();
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, createCrudOptions, context });
+      await crudExpose.doRefresh();
     });
     const { ui } = useUi();
     watch(

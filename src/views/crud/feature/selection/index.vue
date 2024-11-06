@@ -16,18 +16,20 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import createCrudOptions from "./crud";
-import { useFs } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 import { message, Modal } from "ant-design-vue";
 import { BatchDelete } from "./api";
 
 export default defineComponent({
   name: "FeatureSelection",
   setup() {
-    const { crudBinding, crudRef, crudExpose, context } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
+
     const selectedRowKeys = context.selectedRowKeys;
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+      await crudExpose.doRefresh();
     });
 
     const handleBatchDelete = () => {

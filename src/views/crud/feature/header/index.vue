@@ -13,15 +13,14 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
 import createCrudOptions from "./crud.js";
-import { useFs, UseFsProps } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
+
 defineOptions({
   name: "FeatureHeader"
 });
-const customValue: any = {}; //自定义变量，传给createCrudOptions的额外参数（可以任意命名，任意多个）
-const { crudBinding, crudRef, crudExpose, customExport } = useFs({ createCrudOptions, customValue } as UseFsProps);
-
-// 页面打开后获取列表数据
-onMounted(() => {
-  crudExpose.doRefresh();
+const { crudRef, crudBinding, crudExpose, context } = useFsRef();
+onMounted(async () => {
+  await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+  await crudExpose.doRefresh();
 });
 </script>

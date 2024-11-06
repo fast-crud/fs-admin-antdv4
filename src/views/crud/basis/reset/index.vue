@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
-import { CrudOptions, DynamicType, useFs, UseFsProps } from "@fast-crud/fast-crud";
+import { CrudOptions, DynamicType, useFs, UseFsProps, useFsRef } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud.js";
 import _ from "lodash-es";
 export default defineComponent({
@@ -39,8 +39,8 @@ export default defineComponent({
     }, 2000);
 
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await crudExpose.doRefresh();
     });
 
     return {

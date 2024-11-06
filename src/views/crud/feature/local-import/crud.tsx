@@ -1,7 +1,7 @@
 import { CreateCrudOptionsProps, CreateCrudOptionsRet, importTable } from "@fast-crud/fast-crud";
 import { Modal, notification } from "ant-design-vue";
 
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const crudBinding = crudExpose.crudBinding;
   return {
     crudOptions: {

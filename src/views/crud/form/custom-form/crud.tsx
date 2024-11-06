@@ -1,18 +1,5 @@
 import * as api from "./api.js";
-import {
-  AddReq,
-  CreateCrudOptionsProps,
-  CreateCrudOptionsRet,
-  CrudExpose,
-  CrudOptions,
-  DelReq,
-  dict,
-  EditReq,
-  useColumns,
-  UserPageQuery,
-  UserPageRes,
-  utils
-} from "@fast-crud/fast-crud";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, CrudExpose, CrudOptions, DelReq, dict, EditReq, useColumns, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 import { useFormWrapper } from "@fast-crud/fast-crud";
 
@@ -94,7 +81,7 @@ function useCustomFormWrapperDemo(crudExpose: CrudExpose) {
     openCustomFormByExpose
   };
 }
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const { openCustomForm, openCustomFormByExpose } = useCustomFormWrapperDemo(crudExpose);
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);

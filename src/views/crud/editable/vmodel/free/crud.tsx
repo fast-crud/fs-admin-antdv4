@@ -2,7 +2,7 @@ import { compute, CreateCrudOptionsProps, CreateCrudOptionsRet, dict } from "@fa
 import createCrudOptionsText from "/@/views/crud/component/text/crud";
 import * as textTableApi from "/@/views/crud/component/text/api";
 
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const { crudBinding } = crudExpose;
 
   return {

@@ -13,18 +13,13 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onMounted, ref, Ref } from "vue";
-import { CrudBinding, useFsAsync } from "@fast-crud/fast-crud";
+import { nextTick, onMounted } from "vue";
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 import createCrudOptions, { FirstContext } from "./crud";
 import { FirstRow } from "./api";
 import { useTour } from "./use-tour";
 
-// crud组件的ref
-const crudRef: Ref = ref();
-// crud 配置的ref
-const crudBinding: Ref<CrudBinding> = ref();
-
-const context: any = {};
+const { crudRef, crudBinding, crudExpose, context } = useFsRef();
 
 const { open, current, steps, handleOpen } = useTour();
 

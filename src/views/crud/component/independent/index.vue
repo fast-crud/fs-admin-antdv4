@@ -46,7 +46,7 @@
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
 import { message } from "ant-design-vue";
-import {dict, useUi, utils} from "@fast-crud/fast-crud";
+import { dict, useUi, utils } from "@fast-crud/fast-crud";
 import dayjs from "dayjs";
 import { FsUploaderS3, loadUploader, useUploader } from "@fast-crud/fast-extends";
 import createCrudOptionsText from "/@/views/crud/component/text/crud";

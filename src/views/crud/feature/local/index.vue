@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, onMounted } from "vue";
 import createCrudOptions from "./crud";
-import {useExpose, useCrud, useFs, utils} from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef, utils } from "@fast-crud/fast-crud";
 
 export default defineComponent({
   name: "FeatureLocal",
@@ -22,18 +22,19 @@ export default defineComponent({
     modelValue: {}
   },
   setup() {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
+
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+      //初始化本地数据示例
+      crudBinding.value.data = [{ name: "test" }];
+      await crudExpose.doRefresh();
     });
     // 通过crudBinding.value.data 可以获取表格实时数据
     function showData() {
       utils.logger.info("data:", crudBinding.value.data);
     }
-
-    //初始化本地数据示例
-    crudBinding.value.data = [{ name: "test" }];
 
     //启用行编辑
     function enabledRowEdit() {

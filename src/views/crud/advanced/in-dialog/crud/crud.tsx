@@ -1,17 +1,7 @@
 import * as api from "./api";
-import {
-  AddReq,
-  CreateCrudOptionsProps,
-  CreateCrudOptionsRet,
-  DelReq,
-  EditReq,
-  UserPageQuery,
-  UserPageRes,
-  dict,
-  utils
-} from "@fast-crud/fast-crud";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, UserPageQuery, UserPageRes, dict, utils } from "@fast-crud/fast-crud";
 import { SearchOutlined } from "@ant-design/icons-vue";
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
   };
@@ -103,7 +93,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           title: "我的值是由复杂输入列输入的",
           type: "text",
           column: {
-            width: "300px"
+            width: 300
           },
           form: {
             show: false

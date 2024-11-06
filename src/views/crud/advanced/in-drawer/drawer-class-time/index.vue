@@ -5,9 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, nextTick } from "vue";
+import { nextTick, ref } from "vue";
 import { useFs } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
+
 const textbookRef = ref();
 const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions, context: { textbookRef } });
 
@@ -18,7 +19,7 @@ defineOptions({
 const drawerOpened = ref(false);
 
 //定义抽屉打开方法
-const open = async ({ textbook }) => {
+const open = async ({ textbook }: any) => {
   textbookRef.value = textbook;
   drawerOpened.value = true;
   await nextTick(); //等待crud初始化完成

@@ -4,7 +4,7 @@ import { useRouter } from "vue-router";
 import { message } from "ant-design-vue";
 import { SyncOutlined } from "@ant-design/icons-vue";
 
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
   };

@@ -9,18 +9,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, nextTick } from "vue";
-import { useFs, UseFsProps } from "@fast-crud/fast-crud";
+import { defineComponent, onMounted } from "vue";
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
+
 export default defineComponent({
   name: "FormSingleColumn",
   setup() {
-    const customValue: any = {}; //自定义变量，传给createCrudOptions的额外参数（可以任意命名，任意多个）
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions, context: customValue });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
 
     // 页面打开后获取列表数据
     onMounted(async () => {
-      crudExpose.doRefresh();
+      const { crudExpose } = await useFsAsync({ crudBinding, crudRef, createCrudOptions, context });
+      await crudExpose.doRefresh();
     });
 
     return {

@@ -1,7 +1,7 @@
 import * as api from "./api";
 import { dict, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, UserPageQuery, UserPageRes, EditReq, DelReq, AddReq } from "@fast-crud/fast-crud";
 import EditableRowSub from "/@/views/crud/editable/sub-crud/row/index.vue";
-export default function (props: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function (props: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const { crudBinding, crudRef } = props.crudExpose;
   const { crudExpose } = props;
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {

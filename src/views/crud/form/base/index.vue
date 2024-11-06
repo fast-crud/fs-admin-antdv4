@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import { useFs } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud.jsx";
 
 export default defineComponent({
@@ -46,11 +46,13 @@ export default defineComponent({
       labelWidthRef,
       labelLayoutRef
     };
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions, context });
 
+    const { crudRef, crudBinding, crudExpose } = useFsRef();
     // 页面打开后获取列表数据
     onMounted(async () => {
-      crudExpose.doRefresh();
+      await useFsAsync({ crudRef, crudBinding, crudExpose, createCrudOptions, context });
+
+      await crudExpose.doRefresh();
     });
 
     return {

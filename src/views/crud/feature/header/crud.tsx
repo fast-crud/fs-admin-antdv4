@@ -1,6 +1,6 @@
 import * as api from "./api.js";
 import { CreateCrudOptionsProps, dict, CreateCrudOptionsRet, EditReq, DelReq, AddReq } from "@fast-crud/fast-crud";
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const editRequest = async ({ form, row }: EditReq) => {
     if (form.id == null) {
       form.id = row.id;

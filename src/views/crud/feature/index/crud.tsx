@@ -1,7 +1,7 @@
 import * as api from "./api";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
   };
@@ -36,7 +36,7 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
           column: {
             // type: "index",
             align: "center",
-            width: "55px",
+            width: 100,
             columnSetDisabled: true, //禁止在列设置中选择
             formatter: (context) => {
               //计算序号,你可以自定义计算规则，此处为翻页累加

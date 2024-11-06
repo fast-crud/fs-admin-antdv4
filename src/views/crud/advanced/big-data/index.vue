@@ -9,22 +9,22 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
-import { useFs } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud.js";
 
 export default defineComponent({
   name: "AdvancedBigData",
   setup() {
-    const { crudBinding, crudRef, crudExpose, output } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
+    onMounted(async () => {
+      await useFsAsync({ crudRef, crudBinding, crudExpose, context, createCrudOptions });
+      await crudExpose.doRefresh();
     });
 
     return {
       crudBinding,
-      crudRef,
-      ...output
+      crudRef
     };
   }
 });

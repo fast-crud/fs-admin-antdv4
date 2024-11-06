@@ -5,7 +5,7 @@
       <div class="more"><a target="_blank" href="http://fast-crud.docmirror.cn/api/crud-options/table.html#editable">文档</a></div>
     </template>
     <fs-crud ref="crudRef" v-bind="crudBinding">
-      <template #actionbar-right>
+      <template v-if="crudBinding" #actionbar-right>
         <!--      <fs-button class="ml-1" @click="addRow">添加行</fs-button>-->
         <a-radio-group v-model:value="crudBinding.table.editable.enabled" class="ml-5">
           <a-radio-button :value="true">启用编辑</a-radio-button>
@@ -29,20 +29,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted } from "vue";
 import createCrudOptions from "./crud";
-import { useFs, utils } from "@fast-crud/fast-crud";
+import { useFsAsync, useFsRef, utils } from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
 
 export default defineComponent({
   name: "EditableFree",
   setup() {
-    const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions });
+    const { crudRef, crudBinding, crudExpose, context } = useFsRef();
 
     // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
-      crudExpose.editable.enable({ mode: "free" });
+    onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+
+      await crudExpose.doRefresh();
+      await crudExpose.editable.enable({ mode: "free" });
     });
 
     return {

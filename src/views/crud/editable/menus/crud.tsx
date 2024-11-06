@@ -1,7 +1,7 @@
-import * as api from "./api";
-import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
-import { nextTick, ref } from "vue";
-export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOptionsRet {
+import { CreateCrudOptionsProps, CreateCrudOptionsRet } from "@fast-crud/fast-crud";
+import { ref } from "vue";
+
+export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   let idGen = 1;
   function nextId() {
     return idGen++;
@@ -15,17 +15,17 @@ export default function ({ crudExpose }: CreateCrudOptionsProps): CreateCrudOpti
         buttons: {
           add: { show: false },
           addRow: {
-            show: true,
-            click: async () => {
-              crudExpose.editable.addRow({
-                active: true,
-                addRowFunc: () => {
-                  const row = { id: nextId() };
-                  crudBinding.value.data.push(row);
-                  return row;
-                }
-              });
-            }
+            show: true
+            // click: async () => {
+            //   crudExpose.editable.addRow({
+            //     active: true,
+            //     addRowFunc: () => {
+            //       const row = { id: nextId() };
+            //       crudBinding.value.data.push(row);
+            //       return row;
+            //     }
+            //   });
+            // }
           }
         }
       },
