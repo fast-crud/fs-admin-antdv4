@@ -1,4 +1,4 @@
-import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery } from "@fast-crud/fast-crud";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery } from "@fast-crud/fast-crud";
 import * as api from "./api";
 import { FirstRow } from "./api";
 
@@ -8,7 +8,7 @@ import { FirstRow } from "./api";
 export type FirstContext = {
   test?: number;
 };
-export default function ({ crudExpose, context }: CreateCrudOptionsProps<FirstRow, FirstContext>): CreateCrudOptionsRet<FirstRow> {
+export default async function ({ crudExpose, context }: CreateCrudOptionsProps<FirstRow, FirstContext>): Promise<CreateCrudOptionsRet<FirstRow>> {
   context.test = 111;
   return {
     crudOptions: {

@@ -10,13 +10,13 @@
   </fs-page>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, onMounted, reactive } from "vue";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, useCrud, useFs, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+<script lang="ts" setup>
+import { onMounted, ref, Ref } from "vue";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, useFsAsync, UserPageQuery, UserPageRes, CrudBinding } from "@fast-crud/fast-crud";
 import _ from "lodash-es";
 
 //此处为crudOptions配置
-const createCrudOptions = function ({}: CreateCrudOptionsProps): CreateCrudOptionsRet {
+const createCrudOptions = async function ({}: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   //本地模拟后台crud接口方法 ----开始
   const records = [{ id: 1, name: "Hello World", type: 1 }];
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -85,32 +85,17 @@ const createCrudOptions = function ({}: CreateCrudOptionsProps): CreateCrudOptio
 };
 
 //此处为组件定义
-export default defineComponent({
-  name: "FsCrudHelloWorld",
-  setup() {
-    // // crud组件的ref
-    // const crudRef: Ref = ref();
-    // // crud 配置的ref
-    // const crudBinding: Ref<CrudBinding> = ref();
-    // // 暴露的方法
-    // const { crudExpose } = useExpose({ crudRef, crudBinding });
-    // // 你的crud配置
-    // const { crudOptions, customExport } = createCrudOptions({ crudExpose, context });
-    // // 初始化crud配置
-    // const { resetCrudOptions, appendCrudBinding } = useCrud({ crudExpose, crudOptions });
 
-    //  =======以上为fs的初始化代码=========
-    //  =======你可以简写为下面这一行========
-    const { crudRef, crudBinding, crudExpose, context } = useFs({ createCrudOptions, context: {} });
+// crud组件的ref
+const crudRef: Ref = ref();
+// crud 配置的ref
+const crudBinding: Ref<CrudBinding> = ref();
+// 自定义变量上下文, 将会传递给createCrudOptions, 比如直接把props,和ctx直接传过去使用
+const context: any = {};
 
-    // 页面打开后获取列表数据
-    onMounted(() => {
-      crudExpose.doRefresh();
-    });
-    return {
-      crudBinding,
-      crudRef
-    };
-  }
+// 页面打开后获取列表数据
+onMounted(async () => {
+  const { crudExpose } = await useFsAsync({ crudRef, crudBinding, createCrudOptions, context });
+  await crudExpose.doRefresh();
 });
 </script>
