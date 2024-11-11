@@ -41,7 +41,7 @@ export default defineComponent({
   name: "FormBase",
   setup() {
     const labelWidthRef = ref(100);
-    const labelLayoutRef = ref(undefined);
+    const labelLayoutRef = ref();
     const context = {
       labelWidthRef,
       labelLayoutRef
