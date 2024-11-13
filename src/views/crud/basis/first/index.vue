@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { nextTick, onMounted } from "vue";
-import { useFsAsync, useFsRef } from "@fast-crud/fast-crud";
+import { useFs, useFsRef } from "@fast-crud/fast-crud";
 import createCrudOptions, { FirstContext } from "./crud";
 import { FirstRow } from "./api";
 import { useTour } from "./use-tour";
@@ -22,10 +22,9 @@ import { useTour } from "./use-tour";
 const { crudRef, crudBinding, crudExpose, context } = useFsRef();
 
 const { open, current, steps, handleOpen } = useTour();
-
+useFs<FirstRow, FirstContext>({ crudRef, crudBinding, crudExpose, createCrudOptions, context });
 // 页面打开后获取列表数据
 onMounted(async () => {
-  const { crudExpose } = await useFsAsync<FirstRow, FirstContext>({ crudRef, crudBinding, createCrudOptions, context });
   await crudExpose.doRefresh();
   await nextTick();
   await nextTick();
