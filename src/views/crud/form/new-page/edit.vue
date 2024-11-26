@@ -25,47 +25,42 @@ export default defineComponent({
   name: "FormNewPageEdit",
   setup(props, ctx) {
     const { crudRef, crudBinding, crudExpose, context } = useFsRef();
-
-    // 页面打开后获取列表数据
-    onMounted(async () => {
-      await useFsAsync({ crudBinding, crudRef,crudExpose, context, createCrudOptions });
-      await crudExpose.doRefresh();
-    });
-
     const formRef = ref();
     const formOptions = ref();
-
-    const route = useRoute();
-    const id: any = route.query.id;
-
-    if (id) {
-      //编辑表单
-      formOptions.value = crudBinding.value.editForm;
-    } else {
-      formOptions.value = crudBinding.value.addForm;
-    }
-    const doSubmit = formOptions.value.doSubmit;
     const pageStore = usePageStore();
-
-    formOptions.value.doSubmit = (context: any) => {
-      utils.logger.log("submit", context);
-      doSubmit(context);
-      //提交成功后，关闭本页面
-      message.success("保存成功");
-      pageStore.close({ tagName: route.fullPath });
-    };
-
-    const getDetail = async (id: any) => {
-      return await api.GetObj(id);
-    };
-
+    const route = useRoute();
+    // 页面打开后获取列表数据
     onMounted(async () => {
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
+      await crudExpose.doRefresh();
+
+      const id: any = route.query.id;
+      if (id) {
+        //编辑表单
+        formOptions.value = crudBinding.value.editForm;
+      } else {
+        formOptions.value = crudBinding.value.addForm;
+      }
+      const doSubmit = formOptions.value.doSubmit;
+
+      formOptions.value.doSubmit = (context: any) => {
+        utils.logger.log("submit", context);
+        doSubmit(context);
+        //提交成功后，关闭本页面
+        message.success("保存成功");
+        pageStore.close({ tagName: route.fullPath });
+      };
+
       if (id) {
         //远程获取记录详情
         const detail = await getDetail(id);
         formRef.value.setFormData(detail);
       }
     });
+
+    const getDetail = async (id: any) => {
+      return await api.GetObj(id);
+    };
 
     return {
       crudBinding,
