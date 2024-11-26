@@ -210,7 +210,10 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           title: "查看模式",
           dict: dict({
             value: "id",
-            label: "name"
+            label: "name",
+            getNodesByValues: async (values: any[]) => {
+              return await textTableApi.GetByIds(values);
+            }
           }),
           column: {
             component: {
@@ -219,6 +222,14 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
               viewMode: true,
               createCrudOptions: createCrudOptionsText,
               crudOptionsOverride,
+              on: {
+                dialogClose(ctx) {
+                  console.log("dialog close", ctx);
+                },
+                dialogClosed(ctx) {
+                  console.log("dialog closed", ctx);
+                }
+              },
               slots: {
                 default({ scope, value }) {
                   async function open() {
