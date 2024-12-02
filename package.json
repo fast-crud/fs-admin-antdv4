@@ -19,7 +19,7 @@
     "circle:check": "pnpm dependency-cruise --validate --output-type err-html -f dependency-report.html src",
     "afterPubPush": "git add . && git commit -m \"build: publish success\" && git push"
   },
-  "author": "Greper",
+  "author": "greper",
   "license": "MIT",
   "dependencies": {
     "@ant-design/colors": "^7.0.2",
