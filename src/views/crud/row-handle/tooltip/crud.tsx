@@ -1,5 +1,5 @@
 import * as api from "./api";
-import {dict, utils} from "@fast-crud/fast-crud";
+import { dict, utils } from "@fast-crud/fast-crud";
 import { ref } from "vue";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
@@ -42,8 +42,16 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
             }
           },
           remove: {
-            tooltip: {
-              title: "删除"
+            render(scope: any) {
+              function confirm() {
+                const { row, index } = scope;
+                crudExpose.doRemove({ row, index }, { noConfirm: true });
+              }
+              return (
+                <a-popconfirm title={"text"} ok-text="Yes" cancel-text="No" onConfirm={confirm}>
+                  <a-button>删除</a-button>
+                </a-popconfirm>
+              );
             }
           },
           custom: {
