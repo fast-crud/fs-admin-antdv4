@@ -148,6 +148,7 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
               placeholder: "异步计算远程获取options",
               options: asyncCompute({
                 async asyncFn(watchValue: any, context: GetContextFn) {
+                  message.info("asyncCompute 获取options");
                   const url = "/mock/dicts/OpenStatusEnum?remote";
                   return await requestForMock({ url });
                 }
