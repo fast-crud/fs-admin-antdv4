@@ -33,6 +33,14 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
         helper: {
           // position: "label" // helper的展示位置全局配置
           // tooltip:{}
+        },
+        group: {
+          groups: {
+            profile: {
+              header: "profile",
+              columns: ["profile.name", "profile.age", "profile.status"]
+            }
+          }
         }
       },
       columns: {
