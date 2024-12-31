@@ -36,7 +36,9 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
             props: {
               multiple: true,
               crossPage: true,
-              selectedRowKeys,
+              selectedRowKeys: () => {
+                return selectedRowKeys;
+              },
               onSelectedChanged(selected) {
                 utils.logger.info("已选择变化：", selected);
               }
