@@ -72,6 +72,11 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
               style: "font-size:18px"
             }
           }
+        },
+        selector: {
+          title: "图标选择器",
+          search: { show: true },
+          type: "icon"
         }
       }
     }
