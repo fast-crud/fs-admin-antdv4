@@ -277,7 +277,9 @@ function install(app: any, options: any = {}) {
       action: "http://www.docmirror.cn:7070/api/upload/form/upload",
       name: "file",
       withCredentials: false,
-      uploadRequest: async ({ action, file, onProgress }: any) => {
+      uploadRequest: async (opts: any) => {
+        console.log("uploadRequest:", opts);
+        const { action, file, onProgress } = opts;
         // @ts-ignore
         const data = new FormData();
         data.append("file", file);

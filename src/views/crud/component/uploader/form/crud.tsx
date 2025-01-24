@@ -61,6 +61,8 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
               uploader: {
                 type: "form",
                 keepName: true,
+                test: 111,
+                custom: { aaa: 111 },
                 successHandle(res: any) {
                   //这里我的后台返回res是一个key 字符串
                   //此方法需要返回的数据结构为 {key:"string",url:"string"...}
