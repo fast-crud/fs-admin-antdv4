@@ -277,6 +277,8 @@ function install(app: any, options: any = {}) {
       action: "http://www.docmirror.cn:7070/api/upload/form/upload",
       name: "file",
       withCredentials: false,
+      test: 22,
+      custom: { aaa: 22 },
       uploadRequest: async (opts: any) => {
         console.log("uploadRequest:", opts);
         const { action, file, onProgress } = opts;

@@ -32,7 +32,7 @@
     "@fast-crud/ui-interface": "^1.25.1",
     "@iconify/vue": "^4.1.1",
     "@soerenmartius/vue3-clipboard": "^0.1.2",
-    "ant-design-vue": "^4.1.2",
+    "ant-design-vue": "^4.2.6",
     "axios": "^1.6.8",
     "axios-mock-adapter": "^1.22.0",
     "base64-js": "^1.5.1",
