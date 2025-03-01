@@ -3,7 +3,7 @@ import type { AccordionItemProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '/@/vben/shared/utils';
 
 import { AccordionItem, useForwardProps } from 'radix-vue';
 

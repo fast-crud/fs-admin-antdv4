@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const openPreferences = ref(false);
 
@@ -9,7 +9,7 @@ function useOpenPreferences() {
 
   return {
     handleOpenPreference,
-    openPreferences,
+    openPreferences
   };
 }
 

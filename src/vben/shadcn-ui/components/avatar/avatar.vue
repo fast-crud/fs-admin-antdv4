@@ -5,7 +5,7 @@ import type {
   AvatarRootProps,
 } from 'radix-vue';
 
-import type { ClassType } from '@vben-core/typings';
+import type { ClassType } from '/@/vben/typings';
 
 import { computed } from 'vue';
 

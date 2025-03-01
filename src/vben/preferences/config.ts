@@ -1,69 +1,68 @@
-import type { Preferences } from './types';
+import type { Preferences } from "./types";
 
 const defaultPreferences: Preferences = {
   app: {
-    accessMode: 'frontend',
-    authPageLayout: 'panel-right',
+    accessMode: "frontend",
+    authPageLayout: "panel-right",
     checkUpdatesInterval: 1,
     colorGrayMode: false,
     colorWeakMode: false,
     compact: false,
-    contentCompact: 'wide',
-    defaultAvatar:
-      'https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp',
+    contentCompact: "wide",
+    defaultAvatar: "https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp",
     dynamicTitle: true,
     enableCheckUpdates: true,
     enablePreferences: true,
     enableRefreshToken: false,
     isMobile: false,
-    layout: 'sidebar-nav',
-    locale: 'zh-CN',
-    loginExpiredMode: 'page',
-    name: 'Vben Admin',
-    preferencesButtonPosition: 'auto',
-    watermark: false,
+    layout: "sidebar-nav",
+    locale: "zh-CN",
+    loginExpiredMode: "page",
+    name: "Vben Admin",
+    preferencesButtonPosition: "auto",
+    watermark: false
   },
   breadcrumb: {
     enable: true,
     hideOnlyOne: false,
     showHome: false,
     showIcon: true,
-    styleType: 'normal',
+    styleType: "normal"
   },
   copyright: {
-    companyName: 'Vben',
-    companySiteLink: 'https://www.vben.pro',
-    date: '2024',
+    companyName: "Vben",
+    companySiteLink: "https://www.vben.pro",
+    date: "2024",
     enable: true,
-    icp: '',
-    icpLink: '',
-    settingShow: true,
+    icp: "",
+    icpLink: "",
+    settingShow: true
   },
   footer: {
     enable: false,
-    fixed: false,
+    fixed: false
   },
   header: {
     enable: true,
     hidden: false,
-    menuAlign: 'start',
-    mode: 'fixed',
+    menuAlign: "start",
+    mode: "fixed"
   },
   logo: {
     enable: true,
-    source: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/logo-v1.webp',
+    source: "https://unpkg.com/@vbenjs/static-source@0.1.7/source/logo-v1.webp"
   },
   navigation: {
     accordion: true,
     split: true,
-    styleType: 'rounded',
+    styleType: "rounded"
   },
   shortcutKeys: {
     enable: true,
     globalLockScreen: true,
     globalLogout: true,
     globalPreferences: true,
-    globalSearch: true,
+    globalSearch: true
   },
   sidebar: {
     autoActivateChild: false,
@@ -73,7 +72,7 @@ const defaultPreferences: Preferences = {
     expandOnHover: true,
     extraCollapse: false,
     hidden: false,
-    width: 224,
+    width: 224
   },
   tabbar: {
     draggable: true,
@@ -86,25 +85,25 @@ const defaultPreferences: Preferences = {
     showIcon: true,
     showMaximize: true,
     showMore: true,
-    styleType: 'chrome',
-    wheelable: true,
+    styleType: "chrome",
+    wheelable: true
   },
   theme: {
-    builtinType: 'default',
-    colorDestructive: 'hsl(348 100% 61%)',
-    colorPrimary: 'hsl(212 100% 45%)',
-    colorSuccess: 'hsl(144 57% 58%)',
-    colorWarning: 'hsl(42 84% 61%)',
-    mode: 'dark',
-    radius: '0.5',
+    builtinType: "default",
+    colorDestructive: "hsl(348 100% 61%)",
+    colorPrimary: "hsl(212 100% 45%)",
+    colorSuccess: "hsl(144 57% 58%)",
+    colorWarning: "hsl(42 84% 61%)",
+    mode: "dark",
+    radius: "0.5",
     semiDarkHeader: false,
-    semiDarkSidebar: false,
+    semiDarkSidebar: false
   },
   transition: {
     enable: true,
     loading: true,
-    name: 'fade-slide',
-    progress: true,
+    name: "fade-slide",
+    progress: true
   },
   widget: {
     fullscreen: true,
@@ -114,8 +113,8 @@ const defaultPreferences: Preferences = {
     notification: true,
     refresh: true,
     sidebarToggle: true,
-    themeToggle: true,
-  },
+    themeToggle: true
+  }
 };
 
 export { defaultPreferences };

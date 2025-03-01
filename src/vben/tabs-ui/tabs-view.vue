@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { TabsEmits, TabsProps } from './types';
 
-import { useForwardPropsEmits } from '@vben-core/composables';
-import { ChevronLeft, ChevronRight } from '@vben-core/icons';
-import { VbenScrollbar } from '@vben-core/shadcn-ui';
+import { useForwardPropsEmits } from '/@/vben/composables';
+import { ChevronLeft, ChevronRight } from '/@/vben/icons';
+import { VbenScrollbar } from '/@/vben/shadcn-ui';
 
 import { Tabs, TabsChrome } from './components';
 import { useTabsDrag } from './use-tabs-drag';

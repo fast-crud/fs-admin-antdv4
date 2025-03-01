@@ -3,7 +3,7 @@ import type { PinInputInputProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '/@/vben/shared/utils';
 
 import { PinInputInput, useForwardProps } from 'radix-vue';
 

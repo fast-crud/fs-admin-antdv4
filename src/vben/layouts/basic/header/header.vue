@@ -149,7 +149,7 @@ function clearPreferencesAndLogout() {
     </template>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .menu-align-start {
   --menu-align: start;
 }

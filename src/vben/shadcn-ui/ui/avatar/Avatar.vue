@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AvatarVariants } from './avatar';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '/@/vben/shared/utils';
 
 import { AvatarRoot } from 'radix-vue';
 

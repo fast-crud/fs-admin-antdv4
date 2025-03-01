@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from "vue";
 
-import { $t } from '@vben/locales';
+import { $t } from "../../../locales";
 
-import { useVbenModal } from '@vben-core/popup-ui';
+import { useVbenModal } from "../../../popup-ui";
 
 interface Props {
   // 轮训时间，分钟
@@ -12,16 +12,16 @@ interface Props {
   checkUpdateUrl?: string;
 }
 
-defineOptions({ name: 'CheckUpdates' });
+defineOptions({ name: "CheckUpdates" });
 
 const props = withDefaults(defineProps<Props>(), {
   checkUpdatesInterval: 1,
-  checkUpdateUrl: import.meta.env.BASE_URL || '/',
+  checkUpdateUrl: import.meta.env.BASE_URL || "/"
 });
 
 let isCheckingUpdates = false;
-const currentVersionTag = ref('');
-const lastVersionTag = ref('');
+const currentVersionTag = ref("");
+const lastVersionTag = ref("");
 const timer = ref<ReturnType<typeof setInterval>>();
 
 const [UpdateNoticeModal, modalApi] = useVbenModal({
@@ -32,27 +32,22 @@ const [UpdateNoticeModal, modalApi] = useVbenModal({
     lastVersionTag.value = currentVersionTag.value;
     window.location.reload();
     // handleSubmitLogout();
-  },
+  }
 });
 
 async function getVersionTag() {
   try {
-    if (
-      location.hostname === 'localhost' ||
-      location.hostname === '127.0.0.1'
-    ) {
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
       return null;
     }
     const response = await fetch(props.checkUpdateUrl, {
-      cache: 'no-cache',
-      method: 'HEAD',
+      cache: "no-cache",
+      method: "HEAD"
     });
 
-    return (
-      response.headers.get('etag') || response.headers.get('last-modified')
-    );
+    return response.headers.get("etag") || response.headers.get("last-modified");
   } catch {
-    console.error('Failed to fetch version tag');
+    console.error("Failed to fetch version tag");
     return null;
   }
 }
@@ -85,10 +80,7 @@ function start() {
   }
 
   // 每 checkUpdatesInterval(默认值为1) 分钟检查一次
-  timer.value = setInterval(
-    checkForUpdates,
-    props.checkUpdatesInterval * 60 * 1000,
-  );
+  timer.value = setInterval(checkForUpdates, props.checkUpdatesInterval * 60 * 1000);
 }
 
 function handleVisibilitychange() {
@@ -111,12 +103,12 @@ function stop() {
 
 onMounted(() => {
   start();
-  document.addEventListener('visibilitychange', handleVisibilitychange);
+  document.addEventListener("visibilitychange", handleVisibilitychange);
 });
 
 onUnmounted(() => {
   stop();
-  document.removeEventListener('visibilitychange', handleVisibilitychange);
+  document.removeEventListener("visibilitychange", handleVisibilitychange);
 });
 </script>
 <template>
@@ -130,6 +122,6 @@ onUnmounted(() => {
     footer-class="border-none mb-3 mr-3"
     header-class="border-none"
   >
-    {{ $t('ui.widgets.checkUpdatesDescription') }}
+    {{ $t("ui.widgets.checkUpdatesDescription") }}
   </UpdateNoticeModal>
 </template>

@@ -28,7 +28,7 @@ const props = defineProps<Props>();
   </Select>
 </template>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 button[role='combobox'][data-placeholder] {
   color: hsl(var(--muted-foreground));
 }

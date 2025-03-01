@@ -3,7 +3,7 @@ import type { DropdownMenuSeparatorProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '/@/vben/shared/utils';
 
 import { DropdownMenuSeparator } from 'radix-vue';
 

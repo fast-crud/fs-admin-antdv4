@@ -1,18 +1,12 @@
-import { DEFAULT_NAMESPACE } from '@vben-core/shared/constants';
+import { DEFAULT_NAMESPACE } from "../shared/constants";
 
 /**
  * @see copy https://github.com/element-plus/element-plus/blob/dev/packages/hooks/use-namespace/index.ts
  */
 
-const statePrefix = 'is-';
+const statePrefix = "is-";
 
-const _bem = (
-  namespace: string,
-  block: string,
-  blockSuffix: string,
-  element: string,
-  modifier: string,
-) => {
+const _bem = (namespace: string, block: string, blockSuffix: string, element: string, modifier: string) => {
   let cls = `${namespace}-${block}`;
   if (blockSuffix) {
     cls += `-${blockSuffix}`;
@@ -32,30 +26,18 @@ const is: {
   (name: string, state: boolean | undefined): string;
 } = (name: string, ...args: [] | [boolean | undefined]) => {
   const state = args.length > 0 ? args[0] : true;
-  return name && state ? `${statePrefix}${name}` : '';
+  return name && state ? `${statePrefix}${name}` : "";
 };
 
 const useNamespace = (block: string) => {
   const namespace = DEFAULT_NAMESPACE;
-  const b = (blockSuffix = '') => _bem(namespace, block, blockSuffix, '', '');
-  const e = (element?: string) =>
-    element ? _bem(namespace, block, '', element, '') : '';
-  const m = (modifier?: string) =>
-    modifier ? _bem(namespace, block, '', '', modifier) : '';
-  const be = (blockSuffix?: string, element?: string) =>
-    blockSuffix && element
-      ? _bem(namespace, block, blockSuffix, element, '')
-      : '';
-  const em = (element?: string, modifier?: string) =>
-    element && modifier ? _bem(namespace, block, '', element, modifier) : '';
-  const bm = (blockSuffix?: string, modifier?: string) =>
-    blockSuffix && modifier
-      ? _bem(namespace, block, blockSuffix, '', modifier)
-      : '';
-  const bem = (blockSuffix?: string, element?: string, modifier?: string) =>
-    blockSuffix && element && modifier
-      ? _bem(namespace, block, blockSuffix, element, modifier)
-      : '';
+  const b = (blockSuffix = "") => _bem(namespace, block, blockSuffix, "", "");
+  const e = (element?: string) => (element ? _bem(namespace, block, "", element, "") : "");
+  const m = (modifier?: string) => (modifier ? _bem(namespace, block, "", "", modifier) : "");
+  const be = (blockSuffix?: string, element?: string) => (blockSuffix && element ? _bem(namespace, block, blockSuffix, element, "") : "");
+  const em = (element?: string, modifier?: string) => (element && modifier ? _bem(namespace, block, "", element, modifier) : "");
+  const bm = (blockSuffix?: string, modifier?: string) => (blockSuffix && modifier ? _bem(namespace, block, blockSuffix, "", modifier) : "");
+  const bem = (blockSuffix?: string, element?: string, modifier?: string) => (blockSuffix && element && modifier ? _bem(namespace, block, blockSuffix, element, modifier) : "");
 
   // for css var
   // --el-xxx: value;
@@ -96,7 +78,7 @@ const useNamespace = (block: string) => {
     em,
     is,
     m,
-    namespace,
+    namespace
   };
 };
 

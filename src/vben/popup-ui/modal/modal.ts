@@ -1,6 +1,6 @@
 import type { Component, Ref } from 'vue';
 
-import type { MaybePromise } from '@vben-core/typings';
+import type { MaybePromise } from '/@/vben/typings';
 
 import type { ModalApi } from './modal-api';
 

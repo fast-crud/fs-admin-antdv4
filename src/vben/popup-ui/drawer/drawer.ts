@@ -1,6 +1,6 @@
 import type { Component, Ref } from 'vue';
 
-import type { ClassType } from '@vben-core/typings';
+import type { ClassType } from '/@/vben/typings';
 
 import type { DrawerApi } from './drawer-api';
 

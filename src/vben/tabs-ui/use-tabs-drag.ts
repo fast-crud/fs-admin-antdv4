@@ -1,11 +1,11 @@
-import type { Sortable } from '@vben-core/composables';
-import type { EmitType } from '@vben-core/typings';
+import type { Sortable } from '/@/vben/composables';
+import type { EmitType } from '/@/vben/typings';
 
 import type { TabsProps } from './types';
 
 import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 
-import { useIsMobile, useSortable } from '@vben-core/composables';
+import { useIsMobile, useSortable } from '/@/vben/composables';
 
 // 可能会找到拖拽的子元素，这里需要确保拖拽的dom时tab元素
 function findParentElement(element: HTMLElement) {

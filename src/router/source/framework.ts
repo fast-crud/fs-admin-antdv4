@@ -1,17 +1,26 @@
-import LayoutFramework from "/src/layout/layout-framework.vue";
-import { crudResources } from "/@/router/source/modules/crud";
-// import { uiResources } from "/@/router/source/modules/ui";
-// import { integrationResources } from "/@/router/source/modules/integration";
-import { sysResources } from "/@/router/source/modules/sys";
+import BasicLayout from "/@/vben/layouts/basic/layout.vue";
+
+import type { RouteRecordRaw } from "vue-router";
+
+import { mergeRouteModules } from "/@/vben/utils";
+
+const dynamicRouteFiles = import.meta.glob("./modules/**/*.ts", {
+  eager: true
+});
+
+/** 动态路由 */
+const dynamicRoutes: RouteRecordRaw[] = mergeRouteModules(dynamicRouteFiles);
+
 export const frameworkResource = [
   {
     title: "框架",
-    name: "framework",
+    name: "root",
     path: "/",
     redirect: "/index",
-    component: LayoutFramework,
+    component: BasicLayout,
     meta: {
-      icon: "ion:accessibility"
+      icon: "ion:accessibility",
+      hideInBreadcrumb: true
     },
     children: [
       {
@@ -25,9 +34,7 @@ export const frameworkResource = [
           icon: "ion:home-outline"
         }
       },
-      ...crudResources,
-      // ...integrationResources,
-      ...sysResources
+      ...dynamicRoutes
     ]
   }
 ];

@@ -19,6 +19,8 @@ import SubMenu from "./sub-menu.vue";
 
 interface Props extends MenuProps {}
 
+// @ts-ignore
+// eslint-disable-next-line vue/multi-word-component-names,vue/no-reserved-component-names
 defineOptions({ name: "Menu" });
 
 const props = withDefaults(defineProps<Props>(), {
@@ -312,17 +314,15 @@ function removeMenuItem(item: MenuItemRegistered) {
   </ul>
 </template>
 
-<style lang="scss">
-$namespace: vben;
-
-@mixin menu-item-active {
+<style lang="less">
+.menu-item-active() {
   color: var(--menu-item-active-color);
   text-decoration: none;
   cursor: pointer;
   background: var(--menu-item-active-background-color);
 }
 
-@mixin menu-item {
+.menu-item() {
   position: relative;
   display: flex;
   // gap: 12px;
@@ -351,12 +351,12 @@ $namespace: vben;
     opacity: 0.25;
   }
 
-  .#{$namespace}-menu__icon {
+  .vben-menu__icon {
     transition: transform 0.25s;
   }
 
   &:hover {
-    .#{$namespace}-menu__icon {
+    .vben-menu__icon {
       transform: scale(1.2);
     }
   }
@@ -371,7 +371,7 @@ $namespace: vben;
   }
 }
 
-@mixin menu-title {
+.menu-title() {
   max-width: var(--menu-title-width);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -383,8 +383,8 @@ $namespace: vben;
   justify-content: var(--menu-align, start);
 }
 
-.#{$namespace}-menu__popup-container,
-.#{$namespace}-menu {
+.vben-menu__popup-container,
+.vben-menu {
   --menu-title-width: 140px;
   --menu-item-icon-size: 16px;
   --menu-item-height: 38px;
@@ -483,7 +483,7 @@ $namespace: vben;
   }
 }
 
-.#{$namespace}-menu {
+.vben-menu {
   position: relative;
   box-sizing: border-box;
   padding-left: 0;
@@ -493,26 +493,26 @@ $namespace: vben;
 
   // 垂直菜单
   &.is-vertical {
-    &:not(.#{$namespace}-menu.is-collapse) {
-      & .#{$namespace}-menu-item,
-      & .#{$namespace}-sub-menu-content,
-      & .#{$namespace}-menu-item-group__title {
+    &:not(.vben-menu.is-collapse) {
+      & .vben-menu-item,
+      & .vben-sub-menu-content,
+      & .vben-menu-item-group__title {
         padding-left: calc(var(--menu-item-indent) + var(--menu-level) * var(--menu-item-indent));
         white-space: nowrap;
       }
 
-      & > .#{$namespace}-sub-menu {
-        & > .#{$namespace}-menu {
-          & > .#{$namespace}-menu-item {
+      & > .vben-sub-menu {
+        & > .vben-menu {
+          & > .vben-menu-item {
             padding-left: calc(0px + var(--menu-item-indent) + var(--menu-level) * var(--menu-item-indent));
           }
         }
 
-        & > .#{$namespace}-sub-menu-content {
+        & > .vben-sub-menu-content {
           padding-left: calc(var(--menu-item-indent) - 8px);
         }
       }
-      & > .#{$namespace}-menu-item {
+      & > .vben-menu-item {
         padding-left: calc(var(--menu-item-indent) - 8px);
       }
     }
@@ -525,7 +525,7 @@ $namespace: vben;
     height: var(--height-horizontal-height);
     border-right: none;
 
-    .#{$namespace}-menu-item {
+    .vben-menu-item {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -537,7 +537,7 @@ $namespace: vben;
       border-radius: var(--menu-item-radius);
     }
 
-    & > .#{$namespace}-sub-menu {
+    & > .vben-sub-menu {
       height: var(--menu-item-height);
       margin-right: 2px;
 
@@ -546,7 +546,7 @@ $namespace: vben;
         outline: none;
       }
 
-      & .#{$namespace}-sub-menu-content {
+      & .vben-sub-menu-content {
         height: 100%;
         padding-right: 40px;
         // border-bottom: 2px solid transparent;
@@ -554,32 +554,32 @@ $namespace: vben;
       }
     }
 
-    & .#{$namespace}-menu-item:not(.is-disabled):hover,
-    & .#{$namespace}-menu-item:not(.is-disabled):focus {
+    & .vben-menu-item:not(.is-disabled):hover,
+    & .vben-menu-item:not(.is-disabled):focus {
       outline: none;
     }
 
-    & > .#{$namespace}-menu-item.is-active {
+    & > .vben-menu-item.is-active {
       color: var(--menu-item-active-color);
     }
 
     // &.is-light {
-    //   & > .#{$namespace}-sub-menu {
+    //   & > .vben-sub-menu {
     //     &.is-active {
     //       border-bottom: 2px solid var(--menu-item-active-color);
     //     }
-    //     &:not(.is-active) .#{$namespace}-sub-menu-content {
+    //     &:not(.is-active) .vben-sub-menu-content {
     //       &:hover {
     //         border-bottom: 2px solid var(--menu-item-active-color);
     //       }
     //     }
     //   }
-    //   & > .#{$namespace}-menu-item.is-active {
+    //   & > .vben-menu-item.is-active {
     //     border-bottom: 2px solid var(--menu-item-active-color);
     //   }
 
-    //   & .#{$namespace}-menu-item:not(.is-disabled):hover,
-    //   & .#{$namespace}-menu-item:not(.is-disabled):focus {
+    //   & .vben-menu-item:not(.is-disabled):hover,
+    //   & .vben-menu-item:not(.is-disabled):focus {
     //     border-bottom: 2px solid var(--menu-item-active-color);
     //   }
     // }
@@ -587,15 +587,15 @@ $namespace: vben;
   // 折叠菜单
 
   &.is-collapse {
-    .#{$namespace}-menu__icon {
+    .vben-menu__icon {
       margin-right: 0;
     }
-    .#{$namespace}-sub-menu__icon-arrow {
+    .vben-sub-menu__icon-arrow {
       display: none;
     }
 
-    .#{$namespace}-sub-menu-content,
-    .#{$namespace}-menu-item {
+    .vben-sub-menu-content,
+    .vben-menu-item {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -610,8 +610,8 @@ $namespace: vben;
     }
 
     &.is-light {
-      .#{$namespace}-sub-menu-content,
-      .#{$namespace}-menu-item {
+      .vben-sub-menu-content,
+      .vben-menu-item {
         &.is-active {
           // color: hsl(var(--primary-foreground)) !important;
           background: var(--menu-item-active-background-color) !important;
@@ -620,8 +620,8 @@ $namespace: vben;
     }
 
     &.is-rounded {
-      .#{$namespace}-sub-menu-content,
-      .#{$namespace}-menu-item {
+      .vben-sub-menu-content,
+      .vben-menu-item {
         &.is-collapse-show-title {
           // padding: 32px 0 !important;
           margin: 4px 8px !important;
@@ -641,8 +641,8 @@ $namespace: vben;
     padding: 10px 0;
     border-radius: var(--menu-item-radius);
 
-    .#{$namespace}-sub-menu-content,
-    .#{$namespace}-menu-item {
+    .vben-sub-menu-content,
+    .vben-menu-item {
       padding: var(--menu-item-popup-padding-y) var(--menu-item-popup-padding-x);
     }
   }
@@ -657,15 +657,15 @@ $namespace: vben;
   }
 }
 
-.#{$namespace}-menu-item {
+.vben-menu-item {
   fill: var(--menu-item-color);
 
-  @include menu-item;
+  .menu-item();
 
   &.is-active {
     fill: var(--menu-item-active-color);
 
-    @include menu-item-active;
+    .menu-item-active();
   }
 
   &__content {
@@ -675,23 +675,23 @@ $namespace: vben;
     height: var(--menu-item-height);
 
     span {
-      @include menu-title;
+      .menu-title();
     }
   }
 
   &.is-collapse-show-title {
     padding: 32px 0 !important;
     // margin: 4px 8px !important;
-    .#{$namespace}-menu-tooltip__trigger {
+    .vben-menu-tooltip__trigger {
       flex-direction: column;
     }
-    .#{$namespace}-menu__icon {
+    .vben-menu__icon {
       display: block;
       font-size: 20px !important;
       transition: all 0.25s ease;
     }
 
-    .#{$namespace}-menu__name {
+    .vben-menu__name {
       display: inline-flex;
       margin-top: 8px;
       margin-bottom: 0;
@@ -709,7 +709,7 @@ $namespace: vben;
     background: var(--menu-item-hover-background-color) !important;
   }
 
-  .#{$namespace}-menu-tooltip__trigger {
+  .vben-menu-tooltip__trigger {
     position: absolute;
     top: 0;
     left: 0;
@@ -725,7 +725,7 @@ $namespace: vben;
   }
 }
 
-.#{$namespace}-sub-menu {
+.vben-sub-menu {
   padding-left: 0;
   margin: 0;
   list-style: none;
@@ -733,8 +733,8 @@ $namespace: vben;
   fill: var(--menu-item-color);
 
   &.is-active {
-    div[data-state="open"] > .#{$namespace}-sub-menu-content,
-    > .#{$namespace}-sub-menu-content {
+    div[data-state="open"] > .vben-sub-menu-content,
+    > .vben-sub-menu-content {
       // font-weight: 500;
       color: var(--menu-submenu-active-color);
       text-decoration: none;
@@ -745,10 +745,10 @@ $namespace: vben;
   }
 }
 
-.#{$namespace}-sub-menu-content {
+.vben-sub-menu-content {
   height: var(--menu-item-height);
 
-  @include menu-item;
+  .menu-item();
 
   &__icon-arrow {
     position: absolute;
@@ -764,19 +764,19 @@ $namespace: vben;
   }
 
   &__title {
-    @include menu-title;
+    .menu-title();
   }
 
   &.is-collapse-show-title {
     flex-direction: column;
     padding: 32px 0 !important;
     // margin: 4px 8px !important;
-    .#{$namespace}-menu__icon {
+    .vben-menu__icon {
       display: block;
       font-size: 20px !important;
       transition: all 0.25s ease;
     }
-    .#{$namespace}-sub-menu-content__title {
+    .vben-sub-menu-content__title {
       display: inline-flex;
       flex-shrink: 0;
       margin-top: 8px;

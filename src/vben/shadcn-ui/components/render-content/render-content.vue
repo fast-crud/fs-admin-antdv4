@@ -3,7 +3,7 @@ import type { Component, PropType } from 'vue';
 
 import { defineComponent, h } from 'vue';
 
-import { isFunction, isObject } from '@vben-core/shared/utils';
+import { isFunction, isObject } from '/@/vben/shared/utils';
 
 export default defineComponent({
   name: 'RenderContent',

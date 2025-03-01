@@ -16,7 +16,7 @@ function useNavigation() {
 
   const navigation = async (path: string) => {
     const route = routeMetaMap.get(path);
-    const { openInNewWindow = false, query = {} } = route?.meta ?? {};
+    const { openInNewWindow = false, query = {} as any } = route?.meta ?? {};
     if (isHttpUrl(path)) {
       openWindow(path, { target: "_blank" });
     } else if (openInNewWindow) {

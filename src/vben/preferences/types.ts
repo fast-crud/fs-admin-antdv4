@@ -13,10 +13,10 @@ import type {
   PageTransitionType,
   PreferencesButtonPositionType,
   TabsStyleType,
-  ThemeModeType,
-} from '@vben-core/typings';
+  ThemeModeType
+} from "/@/vben/typings";
 
-type SupportedLanguagesType = 'en-US' | 'zh-CN';
+type SupportedLanguagesType = "en-US" | "zh-CN";
 
 interface AppPreferences {
   /** 权限模式 */
@@ -288,5 +288,5 @@ export type {
   TabbarPreferences,
   ThemePreferences,
   TransitionPreferences,
-  WidgetPreferences,
+  WidgetPreferences
 };

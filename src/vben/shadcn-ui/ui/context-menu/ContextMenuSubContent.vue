@@ -6,7 +6,7 @@ import type {
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '/@/vben/shared/utils';
 
 import { ContextMenuSubContent, useForwardPropsEmits } from 'radix-vue';
 

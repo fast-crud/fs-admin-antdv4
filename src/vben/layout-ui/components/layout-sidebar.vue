@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { CSSProperties } from 'vue';
+import type { CSSProperties } from "vue";
 
-import { computed, shallowRef, useSlots, watchEffect } from 'vue';
+import { computed, shallowRef, useSlots, watchEffect } from "vue";
 
-import { VbenScrollbar } from '@vben-core/shadcn-ui';
+import { VbenScrollbar } from "../../shadcn-ui";
 
-import { useScrollLock } from '@vueuse/core';
+import { useScrollLock } from "@vueuse/core";
 
-import { SidebarCollapseButton, SidebarFixedButton } from './widgets';
+import { SidebarCollapseButton, SidebarFixedButton } from "./widgets";
 
 interface Props {
   /**
@@ -95,15 +95,15 @@ const props = withDefaults(defineProps<Props>(), {
   paddingTop: 0,
   show: true,
   showCollapseButton: true,
-  zIndex: 0,
+  zIndex: 0
 });
 
 const emit = defineEmits<{ leave: [] }>();
-const collapse = defineModel<boolean>('collapse');
-const extraCollapse = defineModel<boolean>('extraCollapse');
-const expandOnHovering = defineModel<boolean>('expandOnHovering');
-const expandOnHover = defineModel<boolean>('expandOnHover');
-const extraVisible = defineModel<boolean>('extraVisible');
+const collapse = defineModel<boolean>("collapse");
+const extraCollapse = defineModel<boolean>("extraCollapse");
+const expandOnHovering = defineModel<boolean>("expandOnHovering");
+const expandOnHover = defineModel<boolean>("expandOnHover");
+const extraVisible = defineModel<boolean>("extraVisible");
 
 const isLocked = useScrollLock(document.body);
 const slots = useSlots();
@@ -116,13 +116,13 @@ const style = computed((): CSSProperties => {
   const { isSidebarMixed, marginTop, paddingTop, zIndex } = props;
 
   return {
-    '--scroll-shadow': 'var(--sidebar)',
+    "--scroll-shadow": "var(--sidebar)",
     ...calcMenuWidthStyle(false),
     height: `calc(100% - ${marginTop}px)`,
     marginTop: `${marginTop}px`,
     paddingTop: `${paddingTop}px`,
     zIndex,
-    ...(isSidebarMixed && extraVisible.value ? { transition: 'none' } : {}),
+    ...(isSidebarMixed && extraVisible.value ? { transition: "none" } : {})
   };
 });
 
@@ -132,7 +132,7 @@ const extraStyle = computed((): CSSProperties => {
   return {
     left: `${width}px`,
     width: extraVisible.value && show ? `${extraWidth}px` : 0,
-    zIndex,
+    zIndex
   };
 });
 
@@ -140,7 +140,7 @@ const extraTitleStyle = computed((): CSSProperties => {
   const { headerHeight } = props;
 
   return {
-    height: `${headerHeight - 1}px`,
+    height: `${headerHeight - 1}px`
   };
 });
 
@@ -157,8 +157,8 @@ const contentStyle = computed((): CSSProperties => {
 
   return {
     height: `calc(100% - ${headerHeight + collapseHeight}px)`,
-    paddingTop: '8px',
-    ...contentWidthStyle.value,
+    paddingTop: "8px",
+    ...contentWidthStyle.value
   };
 });
 
@@ -166,22 +166,22 @@ const headerStyle = computed((): CSSProperties => {
   const { headerHeight, isSidebarMixed } = props;
 
   return {
-    ...(isSidebarMixed ? { display: 'flex', justifyContent: 'center' } : {}),
+    ...(isSidebarMixed ? { display: "flex", justifyContent: "center" } : {}),
     height: `${headerHeight - 1}px`,
-    ...contentWidthStyle.value,
+    ...contentWidthStyle.value
   };
 });
 
 const extraContentStyle = computed((): CSSProperties => {
   const { collapseHeight, headerHeight } = props;
   return {
-    height: `calc(100% - ${headerHeight + collapseHeight}px)`,
+    height: `calc(100% - ${headerHeight + collapseHeight}px)`
   };
 });
 
 const collapseStyle = computed((): CSSProperties => {
   return {
-    height: `${props.collapseHeight}px`,
+    height: `${props.collapseHeight}px`
   };
 });
 
@@ -192,10 +192,7 @@ watchEffect(() => {
 function calcMenuWidthStyle(isHiddenDom: boolean): CSSProperties {
   const { extraWidth, fixedExtra, isSidebarMixed, show, width } = props;
 
-  let widthValue =
-    width === 0
-      ? '0px'
-      : `${width + (isSidebarMixed && fixedExtra && extraVisible.value ? extraWidth : 0)}px`;
+  let widthValue = width === 0 ? "0px" : `${width + (isSidebarMixed && fixedExtra && extraVisible.value ? extraWidth : 0)}px`;
 
   const { collapseWidth } = props;
 
@@ -204,12 +201,12 @@ function calcMenuWidthStyle(isHiddenDom: boolean): CSSProperties {
   }
 
   return {
-    ...(widthValue === '0px' ? { overflow: 'hidden' } : {}),
+    ...(widthValue === "0px" ? { overflow: "hidden" } : {}),
     flex: `0 0 ${widthValue}`,
     marginLeft: show ? 0 : `-${widthValue}`,
     maxWidth: widthValue,
     minWidth: widthValue,
-    width: widthValue,
+    width: widthValue
   };
 }
 
@@ -232,7 +229,7 @@ function handleMouseenter(e: MouseEvent) {
 }
 
 function handleMouseleave() {
-  emit('leave');
+  emit("leave");
   if (props.isSidebarMixed) {
     isLocked.value = false;
   }
@@ -247,29 +244,21 @@ function handleMouseleave() {
 </script>
 
 <template>
-  <div
-    v-if="domVisible"
-    :class="theme"
-    :style="hiddenSideStyle"
-    class="h-full transition-all duration-150"
-  ></div>
+  <div v-if="domVisible" :class="theme" :style="hiddenSideStyle" class="h-full transition-all duration-150"></div>
   <aside
     :class="[
       theme,
       {
         'bg-sidebar-deep': isSidebarMixed,
-        'bg-sidebar border-border border-r': !isSidebarMixed,
-      },
+        'bg-sidebar border-border border-r': !isSidebarMixed
+      }
     ]"
     :style="style"
     class="fixed left-0 top-0 h-full transition-all duration-150"
     @mouseenter="handleMouseenter"
     @mouseleave="handleMouseleave"
   >
-    <SidebarFixedButton
-      v-if="!collapse && !isSidebarMixed"
-      v-model:expand-on-hover="expandOnHover"
-    />
+    <SidebarFixedButton v-if="!collapse && !isSidebarMixed" v-model:expand-on-hover="expandOnHover" />
     <div v-if="slots.logo" :style="headerStyle">
       <slot name="logo"></slot>
     </div>
@@ -278,37 +267,23 @@ function handleMouseleave() {
     </VbenScrollbar>
 
     <div :style="collapseStyle"></div>
-    <SidebarCollapseButton
-      v-if="showCollapseButton && !isSidebarMixed"
-      v-model:collapsed="collapse"
-    />
+    <SidebarCollapseButton v-if="showCollapseButton && !isSidebarMixed" v-model:collapsed="collapse" />
     <div
       v-if="isSidebarMixed"
       ref="asideRef"
       :class="{
-        'border-l': extraVisible,
+        'border-l': extraVisible
       }"
       :style="extraStyle"
       class="border-border bg-sidebar fixed top-0 h-full overflow-hidden border-r transition-all duration-200"
     >
-      <SidebarCollapseButton
-        v-if="isSidebarMixed && expandOnHover"
-        v-model:collapsed="extraCollapse"
-      />
+      <SidebarCollapseButton v-if="isSidebarMixed && expandOnHover" v-model:collapsed="extraCollapse" />
 
-      <SidebarFixedButton
-        v-if="!extraCollapse"
-        v-model:expand-on-hover="expandOnHover"
-      />
+      <SidebarFixedButton v-if="!extraCollapse" v-model:expand-on-hover="expandOnHover" />
       <div v-if="!extraCollapse" :style="extraTitleStyle" class="pl-2">
         <slot name="extra-title"></slot>
       </div>
-      <VbenScrollbar
-        :style="extraContentStyle"
-        class="border-border py-2"
-        shadow
-        shadow-border
-      >
+      <VbenScrollbar :style="extraContentStyle" class="border-border py-2" shadow shadow-border>
         <slot name="extra"></slot>
       </VbenScrollbar>
     </div>

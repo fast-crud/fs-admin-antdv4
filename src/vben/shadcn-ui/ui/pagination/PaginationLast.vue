@@ -3,7 +3,7 @@ import type { PaginationLastProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '/@/vben/shared/utils';
 
 import { ChevronsRight } from 'lucide-vue-next';
 import { PaginationLast } from 'radix-vue';

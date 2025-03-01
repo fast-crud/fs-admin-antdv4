@@ -1,8 +1,8 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from "vue-router";
 
-import type { MenuRecordRaw } from '@vben-core/typings';
+import type { MenuRecordRaw } from "../../typings";
 
-import { acceptHMRUpdate, defineStore } from 'pinia';
+import { acceptHMRUpdate, defineStore } from "pinia";
 
 type AccessToken = null | string;
 
@@ -40,13 +40,10 @@ interface AccessState {
 /**
  * @zh_CN 访问权限相关
  */
-export const useAccessStore = defineStore('core-access', {
+export const useAccessStore = defineStore("core-access", {
   actions: {
     getMenuByPath(path: string) {
-      function findMenu(
-        menus: MenuRecordRaw[],
-        path: string,
-      ): MenuRecordRaw | undefined {
+      function findMenu(menus: MenuRecordRaw[], path: string): MenuRecordRaw | undefined {
         for (const menu of menus) {
           if (menu.path === path) {
             return menu;
@@ -81,11 +78,11 @@ export const useAccessStore = defineStore('core-access', {
     },
     setRefreshToken(token: AccessToken) {
       this.refreshToken = token;
-    },
+    }
   },
   persist: {
     // 持久化
-    pick: ['accessToken', 'refreshToken', 'accessCodes'],
+    pick: ["accessToken", "refreshToken", "accessCodes"]
   },
   state: (): AccessState => ({
     accessCodes: [],
@@ -94,8 +91,8 @@ export const useAccessStore = defineStore('core-access', {
     accessToken: null,
     isAccessChecked: false,
     loginExpired: false,
-    refreshToken: null,
-  }),
+    refreshToken: null
+  })
 });
 
 // 解决热更新问题

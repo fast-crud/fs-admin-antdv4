@@ -1,6 +1,6 @@
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 
-import { useTabbarStore } from '@vben/stores';
+import { useTabbarStore } from "../stores";
 
 export function useRefresh() {
   const router = useRouter();
@@ -11,6 +11,6 @@ export function useRefresh() {
   }
 
   return {
-    refresh,
+    refresh
   };
 }

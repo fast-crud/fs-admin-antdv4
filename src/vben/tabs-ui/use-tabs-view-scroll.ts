@@ -2,7 +2,7 @@ import type { TabsProps } from './types';
 
 import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 
-import { VbenScrollbar } from '@vben-core/shadcn-ui';
+import { VbenScrollbar } from '/@/vben/shadcn-ui';
 
 import { useDebounceFn } from '@vueuse/core';
 

@@ -42,10 +42,8 @@ function menuIcon(menu: MenuRecordRaw) {
     </template>
   </ul>
 </template>
-<style lang="scss" scoped>
-$namespace: vben;
-
-.#{$namespace}-normal-menu {
+<style lang="less" scoped>
+.vben-normal-menu {
   --menu-item-margin-y: 4px;
   --menu-item-margin-x: 0px;
   --menu-item-padding-y: 9px;
@@ -60,7 +58,7 @@ $namespace: vben;
   }
 
   &.is-dark {
-    .#{$namespace}-normal-menu__item {
+    .vben-normal-menu__item {
       @apply text-foreground/80;
       // color: hsl(var(--foreground) / 80%);
 
@@ -69,8 +67,8 @@ $namespace: vben;
       }
 
       &.is-active {
-        .#{$namespace}-normal-menu__name,
-        .#{$namespace}-normal-menu__icon {
+        .vben-normal-menu__name,
+        .vben-normal-menu__icon {
           @apply text-foreground;
         }
       }
@@ -78,7 +76,7 @@ $namespace: vben;
   }
 
   &.is-collapse {
-    .#{$namespace}-normal-menu__name {
+    .vben-normal-menu__name {
       width: 0;
       height: 0;
       margin-top: 0;
@@ -86,7 +84,7 @@ $namespace: vben;
       opacity: 0;
     }
 
-    .#{$namespace}-normal-menu__icon {
+    .vben-normal-menu__icon {
       font-size: 20px;
     }
   }
@@ -112,8 +110,8 @@ $namespace: vben;
     &.is-active {
       @apply text-primary bg-primary dark:bg-accent;
 
-      .#{$namespace}-normal-menu__name,
-      .#{$namespace}-normal-menu__icon {
+      .vben-normal-menu__name,
+      .vben-normal-menu__icon {
         @apply text-primary-foreground font-semibold;
       }
     }
@@ -123,7 +121,7 @@ $namespace: vben;
     }
 
     &:hover {
-      .#{$namespace}-normal-menu__icon {
+      .vben-normal-menu__icon {
         transform: scale(1.2);
       }
     }

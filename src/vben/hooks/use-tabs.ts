@@ -1,8 +1,8 @@
-import type { RouteLocationNormalized } from 'vue-router';
+import type { RouteLocationNormalized } from "vue-router";
 
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter } from "vue-router";
 
-import { useTabbarStore } from '@vben/stores';
+import { useTabbarStore } from "../stores";
 
 export function useTabs() {
   const router = useRouter();
@@ -70,7 +70,7 @@ export function useTabs() {
   function getTabDisableState(tab: RouteLocationNormalized = route) {
     const tabs = tabbarStore.getTabs;
     const affixTabs = tabbarStore.affixTabs;
-    const index = tabs.findIndex((item) => item.path === tab.path);
+    const index = tabs.findIndex((item: any) => item.path === tab.path);
 
     const disabled = tabs.length <= 1;
 
@@ -79,20 +79,18 @@ export function useTabs() {
     const isCurrentTab = route.path === tab.path;
 
     // 当前处于最左侧或者减去固定标签页的数量等于0
-    const disabledCloseLeft =
-      index === 0 || index - affixTabs.length <= 0 || !isCurrentTab;
+    const disabledCloseLeft = index === 0 || index - affixTabs.length <= 0 || !isCurrentTab;
 
     const disabledCloseRight = !isCurrentTab || index === tabs.length - 1;
 
-    const disabledCloseOther =
-      disabled || !isCurrentTab || tabs.length - affixTabs.length <= 1;
+    const disabledCloseOther = disabled || !isCurrentTab || tabs.length - affixTabs.length <= 1;
     return {
       disabledCloseAll: disabled,
       disabledCloseCurrent: !!affixTab || disabled,
       disabledCloseLeft,
       disabledCloseOther,
       disabledCloseRight,
-      disabledRefresh: !isCurrentTab,
+      disabledRefresh: !isCurrentTab
     };
   }
 
@@ -110,6 +108,6 @@ export function useTabs() {
     resetTabTitle,
     setTabTitle,
     toggleTabPin,
-    unpinTab,
+    unpinTab
   };
 }

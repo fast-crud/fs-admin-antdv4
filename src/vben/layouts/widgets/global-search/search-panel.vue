@@ -1,36 +1,30 @@
 <script setup lang="ts">
-import type { MenuRecordRaw } from '@vben/types';
+import type { MenuRecordRaw } from "../../../types";
 
-import { nextTick, onMounted, ref, shallowRef, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { nextTick, onMounted, ref, shallowRef, watch } from "vue";
+import { useRouter } from "vue-router";
 
-import { SearchX, X } from '@vben/icons';
-import { $t } from '@vben/locales';
-import { mapTree, traverseTreeValues, uniqueByField } from '@vben/utils';
+import { SearchX, X } from "../../../icons";
+import { $t } from "../../../locales";
+import { mapTree, traverseTreeValues, uniqueByField } from "../../../utils";
 
-import { VbenIcon, VbenScrollbar } from '@vben-core/shadcn-ui';
-import { isHttpUrl } from '@vben-core/shared/utils';
+import { VbenIcon, VbenScrollbar } from "../../../shadcn-ui";
+import { isHttpUrl } from "../../../shared/utils";
 
-import { onKeyStroke, useLocalStorage, useThrottleFn } from '@vueuse/core';
+import { onKeyStroke, useLocalStorage, useThrottleFn } from "@vueuse/core";
 
 defineOptions({
-  name: 'SearchPanel',
+  name: "SearchPanel"
 });
 
-const props = withDefaults(
-  defineProps<{ keyword: string; menus: MenuRecordRaw[] }>(),
-  {
-    keyword: '',
-    menus: () => [],
-  },
-);
+const props = withDefaults(defineProps<{ keyword: string; menus: MenuRecordRaw[] }>(), {
+  keyword: "",
+  menus: () => []
+});
 const emit = defineEmits<{ close: [] }>();
 
 const router = useRouter();
-const searchHistory = useLocalStorage<MenuRecordRaw[]>(
-  `__search-history-${location.hostname}__`,
-  [],
-);
+const searchHistory = useLocalStorage<MenuRecordRaw[]>(`__search-history-${location.hostname}__`, []);
 const activeIndex = ref(-1);
 const searchItems = shallowRef<MenuRecordRaw[]>([]);
 const searchResults = ref<MenuRecordRaw[]>([]);
@@ -55,7 +49,7 @@ function search(searchKey: string) {
   const results: MenuRecordRaw[] = [];
 
   // 遍历搜索项
-  traverseTreeValues(searchItems.value, (item) => {
+  traverseTreeValues(searchItems.value, (item: any) => {
     // 如果菜单项的名称匹配正则表达式，将其添加到结果数组中
     if (reg.test(item.name?.toLowerCase())) {
       results.push(item);
@@ -77,12 +71,10 @@ function search(searchKey: string) {
 // When the keyboard up and down keys move to an invisible place
 // the scroll bar needs to scroll automatically
 function scrollIntoView() {
-  const element = document.querySelector(
-    `[data-search-item="${activeIndex.value}"]`,
-  );
+  const element = document.querySelector(`[data-search-item="${activeIndex.value}"]`);
 
   if (element) {
-    element.scrollIntoView({ block: 'nearest' });
+    element.scrollIntoView({ block: "nearest" });
   }
 }
 
@@ -102,7 +94,7 @@ async function handleEnter() {
     handleClose();
     await nextTick();
     if (isHttpUrl(to.path)) {
-      window.open(to.path, '_blank');
+      window.open(to.path, "_blank");
     } else {
       router.push({ path: to.path, replace: true });
     }
@@ -136,7 +128,7 @@ function handleDown() {
 // close search modal
 function handleClose() {
   searchResults.value = [];
-  emit('close');
+  emit("close");
 }
 
 // Activate when the mouse moves to a certain line
@@ -156,22 +148,7 @@ function removeItem(index: number) {
 }
 
 // 存储所有需要转义的特殊字符
-const code = new Set([
-  '$',
-  '(',
-  ')',
-  '*',
-  '+',
-  '.',
-  '?',
-  '[',
-  '\\',
-  ']',
-  '^',
-  '{',
-  '|',
-  '}',
-]);
+const code = new Set(["$", "(", ")", "*", "+", ".", "?", "[", "\\", "]", "^", "{", "|", "}"]);
 
 // 转换函数，用于转义特殊字符
 function transform(c: string) {
@@ -185,7 +162,7 @@ function createSearchReg(key: string) {
   // 将输入的字符串拆分为单个字符
   // 对每个字符进行转义
   // 然后用'.*'连接所有字符，创建正则表达式
-  const keys = [...key].map((item) => transform(item)).join('.*');
+  const keys = [...key].map((item) => transform(item)).join(".*");
   // 返回创建的正则表达式
   return new RegExp(`.*${keys}.*`);
 }
@@ -198,26 +175,26 @@ watch(
     } else {
       searchResults.value = [...searchHistory.value];
     }
-  },
+  }
 );
 
 onMounted(() => {
-  searchItems.value = mapTree(props.menus, (item) => {
+  searchItems.value = mapTree(props.menus, (item: any) => {
     return {
       ...item,
-      name: $t(item?.name),
+      name: $t(item?.name)
     };
   });
   if (searchHistory.value.length > 0) {
     searchResults.value = searchHistory.value;
   }
   // enter search
-  onKeyStroke('Enter', handleEnter);
+  onKeyStroke("Enter", handleEnter);
   // Monitor keyboard arrow keys
-  onKeyStroke('ArrowUp', handleUp);
-  onKeyStroke('ArrowDown', handleDown);
+  onKeyStroke("ArrowUp", handleUp);
+  onKeyStroke("ArrowDown", handleDown);
   // esc close
-  onKeyStroke('Escape', handleClose);
+  onKeyStroke("Escape", handleClose);
 });
 </script>
 
@@ -225,60 +202,38 @@ onMounted(() => {
   <VbenScrollbar>
     <div class="!flex h-full justify-center px-2 sm:max-h-[450px]">
       <!-- 无搜索结果 -->
-      <div
-        v-if="keyword && searchResults.length === 0"
-        class="text-muted-foreground text-center"
-      >
+      <div v-if="keyword && searchResults.length === 0" class="text-muted-foreground text-center">
         <SearchX class="mx-auto mt-4 size-12" />
         <p class="mb-10 mt-6 text-xs">
-          {{ $t('ui.widgets.search.noResults') }}
-          <span class="text-foreground text-sm font-medium">
-            "{{ keyword }}"
-          </span>
+          {{ $t("ui.widgets.search.noResults") }}
+          <span class="text-foreground text-sm font-medium"> "{{ keyword }}" </span>
         </p>
       </div>
       <!-- 历史搜索记录 & 没有搜索结果 -->
-      <div
-        v-if="!keyword && searchResults.length === 0"
-        class="text-muted-foreground text-center"
-      >
+      <div v-if="!keyword && searchResults.length === 0" class="text-muted-foreground text-center">
         <p class="my-10 text-xs">
-          {{ $t('ui.widgets.search.noRecent') }}
+          {{ $t("ui.widgets.search.noRecent") }}
         </p>
       </div>
 
       <ul v-show="searchResults.length > 0" class="w-full">
-        <li
-          v-if="searchHistory.length > 0 && !keyword"
-          class="text-muted-foreground mb-2 text-xs"
-        >
-          {{ $t('ui.widgets.search.recent') }}
+        <li v-if="searchHistory.length > 0 && !keyword" class="text-muted-foreground mb-2 text-xs">
+          {{ $t("ui.widgets.search.recent") }}
         </li>
         <li
           v-for="(item, index) in uniqueByField(searchResults, 'path')"
           :key="item.path"
-          :class="
-            activeIndex === index
-              ? 'active bg-primary text-primary-foreground'
-              : ''
-          "
+          :class="activeIndex === index ? 'active bg-primary text-primary-foreground' : ''"
           :data-index="index"
           :data-search-item="index"
           class="bg-accent flex-center group mb-3 w-full cursor-pointer rounded-lg px-4 py-4"
           @click="handleEnter"
           @mouseenter="handleMouseenter"
         >
-          <VbenIcon
-            :icon="item.icon"
-            class="mr-2 size-5 flex-shrink-0"
-            fallback
-          />
+          <VbenIcon :icon="item.icon" class="mr-2 size-5 flex-shrink-0" fallback />
 
           <span class="flex-1">{{ item.name }}</span>
-          <div
-            class="flex-center dark:hover:bg-accent hover:text-primary-foreground rounded-full p-1 hover:scale-110"
-            @click.stop="removeItem(index)"
-          >
+          <div class="flex-center dark:hover:bg-accent hover:text-primary-foreground rounded-full p-1 hover:scale-110" @click.stop="removeItem(index)">
             <X class="size-4" />
           </div>
         </li>

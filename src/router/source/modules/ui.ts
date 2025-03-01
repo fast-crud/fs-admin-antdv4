@@ -1,3 +1,5 @@
+import BasicLayout from "/@/vben/layouts/basic/layout.vue";
+
 export const uiResources = [
   {
     title: "UI示例",
@@ -28,3 +30,5 @@ export const uiResources = [
     ]
   }
 ];
+
+export default uiResources;

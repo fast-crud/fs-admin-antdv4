@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '/@/vben/shared/utils';
 
 defineOptions({ name: 'VbenButtonGroup' });
 
@@ -28,7 +28,7 @@ withDefaults(
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .vben-button-group {
   display: inline-flex;
 

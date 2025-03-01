@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
 interface AppState {
   /**
@@ -11,7 +11,7 @@ interface AppState {
   lockScreenPassword?: string;
 }
 
-export const useLockStore = defineStore('core-lock', {
+export const useLockStore = defineStore("core-lock", {
   actions: {
     lockScreen(password: string) {
       this.isLockScreen = true;
@@ -21,13 +21,13 @@ export const useLockStore = defineStore('core-lock', {
     unlockScreen() {
       this.isLockScreen = false;
       this.lockScreenPassword = undefined;
-    },
+    }
   },
   persist: {
-    pick: ['isLockScreen', 'lockScreenPassword'],
+    pick: ["isLockScreen", "lockScreenPassword"]
   },
   state: (): AppState => ({
     isLockScreen: false,
-    lockScreenPassword: undefined,
-  }),
+    lockScreenPassword: undefined
+  })
 });

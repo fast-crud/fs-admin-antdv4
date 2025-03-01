@@ -3,7 +3,7 @@ import type { PaginationNextProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '/@/vben/shared/utils';
 
 import { ChevronRight } from 'lucide-vue-next';
 import { PaginationNext } from 'radix-vue';

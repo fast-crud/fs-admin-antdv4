@@ -1,4 +1,4 @@
-import { updatePreferences, usePreferences } from '@vben/preferences';
+import { updatePreferences, usePreferences } from "/@/vben/preferences";
 /**
  * 主体区域最大化
  */
@@ -10,15 +10,15 @@ export function useContentMaximize() {
 
     updatePreferences({
       header: {
-        hidden: !isMaximize,
+        hidden: !isMaximize
       },
       sidebar: {
-        hidden: !isMaximize,
-      },
+        hidden: !isMaximize
+      }
     });
   }
   return {
     contentIsMaximize,
-    toggleMaximize,
+    toggleMaximize
   };
 }

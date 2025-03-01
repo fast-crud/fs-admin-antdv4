@@ -1,4 +1,5 @@
 import LayoutPass from "/@/layout/layout-pass.vue";
+import BasicLayout from "/@/vben/layouts/basic/layout.vue";
 
 export const sysResources = [
   {
@@ -6,7 +7,6 @@ export const sysResources = [
     name: "sys",
     path: "/sys",
     redirect: "/sys/authority",
-    component: LayoutPass,
     meta: {
       icon: "ion:settings-outline",
       permission: "sys"
@@ -59,3 +59,5 @@ export const sysResources = [
     ]
   }
 ];
+
+export default sysResources;

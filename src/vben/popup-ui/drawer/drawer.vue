@@ -5,7 +5,7 @@ import { computed, provide, ref, useId, watch } from "vue";
 
 import { useIsMobile, usePriorityValues, useSimpleLocale } from "../../composables";
 import { X } from "../../icons";
-import { Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, VbenButton, VbenHelpTooltip, VbenIconButton, VbenLoading, VisuallyHidden } from "@vben-core/shadcn-ui";
+import { Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, VbenButton, VbenHelpTooltip, VbenIconButton, VbenLoading, VisuallyHidden } from "/@/vben/shadcn-ui";
 import { ELEMENT_ID_MAIN_CONTENT } from "../../shared/constants";
 import { globalShareState } from "../../shared/global-state";
 import { cn } from "../../shared/utils";

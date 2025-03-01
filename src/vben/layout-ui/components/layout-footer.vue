@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { CSSProperties } from 'vue';
+import type { CSSProperties } from "vue";
 
-import { computed } from 'vue';
+import { computed } from "vue";
 
 interface Props {
   /**
@@ -19,26 +19,23 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  show: true,
+  show: true
 });
 
 const style = computed((): CSSProperties => {
   const { fixed, height, show, width, zIndex } = props;
   return {
     height: `${height}px`,
-    marginBottom: show ? '0' : `-${height}px`,
-    position: fixed ? 'fixed' : 'static',
+    marginBottom: show ? "0" : `-${height}px`,
+    position: fixed ? "fixed" : "static",
     width,
-    zIndex,
+    zIndex
   };
 });
 </script>
 
 <template>
-  <footer
-    :style="style"
-    class="bg-background-deep bottom-0 w-full transition-all duration-200"
-  >
+  <footer :style="style" class="bg-background-deep bottom-0 w-full transition-all duration-200">
     <slot></slot>
   </footer>
 </template>

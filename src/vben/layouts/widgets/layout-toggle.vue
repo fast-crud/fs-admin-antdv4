@@ -1,40 +1,36 @@
 <script setup lang="ts">
-import type { AuthPageLayoutType } from '@vben/types';
+import type { AuthPageLayoutType } from "/@/vben/types";
 
-import type { VbenDropdownMenuItem } from '@vben-core/shadcn-ui';
+import type { VbenDropdownMenuItem } from "/@/vben//shadcn-ui";
 
-import { computed } from 'vue';
+import { computed } from "vue";
 
-import { InspectionPanel, PanelLeft, PanelRight } from '@vben/icons';
-import { $t } from '@vben/locales';
-import {
-  preferences,
-  updatePreferences,
-  usePreferences,
-} from '@vben/preferences';
+import { InspectionPanel, PanelLeft, PanelRight } from "/@/vben/icons";
+import { $t } from "/@/vben/locales";
+import { preferences, updatePreferences, usePreferences } from "/@/vben/preferences";
 
-import { VbenDropdownRadioMenu, VbenIconButton } from '@vben-core/shadcn-ui';
+import { VbenDropdownRadioMenu, VbenIconButton } from "/@/vben//shadcn-ui";
 
 defineOptions({
-  name: 'AuthenticationLayoutToggle',
+  name: "AuthenticationLayoutToggle"
 });
 
 const menus = computed((): VbenDropdownMenuItem[] => [
   {
     icon: PanelLeft,
-    label: $t('authentication.layout.alignLeft'),
-    value: 'panel-left',
+    label: $t("authentication.layout.alignLeft"),
+    value: "panel-left"
   },
   {
     icon: InspectionPanel,
-    label: $t('authentication.layout.center'),
-    value: 'panel-center',
+    label: $t("authentication.layout.center"),
+    value: "panel-center"
   },
   {
     icon: PanelRight,
-    label: $t('authentication.layout.alignRight'),
-    value: 'panel-right',
-  },
+    label: $t("authentication.layout.alignRight"),
+    value: "panel-right"
+  }
 ]);
 
 const { authPanelCenter, authPanelLeft, authPanelRight } = usePreferences();
@@ -42,18 +38,14 @@ const { authPanelCenter, authPanelLeft, authPanelRight } = usePreferences();
 function handleUpdate(value: string) {
   updatePreferences({
     app: {
-      authPageLayout: value as AuthPageLayoutType,
-    },
+      authPageLayout: value as AuthPageLayoutType
+    }
   });
 }
 </script>
 
 <template>
-  <VbenDropdownRadioMenu
-    :menus="menus"
-    :model-value="preferences.app.authPageLayout"
-    @update:model-value="handleUpdate"
-  >
+  <VbenDropdownRadioMenu :menus="menus" :model-value="preferences.app.authPageLayout" @update:model-value="handleUpdate">
     <VbenIconButton>
       <PanelRight v-if="authPanelRight" class="size-4" />
       <PanelLeft v-if="authPanelLeft" class="size-4" />

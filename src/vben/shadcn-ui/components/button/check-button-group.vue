@@ -1,30 +1,30 @@
 <script lang="ts" setup>
-import type { Arrayable } from '@vueuse/core';
+import type { Arrayable } from "@vueuse/core";
 
-import type { ValueType, VbenButtonGroupProps } from './button';
+import type { ValueType, VbenButtonGroupProps } from "./button";
 
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch } from "vue";
 
-import { Circle, CircleCheckBig, LoaderCircle } from '@vben-core/icons';
-import { VbenRenderContent } from '@vben-core/shadcn-ui';
-import { cn, isFunction } from '@vben-core/shared/utils';
+import { Circle, CircleCheckBig, LoaderCircle } from "/@/vben/icons";
+import { VbenRenderContent } from "/@/vben/shadcn-ui";
+import { cn, isFunction } from "/@/vben/shared/utils";
 
-import { objectOmit } from '@vueuse/core';
+import { objectOmit } from "@vueuse/core";
 
-import VbenButtonGroup from './button-group.vue';
-import Button from './button.vue';
+import VbenButtonGroup from "./button-group.vue";
+import Button from "./button.vue";
 
 const props = withDefaults(defineProps<VbenButtonGroupProps>(), {
   gap: 0,
   multiple: false,
   showIcon: true,
-  size: 'middle',
+  size: "middle"
 });
 
 const btnDefaultProps = computed(() => {
   return {
-    ...objectOmit(props, ['options', 'btnClass', 'size', 'disabled']),
-    class: cn(props.btnClass),
+    ...objectOmit(props, ["options", "btnClass", "size", "disabled"]),
+    class: cn(props.btnClass)
   };
 });
 const modelValue = defineModel<Arrayable<ValueType> | undefined>();
@@ -37,11 +37,10 @@ watch(
     if (val) {
       modelValue.value = innerValue.value;
     } else {
-      modelValue.value =
-        innerValue.value.length > 0 ? innerValue.value[0] : undefined;
+      modelValue.value = innerValue.value.length > 0 ? innerValue.value[0] : undefined;
     }
   },
-  { immediate: true },
+  { immediate: true }
 );
 
 watch(
@@ -50,9 +49,7 @@ watch(
     if (Array.isArray(val)) {
       const arrVal = val.filter((v) => v !== undefined);
       if (arrVal.length > 0) {
-        innerValue.value = props.multiple
-          ? [...arrVal]
-          : [arrVal[0] as ValueType];
+        innerValue.value = props.multiple ? [...arrVal] : [arrVal[0] as ValueType];
       } else {
         innerValue.value = [];
       }
@@ -60,17 +57,14 @@ watch(
       innerValue.value = val === undefined ? [] : [val as ValueType];
     }
   },
-  { deep: true },
+  { deep: true }
 );
 
 async function onBtnClick(value: ValueType) {
   if (props.beforeChange && isFunction(props.beforeChange)) {
     try {
       loadingValues.value.push(value);
-      const canChange = await props.beforeChange(
-        value,
-        !innerValue.value.includes(value),
-      );
+      const canChange = await props.beforeChange(value, !innerValue.value.includes(value));
       if (canChange === false) {
         return;
       }
@@ -93,29 +87,18 @@ async function onBtnClick(value: ValueType) {
 }
 </script>
 <template>
-  <VbenButtonGroup
-    :size="props.size"
-    :gap="props.gap"
-    class="vben-check-button-group"
-  >
+  <VbenButtonGroup :size="props.size" :gap="props.gap" class="vben-check-button-group">
     <Button
       v-for="(btn, index) in props.options"
       :key="index"
       :class="cn('border', props.btnClass)"
-      :disabled="
-        props.disabled ||
-        loadingValues.includes(btn.value) ||
-        (!props.multiple && loadingValues.length > 0)
-      "
+      :disabled="props.disabled || loadingValues.includes(btn.value) || (!props.multiple && loadingValues.length > 0)"
       v-bind="btnDefaultProps"
       :variant="innerValue.includes(btn.value) ? 'default' : 'outline'"
       @click="onBtnClick(btn.value)"
     >
-      <div class="icon-wrapper" v-if="props.showIcon">
-        <LoaderCircle
-          class="animate-spin"
-          v-if="loadingValues.includes(btn.value)"
-        />
+      <div v-if="props.showIcon" class="icon-wrapper">
+        <LoaderCircle v-if="loadingValues.includes(btn.value)" class="animate-spin" />
         <CircleCheckBig v-else-if="innerValue.includes(btn.value)" />
         <Circle v-else />
       </div>
@@ -125,7 +108,7 @@ async function onBtnClick(value: ValueType) {
     </Button>
   </VbenButtonGroup>
 </template>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .vben-check-button-group {
   &:deep(.size-large) button {
     .icon-wrapper {

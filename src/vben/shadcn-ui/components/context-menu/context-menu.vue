@@ -5,7 +5,7 @@ import type {
   ContextMenuRootProps,
 } from 'radix-vue';
 
-import type { ClassType } from '@vben-core/typings';
+import type { ClassType } from '/@/vben/typings';
 
 import type { IContextMenuItem } from './interface';
 

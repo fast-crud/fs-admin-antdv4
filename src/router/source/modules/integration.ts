@@ -1,3 +1,6 @@
+import type { RouteRecordRaw } from "vue-router";
+import BasicLayout from "/@/vben/layouts/basic/layout.vue";
+
 export const integrationResources = [
   {
     title: "集成",
@@ -20,3 +23,5 @@ export const integrationResources = [
     ]
   }
 ];
+
+// export default integrationResources;

@@ -6,7 +6,7 @@ import type { ImportLocaleFn, LoadMessageFn, LocaleSetupOptions, SupportedLangua
 import { unref } from "vue";
 import { createI18n } from "vue-i18n";
 
-import { useSimpleLocale } from "@vben-core/composables";
+import { useSimpleLocale } from "/@/vben/composables";
 
 const i18n = createI18n({
   globalInjection: true,

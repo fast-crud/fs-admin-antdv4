@@ -1,17 +1,13 @@
-import type { Router, RouteRecordNormalized } from 'vue-router';
+import type { Router, RouteRecordNormalized } from "vue-router";
 
-import type { TabDefinition } from '@vben-core/typings';
+import type { TabDefinition } from "/@/vben/typings";
 
-import { toRaw } from 'vue';
+import { toRaw } from "vue";
 
-import { preferences } from '@vben-core/preferences';
-import {
-  openRouteInNewWindow,
-  startProgress,
-  stopProgress,
-} from '@vben-core/shared/utils';
+import { preferences } from "/@/vben/preferences";
+import { openRouteInNewWindow, startProgress, stopProgress } from "/@/vben/shared/utils";
 
-import { acceptHMRUpdate, defineStore } from 'pinia';
+import { acceptHMRUpdate, defineStore } from "pinia";
 
 interface TabbarState {
   /**
@@ -43,7 +39,7 @@ interface TabbarState {
 /**
  * @zh_CN 访问权限相关
  */
-export const useTabbarStore = defineStore('core-tabbar', {
+export const useTabbarStore = defineStore("core-tabbar", {
   actions: {
     /**
      * Close tabs in bulk
@@ -89,7 +85,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
       const toParams = {
         params: params || {},
         path,
-        query: query || {},
+        query: query || {}
       };
       await router.replace(toParams);
     },
@@ -110,26 +106,16 @@ export const useTabbarStore = defineStore('core-tabbar', {
       if (tabIndex === -1) {
         const maxCount = preferences.tabbar.maxCount;
         // 获取动态路由打开数，超过 0 即代表需要控制打开数
-        const maxNumOfOpenTab = (routeTab?.meta?.maxNumOfOpenTab ??
-          -1) as number;
+        const maxNumOfOpenTab = (routeTab?.meta?.maxNumOfOpenTab ?? -1) as number;
         // 如果动态路由层级大于 0 了，那么就要限制该路由的打开数限制了
         // 获取到已经打开的动态路由数, 判断是否大于某一个值
-        if (
-          maxNumOfOpenTab > 0 &&
-          this.tabs.filter((tab) => tab.name === routeTab.name).length >=
-            maxNumOfOpenTab
-        ) {
+        if (maxNumOfOpenTab > 0 && this.tabs.filter((tab) => tab.name === routeTab.name).length >= maxNumOfOpenTab) {
           // 关闭第一个
-          const index = this.tabs.findIndex(
-            (item) => item.name === routeTab.name,
-          );
+          const index = this.tabs.findIndex((item) => item.name === routeTab.name);
           index !== -1 && this.tabs.splice(index, 1);
         } else if (maxCount > 0 && this.tabs.length >= maxCount) {
           // 关闭第一个
-          const index = this.tabs.findIndex(
-            (item) =>
-              !Reflect.has(item.meta, 'affixTab') || !item.meta.affixTab,
-          );
+          const index = this.tabs.findIndex((item) => !Reflect.has(item.meta, "affixTab") || !item.meta.affixTab);
           index !== -1 && this.tabs.splice(index, 1);
         }
         this.tabs.push(tab);
@@ -139,14 +125,14 @@ export const useTabbarStore = defineStore('core-tabbar', {
         const mergedTab = {
           ...currentTab,
           ...tab,
-          meta: { ...currentTab?.meta, ...tab.meta },
+          meta: { ...currentTab?.meta, ...tab.meta }
         };
         if (currentTab) {
           const curMeta = currentTab.meta;
-          if (Reflect.has(curMeta, 'affixTab')) {
+          if (Reflect.has(curMeta, "affixTab")) {
             mergedTab.meta.affixTab = curMeta.affixTab;
           }
-          if (Reflect.has(curMeta, 'newTabTitle')) {
+          if (Reflect.has(curMeta, "newTabTitle")) {
             mergedTab.meta.newTabTitle = curMeta.newTabTitle;
           }
         }
@@ -169,9 +155,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
      * @param tab
      */
     async closeLeftTabs(tab: TabDefinition) {
-      const index = this.tabs.findIndex(
-        (item) => getTabPath(item) === getTabPath(tab),
-      );
+      const index = this.tabs.findIndex((item) => getTabPath(item) === getTabPath(tab));
 
       if (index < 1) {
         return;
@@ -214,9 +198,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
      * @param tab
      */
     async closeRightTabs(tab: TabDefinition) {
-      const index = this.tabs.findIndex(
-        (item) => getTabPath(item) === getTabPath(tab),
-      );
+      const index = this.tabs.findIndex((item) => getTabPath(item) === getTabPath(tab));
 
       if (index !== -1 && index < this.tabs.length - 1) {
         const rightTabs = this.tabs.slice(index + 1);
@@ -245,9 +227,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
         this.updateCacheTabs();
         return;
       }
-      const index = this.getTabs.findIndex(
-        (item) => getTabPath(item) === getTabPath(currentRoute.value),
-      );
+      const index = this.getTabs.findIndex((item) => getTabPath(item) === getTabPath(currentRoute.value));
 
       const before = this.getTabs[index - 1];
       const after = this.getTabs[index + 1];
@@ -261,7 +241,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
         this._close(tab);
         await this._goToTab(before, router);
       } else {
-        console.error('Failed to close the tab; only one tab remains open.');
+        console.error("Failed to close the tab; only one tab remains open.");
       }
     },
 
@@ -272,9 +252,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
      */
     async closeTabByKey(key: string, router: Router) {
       const originKey = decodeURIComponent(key);
-      const index = this.tabs.findIndex(
-        (item) => getTabPath(item) === originKey,
-      );
+      const index = this.tabs.findIndex((item) => getTabPath(item) === originKey);
       if (index === -1) {
         return;
       }
@@ -290,9 +268,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
      * @param path
      */
     getTabByPath(path: string) {
-      return this.getTabs.find(
-        (item) => getTabPath(item) === path,
-      ) as TabDefinition;
+      return this.getTabs.find((item) => getTabPath(item) === path) as TabDefinition;
     },
     /**
      * @zh_CN 新窗口打开标签页
@@ -307,9 +283,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
      * @param tab
      */
     async pinTab(tab: TabDefinition) {
-      const index = this.tabs.findIndex(
-        (item) => getTabPath(item) === getTabPath(tab),
-      );
+      const index = this.tabs.findIndex((item) => getTabPath(item) === getTabPath(tab));
       if (index !== -1) {
         const oldTab = this.tabs[index];
         tab.meta.affixTab = true;
@@ -320,9 +294,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
       // 过滤固定tabs，后面更改affixTabOrder的值的话可能会有问题，目前行464排序affixTabs没有设置值
       const affixTabs = this.tabs.filter((tab) => isAffixTab(tab));
       // 获得固定tabs的index
-      const newIndex = affixTabs.findIndex(
-        (item) => getTabPath(item) === getTabPath(tab),
-      );
+      const newIndex = affixTabs.findIndex((item) => getTabPath(item) === getTabPath(tab));
       // 交换位置重新排序
       await this.sortTabs(index, newIndex);
     },
@@ -352,9 +324,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
       if (tab?.meta?.newTabTitle) {
         return;
       }
-      const findTab = this.tabs.find(
-        (item) => getTabPath(item) === getTabPath(tab),
-      );
+      const findTab = this.tabs.find((item) => getTabPath(item) === getTabPath(tab));
       if (findTab) {
         findTab.meta.newTabTitle = undefined;
         await this.updateCacheTabs();
@@ -378,9 +348,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
      * @param title
      */
     async setTabTitle(tab: TabDefinition, title: string) {
-      const findTab = this.tabs.find(
-        (item) => getTabPath(item) === getTabPath(tab),
-      );
+      const findTab = this.tabs.find((item) => getTabPath(item) === getTabPath(tab));
 
       if (findTab) {
         findTab.meta.newTabTitle = title;
@@ -421,9 +389,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
      * @param tab
      */
     async unpinTab(tab: TabDefinition) {
-      const index = this.tabs.findIndex(
-        (item) => getTabPath(item) === getTabPath(tab),
-      );
+      const index = this.tabs.findIndex((item) => getTabPath(item) === getTabPath(tab));
 
       if (index !== -1) {
         const oldTab = this.tabs[index];
@@ -462,7 +428,7 @@ export const useTabbarStore = defineStore('core-tabbar', {
         cacheMap.add(name);
       }
       this.cachedTabs = cacheMap;
-    },
+    }
   },
   getters: {
     affixTabs(): TabDefinition[] {
@@ -483,14 +449,14 @@ export const useTabbarStore = defineStore('core-tabbar', {
     getTabs(): TabDefinition[] {
       const normalTabs = this.tabs.filter((tab) => !isAffixTab(tab));
       return [...this.affixTabs, ...normalTabs].filter(Boolean);
-    },
+    }
   },
   persist: [
     // tabs不需要保存在localStorage
     {
-      pick: ['tabs'],
-      storage: sessionStorage,
-    },
+      pick: ["tabs"],
+      storage: sessionStorage
+    }
   ],
   state: (): TabbarState => ({
     cachedTabs: new Set(),
@@ -498,8 +464,8 @@ export const useTabbarStore = defineStore('core-tabbar', {
     excludeCachedTabs: new Set(),
     renderRouteView: true,
     tabs: [],
-    updateTime: Date.now(),
-  }),
+    updateTime: Date.now()
+  })
 });
 
 // 解决热更新问题
@@ -523,13 +489,13 @@ function cloneTab(route: TabDefinition): TabDefinition {
       ? matched.map((item) => ({
           meta: item.meta,
           name: item.name,
-          path: item.path,
+          path: item.path
         }))
       : undefined) as RouteRecordNormalized[],
     meta: {
       ...meta,
-      newTabTitle: meta.newTabTitle,
-    },
+      newTabTitle: meta.newTabTitle
+    }
   };
 }
 
@@ -562,6 +528,6 @@ function routeToTab(route: RouteRecordNormalized) {
   return {
     meta: route.meta,
     name: route.name,
-    path: route.path,
+    path: route.path
   } as TabDefinition;
 }

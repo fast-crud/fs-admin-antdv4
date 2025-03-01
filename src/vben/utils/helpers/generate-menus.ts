@@ -1,48 +1,31 @@
-import type { Router, RouteRecordRaw } from 'vue-router';
+import type { Router, RouteRecordRaw } from "vue-router";
 
-import type { ExRouteRecordRaw, MenuRecordRaw } from '@vben-core/typings';
+import type { ExRouteRecordRaw, MenuRecordRaw } from "/@/vben/typings";
 
-import { filterTree, mapTree } from '@vben-core/shared/utils';
+import { filterTree, mapTree } from "/@/vben/shared/utils";
 
 /**
  * 根据 routes 生成菜单列表
  * @param routes
  */
-async function generateMenus(
-  routes: RouteRecordRaw[],
-  router: Router,
-): Promise<MenuRecordRaw[]> {
+async function generateMenus(routes: RouteRecordRaw[], router: Router): Promise<MenuRecordRaw[]> {
   // 将路由列表转换为一个以 name 为键的对象映射
   // 获取所有router最终的path及name
-  const finalRoutesMap: { [key: string]: string } = Object.fromEntries(
-    router.getRoutes().map(({ name, path }) => [name, path]),
-  );
+  const finalRoutesMap: { [key: string]: string } = Object.fromEntries(router.getRoutes().map(({ name, path }) => [name, path]));
 
-  let menus = mapTree<ExRouteRecordRaw, MenuRecordRaw>(routes, (route) => {
+  let menus = mapTree<ExRouteRecordRaw, MenuRecordRaw>(routes, (route: any) => {
     // 路由表的路径写法有多种，这里从router获取到最终的path并赋值
     const path = finalRoutesMap[route.name as string] ?? route.path;
 
     // 转换为菜单结构
     // const path = matchRoute?.path ?? route.path;
     const { meta, name: routeName, redirect, children } = route;
-    const {
-      activeIcon,
-      badge,
-      badgeType,
-      badgeVariants,
-      hideChildrenInMenu = false,
-      icon,
-      link,
-      order,
-      title = '',
-    } = meta || {};
+    const { activeIcon, badge, badgeType, badgeVariants, hideChildrenInMenu = false, icon, link, order, title = "" } = meta || {};
 
-    const name = (title || routeName || '') as string;
+    const name = (title || routeName || "") as string;
 
     // 隐藏子菜单
-    const resultChildren = hideChildrenInMenu
-      ? []
-      : (children as MenuRecordRaw[]);
+    const resultChildren = hideChildrenInMenu ? [] : (children as MenuRecordRaw[]);
 
     // 将菜单的所有父级和父级菜单记录到菜单项内
     if (resultChildren && resultChildren.length > 0) {
@@ -65,7 +48,7 @@ async function generateMenus(
       parents: route.parents,
       path: resultPath as string,
       show: !route?.meta?.hideInMenu,
-      children: resultChildren || [],
+      children: resultChildren || []
     };
   });
 

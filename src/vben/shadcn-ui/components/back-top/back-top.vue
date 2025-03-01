@@ -3,7 +3,7 @@ import type { BacktopProps } from './backtop';
 
 import { computed } from 'vue';
 
-import { ArrowUpToLine } from '@vben-core/icons';
+import { ArrowUpToLine } from '/@/vben/icons';
 
 import { VbenButton } from '../button';
 import { useBackTop } from './use-backtop';

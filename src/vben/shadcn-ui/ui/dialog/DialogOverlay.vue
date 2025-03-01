@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 
-import { useScrollLock } from '@vben-core/composables';
+import { useScrollLock } from '/@/vben/composables';
 
 useScrollLock();
 const id = inject('DISMISSABLE_MODAL_ID');
