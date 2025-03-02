@@ -17,7 +17,7 @@
     @apply text-foreground bg-background font-sans text-[100%];
 
     font-variation-settings: normal;
-    line-height: 1.15;
+    line-height: 1.5;
     text-size-adjust: 100%;
     font-synthesis-weight: none;
     scroll-behavior: smooth;

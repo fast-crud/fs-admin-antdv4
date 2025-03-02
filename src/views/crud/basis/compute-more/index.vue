@@ -21,10 +21,9 @@ export default defineComponent({
     const { crudRef, crudBinding, crudExpose, context } = useFsRef();
     // 页面打开后获取列表数据
     onMounted(async () => {
-      const { crudExpose } = await useFsAsync({ crudBinding, crudRef, createCrudOptions, context });
+      await useFsAsync({ crudBinding, crudRef, createCrudOptions, context });
       await crudExpose.doRefresh();
     });
-
     return {
       crudBinding,
       crudRef

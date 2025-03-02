@@ -13,6 +13,7 @@ function useMixedMenu() {
   const { navigation } = useNavigation();
   const accessStore = useAccessStore();
   const route = useRoute();
+  const lastSideMenus = ref<MenuRecordRaw[]>([]);
   const splitSideMenus = ref<MenuRecordRaw[]>([]);
   const rootMenuPath = ref<string>("");
   const mixedRootMenuPath = ref<string>("");
@@ -31,7 +32,6 @@ function useMixedMenu() {
     return enableSidebar;
   });
   const menus = computed(() => accessStore.accessMenus);
-
   /**
    * 头部菜单
    */
@@ -75,6 +75,13 @@ function useMixedMenu() {
     return rootMenuPath.value;
   });
 
+  function saveLastSplitSideMenus() {
+    if (splitSideMenus.value.length == 0 && lastSideMenus.value?.length > 0) {
+      splitSideMenus.value = lastSideMenus.value;
+    } else {
+      lastSideMenus.value = splitSideMenus.value;
+    }
+  }
   /**
    * 菜单点击事件处理
    * @param key 菜单路径
@@ -89,6 +96,7 @@ function useMixedMenu() {
     const rootMenu = menus.value.find((item) => item.path === key);
     rootMenuPath.value = rootMenu?.path ?? "";
     splitSideMenus.value = rootMenu?.children ?? [];
+    saveLastSplitSideMenus();
     if (splitSideMenus.value.length === 0) {
       navigation(key);
     } else if (rootMenu && preferences.sidebar.autoActivateChild) {
@@ -120,7 +128,8 @@ function useMixedMenu() {
     mixedRootMenuPath.value = result.rootMenuPath ?? "";
     mixExtraMenus.value = result.rootMenu?.children ?? [];
     rootMenuPath.value = rootMenu?.path ?? "";
-    splitSideMenus.value = rootMenu?.children ?? [];
+    splitSideMenus.value = rootMenu?.children ?? lastSideMenus.value ?? [];
+    saveLastSplitSideMenus();
   }
 
   watch(
@@ -135,7 +144,7 @@ function useMixedMenu() {
 
   // 初始化计算侧边菜单
   onBeforeMount(() => {
-    calcSideMenus(route.meta?.activePath || route.path);
+    calcSideMenus((route.meta?.activePath || route.path) as string);
   });
 
   return {

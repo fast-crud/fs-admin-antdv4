@@ -61,14 +61,12 @@ function setupAccessGuard(router: Router) {
             replace: true
           };
         }
-        return to;
+        return true;
       }
     }
 
     // 是否已经生成过动态路由
     if (!accessStore.isAccessChecked) {
-      const userStore = useUserStore();
-      await userStore.getUserInfoAction();
       const accessibleMenus = await generateMenus(frameworkRoutes[0].children, router);
       accessStore.setAccessRoutes(frameworkRoutes);
       accessStore.setAccessMenus(accessibleMenus);

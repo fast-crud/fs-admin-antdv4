@@ -133,24 +133,6 @@ export default defineComponent({
       }
     };
 
-    const accessStore = useAccessStore();
-    async function login(form: any) {
-      try {
-        const data = await UserApi.login(params);
-        const { token, expire } = data;
-
-        // save token
-        this.setToken(token, expire);
-        // get user info
-        const userInfo = await this.getUserInfoAction();
-        await router.replace("/");
-        mitter.emit("app.login", { userInfo, token: data });
-        return userInfo;
-      } catch (error) {
-        return null;
-      }
-    }
-
     const handleFinish = async (values: any) => {
       utils.logger.log(values, formState);
       loading.value = true;

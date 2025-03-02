@@ -31,7 +31,8 @@ export const frameworkResource = [
         meta: {
           fixedAside: true,
           showOnHeader: false,
-          icon: "ion:home-outline"
+          icon: "ion:home-outline",
+          auth: true
         }
       },
       ...dynamicRoutes

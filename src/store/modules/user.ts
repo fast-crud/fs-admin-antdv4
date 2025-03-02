@@ -11,7 +11,7 @@ import { Modal } from "ant-design-vue";
 import { useI18n } from "vue-i18n";
 
 import { mitter } from "/src/utils/util.mitt";
-import { useAccessStore } from "/@/vben/stores";
+import { resetAllStores, useAccessStore } from "/@/vben/stores";
 
 interface UserState {
   userInfo: Nullable<UserInfoRes>;
@@ -82,6 +82,7 @@ export const useUserStore = defineStore({
      */
     logout(goLogin = true) {
       this.resetState();
+      resetAllStores();
       goLogin && router.push("/login");
       mitter.emit("app.logout");
     },
