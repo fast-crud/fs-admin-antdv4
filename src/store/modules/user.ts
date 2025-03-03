@@ -11,6 +11,7 @@ import { Modal } from "ant-design-vue";
 import { useI18n } from "vue-i18n";
 
 import { mitter } from "/src/utils/util.mitt";
+import { resetAllStores, useAccessStore } from "/@/vben/stores";
 
 interface UserState {
   userInfo: Nullable<UserInfoRes>;
@@ -36,8 +37,10 @@ export const useUserStore = defineStore({
     }
   },
   actions: {
-    setToken(info: string, expire: number) {
-      this.token = info;
+    setToken(token: string, expire: number) {
+      this.token = token;
+      const accessStore = useAccessStore();
+      accessStore.setAccessToken(token);
       LocalStorage.set(TOKEN_KEY, this.token, expire);
     },
     setUserInfo(info: UserInfoRes) {
@@ -79,6 +82,7 @@ export const useUserStore = defineStore({
      */
     logout(goLogin = true) {
       this.resetState();
+      resetAllStores();
       goLogin && router.push("/login");
       mitter.emit("app.logout");
     },

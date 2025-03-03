@@ -10,6 +10,7 @@ import _ from "lodash-es";
 import { useCrudPermission } from "../permission";
 import { GetSignedUrl } from "/@/views/crud/component/uploader/s3/api";
 import { notification } from "ant-design-vue";
+import { usePreferences } from "/@/vben/preferences";
 
 function install(app: any, options: any = {}) {
   app.use(UiAntdv);
@@ -31,7 +32,18 @@ function install(app: any, options: any = {}) {
     commonOptions(props: UseCrudProps): CrudOptions {
       utils.logger.debug("commonOptions:", props);
       const crudBinding = props.crudExpose?.crudBinding;
+      const { isMobile } = usePreferences();
       const opts: CrudOptions = {
+        settings: {
+          plugins: {
+            mobile: {
+              enabled: true,
+              props: {
+                isMobile: isMobile
+              }
+            }
+          }
+        },
         table: {
           scroll: {
             x: 960

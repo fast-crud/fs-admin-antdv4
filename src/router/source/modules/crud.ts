@@ -15,6 +15,7 @@ export const crudResources = [
         component: "/crud/debug/index.vue",
         meta: {
           isMenu: false
+          // hideInMenu: true
         }
       },
       {
@@ -794,3 +795,5 @@ export const crudResources = [
     ]
   }
 ];
+
+export default crudResources;

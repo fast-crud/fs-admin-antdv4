@@ -60,6 +60,8 @@ export default {
     background-size: 100%;
     //padding: 50px 0 84px;
     position: relative;
+    display: flex;
+    flex-direction: column;
 
     .user-layout-lang {
       width: 100%;

@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <a-form ref="formRef" class="user-layout-login" name="custom-validation" :model="formState" :rules="rules" v-bind="layout" @finish="handleFinish" @finishFailed="handleFinishFailed">
+    <a-form ref="formRef" class="user-layout-login" name="custom-validation" :model="formState" :rules="rules" v-bind="layout" @finish="handleFinish" @finish-failed="handleFinishFailed">
       <!--      <div class="login-title">登录</div>-->
       <a-tabs :active-key="formState.loginType" :tab-bar-style="{ textAlign: 'center', borderBottom: 'unset' }">
         <a-tab-pane key="password" tab="用户名密码登录">
@@ -74,7 +74,11 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, toRaw, computed } from "vue";
 import { useUserStore } from "/src/store/modules/user";
-import {utils} from "@fast-crud/fast-crud";
+import { utils } from "@fast-crud/fast-crud";
+import * as UserApi from "/@/api/modules/api.user";
+import router from "/@/router";
+import { mitter } from "/@/utils/util.mitt";
+import { useAccessStore } from "/@/vben/stores";
 export default defineComponent({
   name: "LoginPage",
   setup() {

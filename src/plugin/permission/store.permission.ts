@@ -1,8 +1,9 @@
 import { defineStore } from "pinia";
-import { useResourceStore } from "/src/store/modules/resource";
+// import { useResourceStore } from "/src/store/modules/resource";
 import { getPermissions } from "./api";
 import { mitter } from "/@/utils/util.mitt";
 import { env } from "/@/utils/util.env";
+import { useAccessStore } from "/@/vben/stores";
 
 //监听注销事件
 mitter.on("app.logout", () => {
@@ -69,8 +70,8 @@ export const usePermissionStore = defineStore({
       this.init({ permissions });
 
       //过滤没有权限的菜单
-      const resourceStore = useResourceStore();
-      resourceStore.filterByPermission(permissions);
+      const accessStore = useAccessStore();
+      accessStore.setAccessCodes(permissions);
     },
     async loadFromRemote() {
       let permissionTree = [];
