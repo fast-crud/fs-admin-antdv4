@@ -59,5 +59,6 @@ export {
   SunMoon,
   SwatchBook,
   UserRoundPen,
-  X
+  X,
+  CircleX
 } from "lucide-vue-next";

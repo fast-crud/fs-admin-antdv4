@@ -47,8 +47,9 @@ async function generateMenus(routes: RouteRecordRaw[], router: Router): Promise<
       parent: route.parent,
       parents: route.parents,
       path: resultPath as string,
-      show: !route?.meta?.hideInMenu,
-      children: resultChildren || []
+      show: !route?.meta?.hideInMenu && route?.meta?.isMenu !== false,
+      children: resultChildren || [],
+      meta: route.meta
     };
   });
 

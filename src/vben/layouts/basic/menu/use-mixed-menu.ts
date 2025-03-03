@@ -31,7 +31,15 @@ function useMixedMenu() {
     }
     return enableSidebar;
   });
-  const menus = computed(() => accessStore.accessMenus);
+
+  const allMenus = computed(() => accessStore.accessMenus);
+
+  const menus = computed(() => {
+    return allMenus.value.filter((item) => !item?.meta?.isMenu && !item?.meta?.fixedAside);
+  });
+  const holdMenus = computed(() => {
+    return allMenus.value.filter((item) => item?.meta?.fixedAside);
+  });
   /**
    * 头部菜单
    */
@@ -51,7 +59,8 @@ function useMixedMenu() {
    * 侧边菜单
    */
   const sidebarMenus = computed(() => {
-    return needSplit.value ? splitSideMenus.value : menus.value;
+    const sideMenus = needSplit.value ? splitSideMenus.value : menus.value;
+    return [...holdMenus.value, ...sideMenus];
   });
 
   const mixHeaderMenus = computed(() => {
@@ -78,9 +87,17 @@ function useMixedMenu() {
   function saveLastSplitSideMenus() {
     if (splitSideMenus.value.length == 0 && lastSideMenus.value?.length > 0) {
       splitSideMenus.value = lastSideMenus.value;
-    } else {
-      lastSideMenus.value = splitSideMenus.value;
     }
+    if (!splitSideMenus.value || splitSideMenus.value.length === 0) {
+      //仍然为空，从所有菜单中查找
+      const hasChildren = headerMenus.value.find((item) => {
+        return item.children && item.children.length > 0;
+      });
+      if (hasChildren) {
+        splitSideMenus.value = hasChildren.children;
+      }
+    }
+    lastSideMenus.value = splitSideMenus.value;
   }
   /**
    * 菜单点击事件处理

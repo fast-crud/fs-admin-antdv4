@@ -16,7 +16,7 @@ import type { SegmentedItem } from "/@/vben//shadcn-ui";
 
 import { computed, ref } from "vue";
 
-import { Copy, RotateCw } from "/@/vben/icons";
+import { Copy, RotateCw, X } from "/@/vben/icons";
 import { $t, loadLocaleMessages } from "/@/vben/locales";
 import { clearPreferencesCache, preferences, resetPreferences, usePreferences } from "/@/vben/preferences";
 
@@ -117,7 +117,7 @@ const widgetRefresh = defineModel<boolean>("widgetRefresh");
 const { diffPreference, isDark, isFullContent, isHeaderNav, isHeaderSidebarNav, isMixedNav, isSideMixedNav, isSideMode, isSideNav } = usePreferences();
 const { copy } = useClipboard({ legacy: true });
 
-const [Drawer] = useVbenDrawer();
+const [Drawer, drawerApi] = useVbenDrawer();
 
 const activeTab = ref("appearance");
 
@@ -175,6 +175,10 @@ async function handleReset() {
           <VbenIconButton :disabled="!diffPreference" :tooltip="$t('preferences.resetTip')" class="relative">
             <span v-if="diffPreference" class="bg-primary absolute right-0.5 top-0.5 h-2 w-2 rounded"></span>
             <RotateCw class="size-4" @click="handleReset" />
+          </VbenIconButton>
+
+          <VbenIconButton class="relative" @click="drawerApi.close()">
+            <X class="size-4" />
           </VbenIconButton>
         </div>
       </template>

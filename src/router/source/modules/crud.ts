@@ -1,6 +1,3 @@
-import type { RouteRecordRaw } from "vue-router";
-import BasicLayout from "/@/vben/layouts/basic/layout.vue";
-
 export const crudResources = [
   {
     title: "CRUD示例",
@@ -18,6 +15,7 @@ export const crudResources = [
         component: "/crud/debug/index.vue",
         meta: {
           isMenu: false
+          // hideInMenu: true
         }
       },
       {

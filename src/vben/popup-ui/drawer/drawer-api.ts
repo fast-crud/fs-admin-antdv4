@@ -1,63 +1,46 @@
-import type { DrawerApiOptions, DrawerState } from './drawer';
+import type { DrawerApiOptions, DrawerState } from "./drawer";
 
-import { Store } from '/@/vben/shared/store';
-import { bindMethods, isFunction } from '/@/vben/shared/utils';
+import { Store } from "/@/vben/shared/store";
+import { bindMethods, isFunction } from "/@/vben/shared/utils";
 
 export class DrawerApi {
   // 共享数据
-  public sharedData: Record<'payload', any> = {
-    payload: {},
+  public sharedData: Record<"payload", any> = {
+    payload: {}
   };
   public store: Store<DrawerState>;
 
-  private api: Pick<
-    DrawerApiOptions,
-    | 'onBeforeClose'
-    | 'onCancel'
-    | 'onClosed'
-    | 'onConfirm'
-    | 'onOpenChange'
-    | 'onOpened'
-  >;
+  private api: Pick<DrawerApiOptions, "onBeforeClose" | "onCancel" | "onClosed" | "onConfirm" | "onOpenChange" | "onOpened">;
 
   // private prevState!: DrawerState;
   private state!: DrawerState;
 
   constructor(options: DrawerApiOptions = {}) {
-    const {
-      connectedComponent: _,
-      onBeforeClose,
-      onCancel,
-      onClosed,
-      onConfirm,
-      onOpenChange,
-      onOpened,
-      ...storeState
-    } = options;
+    const { connectedComponent: _, onBeforeClose, onCancel, onClosed, onConfirm, onOpenChange, onOpened, ...storeState } = options;
 
     const defaultState: DrawerState = {
-      class: '',
+      class: "",
       closable: true,
       closeOnClickModal: true,
       closeOnPressEscape: true,
       confirmLoading: false,
-      contentClass: '',
+      contentClass: "",
       footer: true,
       header: true,
       isOpen: false,
       loading: false,
       modal: true,
       openAutoFocus: false,
-      placement: 'right',
+      placement: "right",
       showCancelButton: true,
       showConfirmButton: true,
-      title: '',
+      title: ""
     };
 
     this.store = new Store<DrawerState>(
       {
         ...defaultState,
-        ...storeState,
+        ...storeState
       },
       {
         onUpdate: () => {
@@ -68,8 +51,8 @@ export class DrawerApi {
             this.state = state;
             this.api.onOpenChange?.(!!state?.isOpen);
           }
-        },
-      },
+        }
+      }
     );
     this.state = this.store.state;
     this.api = {
@@ -78,7 +61,7 @@ export class DrawerApi {
       onClosed,
       onConfirm,
       onOpenChange,
-      onOpened,
+      onOpened
     };
     bindMethods(this);
   }
@@ -144,11 +127,7 @@ export class DrawerApi {
     return this;
   }
 
-  setState(
-    stateOrFn:
-      | ((prev: DrawerState) => Partial<DrawerState>)
-      | Partial<DrawerState>,
-  ) {
+  setState(stateOrFn: ((prev: DrawerState) => Partial<DrawerState>) | Partial<DrawerState>) {
     if (isFunction(stateOrFn)) {
       this.store.setState(stateOrFn);
     } else {

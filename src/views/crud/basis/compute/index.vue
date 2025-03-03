@@ -27,8 +27,11 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
-import { useFs, useFsAsync, useFsRef } from "@fast-crud/fast-crud";
+import { useFs, useFsRef } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
+import { useTour } from "/@/views/crud/basis/first/use-tour";
+import { FirstRow } from "/@/views/crud/basis/first/api";
+import { FirstContext } from "/@/views/crud/basis/first/crud";
 
 export default defineComponent({
   name: "BasisCompute",
@@ -53,15 +56,14 @@ export default defineComponent({
       columnComponentShowComputed
     };
 
-    const { crudRef, crudBinding } = useFsRef();
-
+    const { crudRef, crudBinding, crudExpose } = useFsRef();
+    useFs({ crudRef, crudBinding, crudExpose, createCrudOptions, context });
     function columnsMapSetShow() {
       crudBinding.value.table.columnsMap["id"].show = !crudBinding.value.table.columnsMap["id"].show;
     }
     // 页面打开后获取列表数据
-    onMounted(async () => {
-      const { crudExpose } = await useFsAsync({ crudBinding, crudRef, createCrudOptions, context });
-      await crudExpose.doRefresh();
+    onMounted(() => {
+      crudExpose.doRefresh();
     });
 
     return {

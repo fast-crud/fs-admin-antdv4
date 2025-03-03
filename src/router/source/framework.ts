@@ -1,4 +1,4 @@
-import BasicLayout from "/@/vben/layouts/basic/layout.vue";
+import LayoutBasic from "/@/layout/layout-basic.vue";
 
 import type { RouteRecordRaw } from "vue-router";
 
@@ -17,7 +17,7 @@ export const frameworkResource = [
     name: "root",
     path: "/",
     redirect: "/index",
-    component: BasicLayout,
+    component: LayoutBasic,
     meta: {
       icon: "ion:accessibility",
       hideInBreadcrumb: true

@@ -15,10 +15,10 @@ const defaultPreferences: Preferences = {
     enablePreferences: true,
     enableRefreshToken: false,
     isMobile: false,
-    layout: "sidebar-nav",
+    layout: "mixed-nav",
     locale: "zh-CN",
     loginExpiredMode: "page",
-    name: "Vben Admin",
+    name: "FsAdmin",
     preferencesButtonPosition: "auto",
     watermark: false
   },
@@ -30,13 +30,13 @@ const defaultPreferences: Preferences = {
     styleType: "normal"
   },
   copyright: {
-    companyName: "Vben",
-    companySiteLink: "https://www.vben.pro",
+    companyName: "greper",
+    companySiteLink: "https://github.com/fast-crud/fast-crud",
     date: "2024",
     enable: true,
     icp: "",
     icpLink: "",
-    settingShow: true
+    settingShow: false
   },
   footer: {
     enable: false,
@@ -50,7 +50,7 @@ const defaultPreferences: Preferences = {
   },
   logo: {
     enable: true,
-    source: "https://unpkg.com/@vbenjs/static-source@0.1.7/source/logo-v1.webp"
+    source: "./images/logo/logo.svg"
   },
   navigation: {
     accordion: true,
@@ -94,14 +94,14 @@ const defaultPreferences: Preferences = {
     colorPrimary: "hsl(212 100% 45%)",
     colorSuccess: "hsl(144 57% 58%)",
     colorWarning: "hsl(42 84% 61%)",
-    mode: "dark",
+    mode: "light",
     radius: "0.5",
     semiDarkHeader: false,
     semiDarkSidebar: false
   },
   transition: {
     enable: true,
-    loading: true,
+    loading: false,
     name: "fade-slide",
     progress: true
   },
