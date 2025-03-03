@@ -35,7 +35,7 @@ function useMixedMenu() {
   const allMenus = computed(() => accessStore.accessMenus);
 
   const menus = computed(() => {
-    return allMenus.value.filter((item) => !item?.meta?.isMenu && !item?.meta?.fixedAside);
+    return allMenus.value.filter((item) => item?.meta?.isMenu !== false && item?.meta?.hideInMenu !== true && !item?.meta?.fixedAside);
   });
   const holdMenus = computed(() => {
     return allMenus.value.filter((item) => item?.meta?.fixedAside);
@@ -90,7 +90,7 @@ function useMixedMenu() {
     }
     if (!splitSideMenus.value || splitSideMenus.value.length === 0) {
       //仍然为空，从所有菜单中查找
-      const hasChildren = headerMenus.value.find((item) => {
+      const hasChildren = allMenus.value.find((item) => {
         return item.children && item.children.length > 0;
       });
       if (hasChildren) {
