@@ -6,7 +6,7 @@ import { FsExtendsCopyable, FsExtendsEditor, FsExtendsJson, FsExtendsTime, FsExt
 import "@fast-crud/fast-extends/dist/style.css";
 import UiAntdv from "@fast-crud/ui-antdv4";
 import "@fast-crud/ui-antdv4/dist/style.css";
-import _ from "lodash-es";
+import { merge } from "lodash-es";
 import { useCrudPermission } from "../permission";
 import { GetSignedUrl } from "/@/views/crud/component/uploader/s3/api";
 import { notification } from "ant-design-vue";
@@ -362,7 +362,7 @@ function install(app: any, options: any = {}) {
       // 比如你可以定义一个readonly的公共属性，处理该字段只读，不能编辑
       if (columnProps.readonly) {
         // 合并column配置
-        _.merge(columnProps, {
+        merge(columnProps, {
           form: { show: false },
           viewForm: { show: true }
         });

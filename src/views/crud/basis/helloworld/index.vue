@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, useFsAsync, useFsRef, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
-import _ from "lodash-es";
+import { cloneDeep, find, merge, remove, maxBy } from "lodash-es";
 
 //此处为crudOptions配置
 const createCrudOptions = async function ({}: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
@@ -21,26 +21,26 @@ const createCrudOptions = async function ({}: CreateCrudOptionsProps): Promise<C
   const records = [{ id: 1, name: "Hello World", type: 1 }];
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return {
-      records: _.cloneDeep(records),
+      records: cloneDeep(records),
       offset: 0, //后续transformRes会计算为currentPage
       limit: 20, //后续transformRes会计算为pageSize
       total: records.length
     };
   };
   const editRequest = async ({ form, row }: EditReq) => {
-    const target = _.find(records, (item) => {
+    const target = find(records, (item) => {
       return row.id === item.id;
     });
-    _.merge(target, form);
+    merge(target, form);
     return target;
   };
   const delRequest = async ({ row }: DelReq) => {
-    _.remove(records, (item) => {
+    remove(records, (item) => {
       return item.id === row.id;
     });
   };
   const addRequest = async ({ form }: AddReq) => {
-    const maxRecord = _.maxBy(records, (item) => {
+    const maxRecord = maxBy(records, (item: any) => {
       return item.id;
     });
     form.id = (maxRecord?.id || 0) + 1;

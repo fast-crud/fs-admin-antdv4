@@ -22,14 +22,14 @@
 <script lang="ts">
 import i18n from "../../../i18n";
 import { computed, inject } from "vue";
-import _ from "lodash-es";
+import { forEach } from "lodash-es";
 export default {
   name: "FsLocale",
   setup() {
     const languages = computed(() => {
       const map: any = i18n.global.messages?.value || {};
       const list: any = [];
-      _.forEach(map, (item, key) => {
+      forEach(map, (item, key) => {
         list.push({
           key,
           label: item.label

@@ -1,10 +1,10 @@
-import _ from "lodash-es";
+import { isArray } from "lodash-es";
 export default {
   arrayToMap(array: any) {
     if (!array) {
       return {};
     }
-    if (!_.isArray(array)) {
+    if (!isArray(array)) {
       return array;
     }
     const map: any = {};
@@ -19,7 +19,7 @@ export default {
     if (!map) {
       return [];
     }
-    if (_.isArray(map)) {
+    if (isArray(map)) {
       return map;
     }
     const array: any = [];

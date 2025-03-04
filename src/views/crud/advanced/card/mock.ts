@@ -1,6 +1,5 @@
 // @ts-ignore
 import mockUtil from "/src/mock/base";
-import _ from "lodash-es";
 const options: any = {
   name: "AdvancedCard",
   idGenerator: 0

@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { utils } from "@fast-crud/fast-crud";
-import _ from "lodash-es";
+import { cloneDeep } from "lodash-es";
 import { computed, defineComponent, ref } from "vue";
 
 export default defineComponent({
@@ -53,7 +53,7 @@ export default defineComponent({
       if (props.tree == null) {
         return null;
       }
-      const clone = _.cloneDeep(props.tree);
+      const clone = cloneDeep(props.tree);
       utils.deepdash.forEachDeep(clone, (value: any, key: any, pNode: any, context: any) => {
         if (value == null) {
           return;

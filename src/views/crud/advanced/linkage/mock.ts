@@ -1,6 +1,6 @@
 // @ts-ignore
 import mockUtil from "/src/mock/base";
-import _ from "lodash-es";
+import { omit } from "lodash-es";
 const options: any = {
   name: "FormLinkage",
   idGenerator: 0
@@ -71,7 +71,7 @@ const mock = mockUtil.buildMock(options);
 function omitChildren(originalList: any) {
   const list: any = [];
   originalList.forEach((item: any) => {
-    list.push(_.omit(item, "children"));
+    list.push(omit(item, "children"));
   });
   return list;
 }

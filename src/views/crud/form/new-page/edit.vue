@@ -19,7 +19,7 @@ import { useFsRef, utils, useFsAsync } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud";
 import * as api from "./api";
 import { message } from "ant-design-vue";
-import { usePageStore } from "/@/store/modules/page";
+import { useTabbarStore } from "/@/vben/stores/modules/tabbar";
 
 export default defineComponent({
   name: "FormNewPageEdit",
@@ -27,7 +27,7 @@ export default defineComponent({
     const { crudRef, crudBinding, crudExpose, context } = useFsRef();
     const formRef = ref();
     const formOptions = ref();
-    const pageStore = usePageStore();
+    const tabbarStore = useTabbarStore();
     const route = useRoute();
     // 页面打开后获取列表数据
     onMounted(async () => {
@@ -48,7 +48,7 @@ export default defineComponent({
         doSubmit(context);
         //提交成功后，关闭本页面
         message.success("保存成功");
-        pageStore.close({ tagName: route.fullPath });
+        tabbarStore.getTabByPath(route.fullPath);
       };
 
       if (id) {

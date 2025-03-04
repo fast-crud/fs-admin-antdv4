@@ -3,7 +3,7 @@ import cascaderData from "./cascader-data";
 import pcaDataLittle from "./pca-data-little";
 // @ts-ignore
 import { TreeNodesLazyLoader, getPcaData } from "./pcas-data";
-import _ from "lodash-es";
+import { cloneDeep } from "lodash-es";
 const openStatus = [
   { value: "1", label: "打开", color: "success", icon: "ion:radio-button-on" },
   { value: "2", label: "停止", color: "cyan" },
@@ -29,7 +29,7 @@ let manyStatus = [
 ];
 let tempManyStatus: any[] = [];
 for (let i = 0; i < 100; i++) {
-  tempManyStatus = tempManyStatus.concat(_.cloneDeep(manyStatus));
+  tempManyStatus = tempManyStatus.concat(cloneDeep(manyStatus));
 }
 manyStatus = tempManyStatus;
 let idIndex = 0;

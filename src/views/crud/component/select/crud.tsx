@@ -2,7 +2,7 @@ import * as api from "./api";
 import { requestForMock } from "/src/api/service";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, DictOnReadyContext, EditReq, UserPageQuery, UserPageRes, useUi, utils } from "@fast-crud/fast-crud";
 import { ref } from "vue";
-import _ from "lodash-es";
+import { debounce } from "lodash-es";
 function useSearchRemote() {
   let lastFetchId = 0;
 
@@ -10,7 +10,7 @@ function useSearchRemote() {
     data: ref([]),
     fetching: ref(false)
   };
-  const fetchUser = _.debounce((value) => {
+  const fetchUser = debounce((value) => {
     utils.logger.info("fetching user", value);
     lastFetchId += 1;
 

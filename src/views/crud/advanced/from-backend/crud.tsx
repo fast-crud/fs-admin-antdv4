@@ -1,7 +1,7 @@
 import * as api from "./api";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, UserPageQuery, UserPageRes, dict } from "@fast-crud/fast-crud";
 import { GetCrud } from "./api";
-import _ from "lodash-es";
+import { merge } from "lodash-es";
 
 /**
  * 异步创建options
@@ -43,7 +43,7 @@ export default async function (props: CreateCrudOptionsProps): Promise<CreateCru
   // 本示例返回的是一个方法字符串，所以要先执行这个方法，获取options
   const remoteCrudOptions = crudBackend({ crudExpose, dict });
   // 与本地options合并
-  const crudOptions = _.merge(localCrudOptions, remoteCrudOptions);
+  const crudOptions = merge(localCrudOptions, remoteCrudOptions);
 
   return {
     crudOptions

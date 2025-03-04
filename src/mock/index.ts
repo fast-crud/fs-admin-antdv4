@@ -1,6 +1,6 @@
 import { mock } from "../api/service";
 import * as tools from "../api/tools";
-import _ from "lodash-es";
+import { forEach } from "lodash-es";
 import { utils } from "@fast-crud/fast-crud";
 // @ts-ignore
 const commonMocks: any = import.meta.glob("./common/mock.*.[j|t]s", { eager: true });
@@ -10,13 +10,13 @@ const apiMocks: any = import.meta.glob("../api/modules/*.mock.ts", { eager: true
 const viewMocks: any = import.meta.glob("../views/**/mock.[j|t]s", { eager: true });
 
 const list: any = [];
-_.forEach(commonMocks, (value: any) => {
+forEach(commonMocks, (value: any) => {
   list.push(value.default);
 });
-_.forEach(apiMocks, (value) => {
+forEach(apiMocks, (value) => {
   list.push(value.default);
 });
-_.forEach(viewMocks, (value) => {
+forEach(viewMocks, (value) => {
   list.push(value.default);
 });
 

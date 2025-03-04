@@ -1,5 +1,5 @@
 import * as api from "./api.js";
-import _ from "lodash-es";
+import { merge } from "lodash-es";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 
 export default function ({ crudExpose, context }: CreateCrudOptionsProps): CreateCrudOptionsRet {
@@ -45,7 +45,7 @@ export default function ({ crudExpose, context }: CreateCrudOptionsProps): Creat
     const tableData = localDataRef.value;
     for (const item of tableData) {
       if (item.id === form.id) {
-        _.merge(item, form);
+        merge(item, form);
       }
     }
   };

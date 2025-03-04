@@ -1,4 +1,4 @@
-import _ from "lodash-es";
+import {cloneDeep} from "lodash-es";
 export async function getPcasData() {
   // @ts-ignore
   const pcasData = () => import("china-division/dist/pcas-code.json");
@@ -22,7 +22,7 @@ export const TreeNodesLazyLoader = {
       for (const value of values) {
         const found = this.getNode(data, value);
         if (found) {
-          const target = _.cloneDeep(found);
+          const target = cloneDeep(found);
           delete target.children;
           nodes.push(target);
         }

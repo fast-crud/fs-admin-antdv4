@@ -1,8 +1,8 @@
-import _ from "lodash-es";
+import { cloneDeep, mergeWith, isArray } from "lodash-es";
 function copyList(originList: any, newList: any, options: any, parentId?: any) {
   for (const item of originList) {
-    const newItem: any = _.cloneDeep(item);
-    if(parentId!= null && newItem.parentId == null){
+    const newItem: any = cloneDeep(item);
+    if (parentId != null && newItem.parentId == null) {
       newItem.parentId = parentId;
     }
 
@@ -218,7 +218,7 @@ const mockUtil: any = {
           return {
             code: 0,
             msg: "success",
-            data: _.cloneDeep(req.body)
+            data: cloneDeep(req.body)
           };
         }
       },
@@ -228,12 +228,12 @@ const mockUtil: any = {
         handle(req: any): any {
           const item = findById(req.body.id, list);
           if (item) {
-            _.mergeWith(item, req.body, (objValue, srcValue) => {
+            mergeWith(item, req.body, (objValue, srcValue) => {
               if (srcValue == null) {
                 return;
               }
               // 如果被合并对象为数组，则直接被覆盖对象覆盖，只要覆盖对象不为空
-              if (_.isArray(objValue)) {
+              if (isArray(objValue)) {
                 return srcValue;
               }
             });
@@ -305,12 +305,12 @@ const mockUtil: any = {
           console.log("req", req);
           let item = findById(req.body.id, list);
           if (item) {
-            _.mergeWith(item, { [req.body.key]: req.body.value }, (objValue, srcValue) => {
+            mergeWith(item, { [req.body.key]: req.body.value }, (objValue, srcValue) => {
               if (srcValue == null) {
                 return;
               }
               // 如果被合并对象为数组，则直接被覆盖对象覆盖，只要覆盖对象不为空
-              if (_.isArray(objValue)) {
+              if (isArray(objValue)) {
                 return srcValue;
               }
             });
@@ -336,12 +336,12 @@ const mockUtil: any = {
           for (const item of req.body) {
             const item2 = findById(item.id, list);
             if (item2) {
-              _.mergeWith(item2, item, (objValue, srcValue) => {
+              mergeWith(item2, item, (objValue, srcValue) => {
                 if (srcValue == null) {
                   return;
                 }
                 // 如果被合并对象为数组，则直接被覆盖对象覆盖，只要覆盖对象不为空
-                if (_.isArray(objValue)) {
+                if (isArray(objValue)) {
                   return srcValue;
                 }
               });

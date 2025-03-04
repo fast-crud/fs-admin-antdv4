@@ -1,6 +1,6 @@
 import { useRoute, useRouter } from "vue-router";
 import { ref, watch, onMounted, onUnmounted, resolveComponent, nextTick, defineComponent } from "vue";
-import _ from "lodash-es";
+import { forEach } from "lodash-es";
 import BScroll from "better-scroll";
 import "./index.less";
 import { utils } from "@fast-crud/fast-crud";
@@ -161,7 +161,7 @@ export default defineComponent({
           return;
         }
         if (value.path === fullPath) {
-          _.forEach(context.parents, (item) => {
+          forEach(context.parents, (item) => {
             if (item.value instanceof Array) {
               return;
             }

@@ -1,5 +1,5 @@
 import { usePermission } from "/@/plugin/permission";
-import _ from "lodash-es";
+import { merge as LodashMerge } from "lodash-es";
 
 export type UseCrudPermissionExtraProps = {
   hasActionPermission: (action: string) => boolean;
@@ -30,7 +30,7 @@ export function useCrudPermission({ permission }: UseCrudPermissionProps) {
     return hasPermissions(prefix + ":" + action);
   }
 
-  function buildCrudPermission() {
+  function buildCrudPermission(): any {
     if (permission == null) {
       return {};
     }
@@ -43,7 +43,7 @@ export function useCrudPermission({ permission }: UseCrudPermissionProps) {
       }
     }
 
-    return _.merge(
+    return LodashMerge(
       {
         actionbar: {
           buttons: {
@@ -64,7 +64,7 @@ export function useCrudPermission({ permission }: UseCrudPermissionProps) {
 
   function merge(userOptions: any) {
     const permissionOptions = buildCrudPermission();
-    _.merge(permissionOptions, userOptions);
+    LodashMerge(permissionOptions, userOptions);
     return permissionOptions;
   }
 

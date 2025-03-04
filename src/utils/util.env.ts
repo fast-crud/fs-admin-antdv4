@@ -1,4 +1,4 @@
-import _ from "lodash-es";
+import {forEach} from "lodash-es";
 export function getEnvValue(key: string) {
   // @ts-ignore
   return import.meta.env["VITE_APP_" + key];
@@ -19,7 +19,7 @@ export class EnvConfig {
 
   init() {
     // @ts-ignore
-    _.forEach(import.meta.env, (value, key) => {
+    forEach(import.meta.env, (value, key) => {
       if (key.startsWith("VITE_APP")) {
         key = key.replace("VITE_APP_", "");
         // @ts-ignore
