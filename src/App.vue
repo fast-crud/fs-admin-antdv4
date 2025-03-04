@@ -1,9 +1,9 @@
 <template>
-  <a-config-provider :locale="locale" :theme="tokenTheme">
+  <AConfigProvider :locale="locale" :theme="tokenTheme">
     <fs-form-provider>
       <router-view v-if="routerEnabled" />
     </fs-form-provider>
-  </a-config-provider>
+  </AConfigProvider>
 </template>
 
 <script lang="ts" setup>
@@ -16,7 +16,7 @@ import dayjs from "dayjs";
 import { usePreferences, preferences } from "/@/vben/preferences";
 import { useAntdDesignTokens } from "/@/vben/hooks";
 import { theme } from "ant-design-vue";
-
+import AConfigProvider from "ant-design-vue/es/config-provider";
 defineOptions({
   name: "App"
 });

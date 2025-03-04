@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import Antd from "ant-design-vue";
-// import Antd from "./plugin/antdv-async/index";
+// import Antd from "ant-design-vue";
+import Antd from "./plugin/antdv-async/index";
 import "./style/common.less";
 import i18n from "./i18n";
 import components from "./components";

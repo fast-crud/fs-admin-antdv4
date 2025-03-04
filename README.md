@@ -13,6 +13,11 @@ https://github.com/fast-crud/fs-server-js
  * [fs-admin-naive](https://github.com/fast-crud/fs-admin-naive-ui) naive版示例 
  * [fs-in-vben-starter](https://github.com/fast-crud/fs-in-vben-starter) vben示例
 
+# build
+
+```sh
+set NODE_OPTIONS=--max-old-space-size=32768 && npm run build
+```
 # 感谢
 
 ### 依赖

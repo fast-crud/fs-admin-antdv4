@@ -3,12 +3,28 @@ import { defineAsyncComponent } from "vue";
 export default {
   install(app: any) {
     app.component(
+      "AInput",
+      defineAsyncComponent(() => import("ant-design-vue/es/input/Input"))
+    );
+    app.component(
+      "AInputPassword",
+      defineAsyncComponent(() => import("ant-design-vue/es/input/Password"))
+    );
+    app.component(
       "AButton",
       defineAsyncComponent(() => import("ant-design-vue/es/button/button"))
     );
     app.component(
+      "AButtonGroup",
+      defineAsyncComponent(() => import("ant-design-vue/es/button/button-group"))
+    );
+    app.component(
       "ARadio",
       defineAsyncComponent(() => import("ant-design-vue/es/radio/Radio"))
+    );
+    app.component(
+      "ARadioGroup",
+      defineAsyncComponent(() => import("ant-design-vue/es/radio/Group"))
     );
     app.component(
       "ATable",
@@ -32,12 +48,8 @@ export default {
     );
 
     app.component(
-      "AInput",
-      defineAsyncComponent(() => import("ant-design-vue/es/input/Input"))
-    );
-    app.component(
-      "AInputPassword",
-      defineAsyncComponent(() => import("ant-design-vue/es/input/Password"))
+      "ATabPane",
+      defineAsyncComponent(() => import("ant-design-vue/es/tabs/src/TabPanelList/TabPane"))
     );
     app.component(
       "ATextarea",
@@ -68,6 +80,13 @@ export default {
       defineAsyncComponent(() => import("ant-design-vue/es/date-picker/index"))
     );
     app.component(
+      "ARangePicker",
+      defineAsyncComponent(async () => {
+        const { RangePicker } = await import("ant-design-vue/es/date-picker/index");
+        return RangePicker;
+      })
+    );
+    app.component(
       "ATimePicker",
       defineAsyncComponent(() => import("ant-design-vue/es/time-picker/index"))
     );
@@ -94,6 +113,10 @@ export default {
     app.component(
       "ACheckbox",
       defineAsyncComponent(() => import("ant-design-vue/es/checkbox"))
+    );
+    app.component(
+      "ACheckboxGroup",
+      defineAsyncComponent(() => import("ant-design-vue/es/checkbox/Group"))
     );
     app.component(
       "ACol",
@@ -129,6 +152,10 @@ export default {
     );
     app.component(
       "ATreeSelect",
+      defineAsyncComponent(() => import("ant-design-vue/es/tree-select"))
+    );
+    app.component(
+      "AToar",
       defineAsyncComponent(() => import("ant-design-vue/es/tree-select"))
     );
   }
