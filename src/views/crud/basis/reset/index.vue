@@ -15,17 +15,18 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
-import { CrudOptions, DynamicType, useFs, UseFsProps, useFsRef } from "@fast-crud/fast-crud";
+import { CrudOptions, DynamicType, useFs, UseFsProps, useFsRef, useMerge } from "@fast-crud/fast-crud";
 import createCrudOptions from "./crud.js";
-import _ from "lodash-es";
 export default defineComponent({
   name: "BasisReset",
   setup() {
     const { crudBinding, crudRef, crudExpose, context, crudOptions, resetCrudOptions, appendBindingOptions } = useFs({ createCrudOptions, context: { text: 111 } });
 
+    debugger;
+    const { merge } = useMerge();
     setTimeout(() => {
       //合并新的crudOptions
-      const newOptions: DynamicType<CrudOptions> = _.merge(crudOptions, {
+      const newOptions: DynamicType<CrudOptions> = merge(crudOptions, {
         columns: {
           text: {
             title: "追加字段",
