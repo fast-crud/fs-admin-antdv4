@@ -22,7 +22,6 @@ export default defineComponent({
   setup() {
     const { crudBinding, crudRef, crudExpose, context, crudOptions, resetCrudOptions, appendBindingOptions } = useFs({ createCrudOptions, context: { text: 111 } });
 
-    debugger;
     const { merge } = useMerge();
     setTimeout(() => {
       //合并新的crudOptions

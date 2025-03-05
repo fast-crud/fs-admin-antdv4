@@ -1,18 +1,14 @@
 import { defineAsyncComponent } from "vue";
+import Input from "ant-design-vue/es/input/Input";
+import Button from "ant-design-vue/es/button/button";
 
 export default {
   install(app: any) {
-    app.component(
-      "AInput",
-      defineAsyncComponent(() => import("ant-design-vue/es/input/Input"))
-    );
+    app.component("AInput", Input);
+    app.component("AButton", Button);
     app.component(
       "AInputPassword",
       defineAsyncComponent(() => import("ant-design-vue/es/input/Password"))
-    );
-    app.component(
-      "AButton",
-      defineAsyncComponent(() => import("ant-design-vue/es/button/button"))
     );
     app.component(
       "AButtonGroup",
@@ -157,6 +153,19 @@ export default {
     app.component(
       "AToar",
       defineAsyncComponent(() => import("ant-design-vue/es/tree-select"))
+    );
+
+    app.component(
+      "AMenu",
+      defineAsyncComponent(() => import("ant-design-vue/es/menu/index"))
+    );
+    app.component(
+      "ASubMenu",
+      defineAsyncComponent(() => import("ant-design-vue/es/menu/src/SubMenu"))
+    );
+    app.component(
+      "AMenuItem",
+      defineAsyncComponent(() => import("ant-design-vue/es/menu/src/MenuItem"))
     );
   }
 };
