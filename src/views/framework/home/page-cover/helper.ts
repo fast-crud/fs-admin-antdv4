@@ -1,6 +1,6 @@
 export default {
   crud: `  columns: {
-    date:{
+    name:{
       title: '姓名', //字段名称
       type: 'text', //字段类型，添加、修改、查询将自动生成相应表单组件
     },

@@ -62,5 +62,6 @@ export default defineComponent({
 .fs-highlight {
   margin: 0px;
   border-radius: 4px;
+  font-size: 12px;
 }
 </style>

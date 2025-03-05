@@ -15,15 +15,15 @@ const userStore = useUserStore();
 const accessStore = useAccessStore();
 
 const menus = computed(() => [
-  {
-    handler: () => {
-      openWindow(VBEN_DOC_URL, {
-        target: "_blank"
-      });
-    },
-    icon: BookOpenText,
-    text: $t("ui.widgets.document")
-  }
+  // {
+  //   handler: () => {
+  //     openWindow(VBEN_DOC_URL, {
+  //       target: "_blank"
+  //     });
+  //   },
+  //   icon: BookOpenText,
+  //   text: $t("ui.widgets.document")
+  // }
 ]);
 
 const avatar = computed(() => {
@@ -38,7 +38,7 @@ async function handleLogout() {
 <template>
   <BasicLayout @clear-preferences-and-logout="handleLogout">
     <template #user-dropdown>
-      <UserDropdown :avatar :menus :text="userStore.userInfo?.nickName" description="ann.vben@gmail.com" tag-text="Pro" @logout="handleLogout" />
+      <UserDropdown :avatar :menus :text="userStore.userInfo?.nickName" description="development@handsfree.work" tag-text="Pro" @logout="handleLogout" />
     </template>
     <template #lock-screen>
       <LockScreen :avatar @to-login="handleLogout" />
