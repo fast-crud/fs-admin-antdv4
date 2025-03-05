@@ -382,6 +382,9 @@ function removeMenuItem(item: MenuItemRegistered) {
 .is-menu-align {
   justify-content: var(--menu-align, start);
 }
+.vben-menu__popup-container {
+  padding: 0px !important;
+}
 
 .vben-menu__popup-container,
 .vben-menu {

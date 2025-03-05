@@ -135,6 +135,7 @@ function handleMouseenter(event: FocusEvent | MouseEvent, showTimeout = 300) {
 }
 
 function handleMouseleave(deepDispatch = false) {
+  return;
   if (!rootMenu?.props.collapse && rootMenu?.props.mode === "vertical" && subMenu) {
     subMenu.mouseInChild.value = false;
     return;
