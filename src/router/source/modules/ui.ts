@@ -31,4 +31,4 @@ export const uiResources = [
   }
 ];
 
-export default uiResources;
+// export default uiResources;

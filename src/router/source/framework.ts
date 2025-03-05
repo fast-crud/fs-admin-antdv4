@@ -35,7 +35,8 @@ export const frameworkResource = [
           auth: true
         }
       },
-      ...dynamicRoutes
+      // @ts-ignore
+      ...dynamicRoutes.sort((a, b) => (a.meta?.order || 0) - (b.meta?.order || 0))
     ]
   }
 ];
