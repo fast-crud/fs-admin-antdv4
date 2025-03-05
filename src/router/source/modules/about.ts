@@ -7,7 +7,7 @@ export const aboutResource = [
     path: "/about",
     redirect: "/about/doc",
     meta: {
-      icon: "ion:apps-sharp",
+      icon: "lucide:copyright",
       order: 9999
     },
     children: [
