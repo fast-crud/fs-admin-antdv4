@@ -44,7 +44,7 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           title: "js code",
           type: "editor-code",
           form: {
-            show: false,
+            show: true,
             component: {
               language: "javascript"
             }
@@ -85,7 +85,7 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           title: "json",
           type: "editor-code",
           form: {
-            show: false,
+            show: true,
             rules: FsEditorCodeValidators.jsonRule,
             component: {
               language: "json",
