@@ -12,7 +12,7 @@ import { GetSignedUrl } from "/@/views/crud/component/uploader/s3/api";
 import { notification } from "ant-design-vue";
 import { usePreferences } from "/@/vben/preferences";
 import { columnSizeSaver } from "/@/plugin/fast-crud/column-size-saver";
-
+import { initWorkers } from "@fast-crud/fast-extends/src/editor/components/fs-editor-code/workers";
 function install(app: any, options: any = {}) {
   app.use(UiAntdv);
   //设置日志级别
@@ -181,6 +181,7 @@ function install(app: any, options: any = {}) {
       return crudPermission.merge(opts);
     }
   });
+  initWorkers(); // 初始化code编辑器
 
   // fast-extends里面的扩展组件均为异步组件，只有在使用时才会被加载，并不会影响首页加载速度
   //安装uploader 公共参数
@@ -338,6 +339,7 @@ function install(app: any, options: any = {}) {
       toolbarConfig: {}
     }
   });
+
   app.use(FsExtendsJson);
   app.use(FsExtendsTime);
   app.use(FsExtendsCopyable);

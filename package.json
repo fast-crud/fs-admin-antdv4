@@ -138,7 +138,6 @@
     "vite": "^5.1.6",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^3.2.2",
-    "vite-plugin-monaco-editor-esm": "^2.0.2",
     "vite-plugin-theme": "^0.8.6",
     "vite-plugin-windicss": "^1.9.3",
     "vue-eslint-parser": "^9.4.2",
