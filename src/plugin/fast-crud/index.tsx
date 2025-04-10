@@ -80,11 +80,6 @@ function install(app: any, options: any = {}) {
             async onReset() {
               columnSizeSaver.clear();
             }
-          },
-          buttons: {
-            export: {
-              show: false
-            }
           }
         },
         rowHandle: {
