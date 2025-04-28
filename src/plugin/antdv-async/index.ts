@@ -223,6 +223,19 @@ export default {
     );
 
     app.component(
+      "ATableSummaryCell",
+      defineAsyncComponent(() => import("ant-design-vue/es/vc-table/Cell/index"))
+    );
+    app.component(
+      "ATableSummaryRow",
+      defineAsyncComponent(() => import("ant-design-vue/es/vc-table/Footer/Row"))
+    );
+    app.component(
+      "ATableSummary",
+      defineAsyncComponent(() => import("ant-design-vue/es/vc-table/Footer/Summary"))
+    );
+
+    app.component(
       "ASlider",
       defineAsyncComponent(() => import("ant-design-vue/es/slider/index"))
     );
