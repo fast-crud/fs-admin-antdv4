@@ -221,5 +221,10 @@ export default {
       "AResult",
       defineAsyncComponent(() => import("ant-design-vue/es/result"))
     );
+
+    app.component(
+      "ASlider",
+      defineAsyncComponent(() => import("ant-design-vue/es/slider/index"))
+    );
   }
 };
