@@ -53,6 +53,23 @@ export default async function createCrudOptions({}: CreateCrudOptionsProps): Pro
             component: { dict: { cache: false } }
           }
         },
+        localSet: {
+          title: "本地修改",
+          search: { show: true },
+          dict: dict({
+            cloneable: true,
+            data: [
+              {
+                value: 1,
+                label: "本地字典"
+              }
+            ]
+          }),
+          type: "dict-select",
+          form: {
+            component: { dict: { cache: false } }
+          }
+        },
         modifyDict: {
           title: "动态修改字典",
           search: { show: false },
@@ -68,6 +85,13 @@ export default async function createCrudOptions({}: CreateCrudOptionsProps): Pro
               const targetDict = getComponentRef("remote").dict;
               targetDict.url = row.modifyDict ? "/mock/dicts/moreOpenStatusEnum?remote" : "/mock/dicts/OpenStatusEnum?remote";
               targetDict.reloadDict();
+
+              const targetDict2 = getComponentRef("localSet").dict;
+              if (row.modifyDict) {
+                targetDict2.setData([{ value: 1, label: "修改后的字典" }]);
+              } else {
+                targetDict2.setData([{ value: 1, label: "原字典" }]);
+              }
             }
           },
           form: {
@@ -81,6 +105,13 @@ export default async function createCrudOptions({}: CreateCrudOptionsProps): Pro
               const targetDict = getComponentRef("remote").dict;
               targetDict.url = form.modifyDict ? "/mock/dicts/moreOpenStatusEnum?remote" : "/mock/dicts/OpenStatusEnum?remote";
               targetDict.reloadDict();
+
+              const targetDict2 = getComponentRef("localSet").dict;
+              if (form.modifyDict) {
+                targetDict2.setData([{ value: 1, label: "修改后的字典" }]);
+              } else {
+                targetDict2.setData([{ value: 1, label: "原字典" }]);
+              }
             }
           }
         }
