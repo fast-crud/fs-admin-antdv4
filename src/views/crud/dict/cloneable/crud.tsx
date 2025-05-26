@@ -1,5 +1,6 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes, ValueChangeContext } from "@fast-crud/fast-crud";
+import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes, ValueChangeContext } from "@fast-crud/fast-crud";
+import { createUploaderRules } from "@fast-crud/fast-extends";
 export default async function createCrudOptions({}: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
     return await api.GetList(query);
@@ -65,10 +66,7 @@ export default async function createCrudOptions({}: CreateCrudOptionsProps): Pro
               }
             ]
           }),
-          type: "dict-select",
-          form: {
-            component: { dict: { cache: false } }
-          }
+          type: "dict-select"
         },
         modifyDict: {
           title: "动态修改字典",
@@ -82,11 +80,11 @@ export default async function createCrudOptions({}: CreateCrudOptionsProps): Pro
             valueChange({ row, getComponentRef }: ValueChangeContext) {
               // 这里不能使用remoteDict,因为在分发时已经clone到form配置中了
               // 这里dict修改不会影响列里面的数据
-              const targetDict = getComponentRef("remote").dict;
+              const targetDict = getComponentRef("remote").getDict();
               targetDict.url = row.modifyDict ? "/mock/dicts/moreOpenStatusEnum?remote" : "/mock/dicts/OpenStatusEnum?remote";
               targetDict.reloadDict();
 
-              const targetDict2 = getComponentRef("localSet").dict;
+              const targetDict2 = getComponentRef("localSet").getDict();
               if (row.modifyDict) {
                 targetDict2.setData([{ value: 1, label: "修改后的字典" }]);
               } else {
@@ -102,11 +100,11 @@ export default async function createCrudOptions({}: CreateCrudOptionsProps): Pro
             valueChange({ form, getComponentRef }: ValueChangeContext) {
               // 这里不能使用remoteDict,因为在分发时已经clone到form配置中了
               // 这里dict修改不会影响列里面的数据
-              const targetDict = getComponentRef("remote").dict;
+              const targetDict = getComponentRef("remote").getDict();
               targetDict.url = form.modifyDict ? "/mock/dicts/moreOpenStatusEnum?remote" : "/mock/dicts/OpenStatusEnum?remote";
               targetDict.reloadDict();
 
-              const targetDict2 = getComponentRef("localSet").dict;
+              const targetDict2 = getComponentRef("localSet").getDict();
               if (form.modifyDict) {
                 targetDict2.setData([{ value: 1, label: "修改后的字典" }]);
               } else {
@@ -114,6 +112,10 @@ export default async function createCrudOptions({}: CreateCrudOptionsProps): Pro
               }
             }
           }
+        },
+        pictureCard: {
+          title: "照片墙",
+          type: "image-uploader"
         }
       }
     }
