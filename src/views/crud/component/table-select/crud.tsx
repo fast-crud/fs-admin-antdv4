@@ -124,7 +124,8 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
                 placeholder: "点击选择"
               },
               createCrudOptions: createCrudOptionsText,
-              crudOptionsOverride: crudOptionsOverride
+              crudOptionsOverride: crudOptionsOverride,
+              isSyncCreate: true
             }
           },
           column: {
