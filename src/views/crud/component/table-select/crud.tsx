@@ -22,6 +22,9 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
   };
 
   const crudOptionsOverride = {
+    container: {
+      is: "fs-layout-card"
+    },
     table: {
       scroll: {
         x: 2000
