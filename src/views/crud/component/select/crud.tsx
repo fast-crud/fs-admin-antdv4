@@ -1,7 +1,7 @@
 import * as api from "./api";
 import { requestForMock } from "/src/api/service";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, DictOnReadyContext, EditReq, UserPageQuery, UserPageRes, useUi, utils } from "@fast-crud/fast-crud";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { debounce } from "lodash-es";
 function useSearchRemote() {
   let lastFetchId = 0;
@@ -121,7 +121,15 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
           title: "单选本地",
           type: "dict-select",
           dict: dictRef,
+          column: {
+            order: computed(() => {
+              return 4;
+            })
+          },
           form: {
+            order: computed(() => {
+              return 4;
+            }),
             component: {
               onChange(args: any) {
                 utils.logger.info("onChange", args);
