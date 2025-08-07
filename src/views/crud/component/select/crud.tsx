@@ -126,6 +126,11 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
               onChange(args: any) {
                 utils.logger.info("onChange", args);
               },
+              slots: {
+                suffixIcon() {
+                  return <div>suffixIcon</div>;
+                }
+              },
               on: {
                 selectedChange({ form, $event }) {
                   // $event就是原始的事件值，也就是选中的 option对象
