@@ -140,14 +140,14 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           column: { width: 80, align: "center" }
         },
         disable: {
-          title: "禁止编辑",
+          title: "偶数行禁止编辑",
           type: "text",
           column: {
             editable: {
-              disabled: true //也可以配置为方法，根据条件禁用或启用编辑
-              // disabled: ({ column, index, row }) => {
-              //   return index % 2 === 0;
-              // }
+              //disabled: true //也可以配置为方法，根据条件禁用或启用编辑
+              disabled: ({ column, editableId, row }) => {
+                return editableId % 2 === 0;
+              }
             }
           }
         },

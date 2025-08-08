@@ -7,11 +7,11 @@
       </div>
       <div class="more"><a target="_blank" href="http://fast-crud.docmirror.cn/api/crud-options/table.html#editable">文档</a></div>
     </template>
-    <fs-crud ref="crudRef" v-bind="crudBinding">
+    <fs-crud v-if="crudBinding" ref="crudRef" v-bind="crudBinding">
       <template #cell_slot="scope">
         <span>{{ scope.row.slot }}=插槽显示</span>
       </template>
-      <template #actionbar-right>
+      <template v-if="crudBinding" #actionbar-right>
         <!--      <fs-button class="ml-1" @click="addRow">添加行</fs-button>-->
         <a-radio-group v-model:value="crudBinding.table.editable.enabled" class="ml-5">
           <a-radio-button :value="true">启用编辑</a-radio-button>
