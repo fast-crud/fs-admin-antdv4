@@ -79,6 +79,12 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
 
   const { ui } = useUi();
 
+  const orderRef = ref(-1);
+
+  setTimeout(() => {
+    orderRef.value = 999;
+  }, 3000);
+
   const { fetchUser, searchState } = useSearchRemote();
   return {
     dynamicUpdateDictOptions,
@@ -123,7 +129,7 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
           dict: dictRef,
           column: {
             order: computed(() => {
-              return 7;
+              return orderRef.value;
             })
           },
           form: {
