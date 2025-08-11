@@ -1,16 +1,5 @@
 import * as api from "./api";
-import {
-  AddReq,
-  compute,
-  CreateCrudOptionsProps,
-  CreateCrudOptionsRet,
-  DelReq,
-  dict,
-  EditReq,
-  UserPageQuery,
-  UserPageRes,
-  utils
-} from "@fast-crud/fast-crud";
+import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
 
 export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {

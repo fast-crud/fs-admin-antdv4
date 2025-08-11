@@ -123,7 +123,7 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
           dict: dictRef,
           column: {
             order: computed(() => {
-              return 4;
+              return 7;
             })
           },
           form: {
@@ -164,6 +164,11 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
           }),
           form: {
             rules: [{ required: true, message: "请选择一个选项" }]
+          },
+          column: {
+            order: computed(() => {
+              return 6;
+            })
           }
         },
         filter: {

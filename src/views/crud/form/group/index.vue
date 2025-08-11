@@ -20,7 +20,7 @@ export default defineComponent({
 
     // 页面打开后获取列表数据
     onMounted(async () => {
-      await useFsAsync({ crudBinding, crudRef,crudExpose, context, createCrudOptions });
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
       await crudExpose.doRefresh();
     });
 

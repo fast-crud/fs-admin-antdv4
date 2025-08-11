@@ -32,7 +32,7 @@ export default defineComponent({
     const { crudRef, crudBinding, crudExpose, context } = useFsRef();
     // 页面打开后获取列表数据
     onMounted(async () => {
-      await useFsAsync({ crudBinding, crudRef,crudExpose, context, createCrudOptions });
+      await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
 
       context.handleBatchDelete = () => {
         const { selectedRowKeys } = context;

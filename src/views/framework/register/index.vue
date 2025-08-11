@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <a-form ref="formRef" class="user-layout-login" name="custom-validation" :model="formState" :rules="rules" v-bind="layout" @finish="handleFinish" @finishFailed="handleFinishFailed">
+    <a-form ref="formRef" class="user-layout-login" name="custom-validation" :model="formState" :rules="rules" v-bind="layout" @finish="handleFinish" @finish-failed="handleFinishFailed">
       <a-form-item required has-feedback name="username">
         <a-input v-model:value="formState.username" size="large" autocomplete="off">
           <template #prefix>
@@ -36,7 +36,7 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, toRaw } from "vue";
 import { useUserStore } from "/src/store/modules/user";
-import {utils} from "@fast-crud/fast-crud";
+import { utils } from "@fast-crud/fast-crud";
 export default defineComponent({
   name: "RegisterPage",
   setup() {
