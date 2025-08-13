@@ -28,6 +28,7 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
       },
       form: {
         wrapper: {
+          saveDraft: true,
           is: "a-drawer",
           onClosed(e) {
             utils.logger.info("onClosed", e);

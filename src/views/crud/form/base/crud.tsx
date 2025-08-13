@@ -57,6 +57,7 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
           message.success("保存成功");
         },
         wrapper: {
+          saveDraft: true,
           title: compute(({ form }) => {
             return form.draft ? "草稿" : "编辑";
           }),
