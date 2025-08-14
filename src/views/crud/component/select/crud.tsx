@@ -130,7 +130,9 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
           column: {
             order: computed(() => {
               return orderRef.value;
-            })
+            }),
+            columnSetDisabled: true,
+            columnSetShow: false
           },
           form: {
             order: computed(() => {
