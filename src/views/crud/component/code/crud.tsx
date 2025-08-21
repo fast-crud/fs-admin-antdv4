@@ -46,7 +46,10 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           form: {
             show: true,
             component: {
-              language: "javascript"
+              language: "javascript",
+              onBlur(ctx: any) {
+                console.log("blur", ctx);
+              }
             }
           }
         },
