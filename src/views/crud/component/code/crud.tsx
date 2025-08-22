@@ -1,5 +1,5 @@
 import * as api from "./api";
-
+import {utils} from '@fast-crud/fast-crud'
 import { FsEditorCodeValidators } from "@fast-crud/editor-code";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, UserPageQuery, UserPageRes, ValueBuilderContext, ValueResolveContext } from "@fast-crud/fast-crud";
 export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
@@ -48,8 +48,8 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
             component: {
               language: "javascript",
               onBlur(ctx: any) {
-                console.log("blur", ctx);
-              }
+                utils.logger.info("blur", ctx);
+              },
             }
           }
         },
