@@ -13,6 +13,7 @@ import { notification } from "ant-design-vue";
 import { usePreferences } from "/@/vben/preferences";
 import { columnSizeSaver } from "/@/plugin/fast-crud/column-size-saver";
 import { FsEditorCode } from "@fast-crud/editor-code";
+import "@fast-crud/editor-code/dist/style.css"
 function install(app: any, options: any = {}) {
   app.use(UiAntdv);
   //设置日志级别
