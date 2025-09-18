@@ -9,6 +9,7 @@ type ScProps = {
   modelValue?: string;
   value?: string;
 };
+console.log("shallow-component 初始化");
 const props = defineProps<ScProps>();
 const { ui } = useUi();
 </script>

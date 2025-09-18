@@ -54,9 +54,15 @@ export default function ({ context }: CreateCrudOptionsProps): CreateCrudOptions
         }),
         buttons: {
           edit: {
-            show: compute<boolean>(({ row }) => {
-              return row.editable;
+            // show: compute<boolean>(({ row }) => {
+            //   return row.editable;
+            // }),
+            loading: compute<boolean>(({ row }) => {
+              return !row.editable;
             })
+            // loading: compute<boolean>(() => {
+            //   return row.editable;
+            // })
           },
           remove: {
             show: compute(({ row }) => {
@@ -111,9 +117,13 @@ export default function ({ context }: CreateCrudOptionsProps): CreateCrudOptions
           form: {
             component: {
               name: "a-switch",
-              vModel: "checked"
+              vModel: compute(() => {
+                return "checked";
+              })
             },
-            helper: "点我触发动态计算"
+            helper: compute(() => {
+              return "点我触发动态计算";
+            })
           }
         },
         shower: {

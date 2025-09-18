@@ -2,6 +2,7 @@ import * as api from "./api";
 import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import { computed, ref, shallowRef } from "vue";
 import ShallowComponent from "/@/views/crud/basis/compute-more/shallow-component.vue";
+import CustomComponent from "/@/views/crud/basis/compute-more/custom-component.vue";
 
 export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -96,6 +97,24 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
                 return form.switch === "select" ? "fs-dict-select" : form.switch === "radio" ? "fs-dict-radio" : ShallowComponent;
               })
             }
+          }
+        },
+        custom: {
+          title: "自定义组件",
+          type: "text",
+          form: {
+            component: {
+              name: CustomComponent,
+              vModel: "value",
+              props: {
+                // placeholder: compute(({ form }) => {
+                //   return `自定义组件:${form.switch}`;
+                // })
+              }
+            }
+            // helper: compute(({ form }) => {
+            //   return `自定义组件:${form.switch}`;
+            // })
           }
         }
       }
