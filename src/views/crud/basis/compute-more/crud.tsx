@@ -133,7 +133,7 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           title: "测试",
           type: "text",
           form: {
-            title: computed(({ form }) => {
+            title: compute(({ form }) => {
               return `title:${form.switch}`;
             }),
             component: {
