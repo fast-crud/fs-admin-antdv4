@@ -44,6 +44,20 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
         labelCol: { span: 8 },
         wrapperCol: { span: 14 }
       },
+      editForm: {
+        wrapper: {
+          title: computed(() => {
+            return `edit-title`;
+          })
+        }
+      },
+      addForm: {
+        wrapper: {
+          title: computed(() => {
+            return `add-title`;
+          })
+        }
+      },
       rowHandle: {
         fixed: "right",
         align: "center"
@@ -78,7 +92,12 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
               { value: "select", label: "select" },
               { value: "shallow", label: "shallowComponent" }
             ]
-          })
+          }),
+          form: {
+            order: compute(({ form }) => {
+              return -1;
+            })
+          }
         },
         componentName: {
           title: "动态组件",
@@ -105,16 +124,37 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           form: {
             component: {
               name: CustomComponent,
+              vModel: "value"
+            }
+          }
+        },
+        test: {
+          title: "测试",
+          type: "text",
+          form: {
+            title: computed(({ form }) => {
+              return `title:${form.switch}`;
+            }),
+            component: {
+              name: "a-input",
               vModel: "value",
               props: {
-                // placeholder: compute(({ form }) => {
-                //   return `自定义组件:${form.switch}`;
-                // })
+                placeholder: compute(({ form }) => {
+                  return `placeholder:${form.switch}`;
+                })
               }
-            }
-            // helper: compute(({ form }) => {
-            //   return `自定义组件:${form.switch}`;
-            // })
+            },
+            helper: compute(({ form }) => {
+              return `helper:${form.switch}`;
+            }),
+            rules: [
+              {
+                required: true,
+                message: compute(({ form }) => {
+                  return `message:${form.switch}`;
+                })
+              }
+            ]
           }
         }
       }
