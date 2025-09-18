@@ -112,6 +112,7 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           form: {
             component: {
               value: "2",
+              vModel: "value",
               name: compute(({ form }) => {
                 return form.switch === "select" ? "fs-dict-select" : form.switch === "radio" ? "fs-dict-radio" : ShallowComponent;
               })
