@@ -49,7 +49,19 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           enabled: true,
           mode: "free",
           activeDefault: true,
-          showAction: false
+          showAction: false,
+          customRowHandleActive({ enabled, mode, rowHandle }) {
+            //自定义切换 按钮组
+            if (enabled) {
+              if (mode === "row") {
+                rowHandle.active = "default"; // 默认是editRow
+              } else {
+                rowHandle.active = "default"; // 默认是editable
+              }
+            } else {
+              rowHandle.active = "default";
+            }
+          }
         }
       },
       pagination: {
