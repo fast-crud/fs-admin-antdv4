@@ -1,5 +1,5 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import { CheckOutlined } from "@ant-design/icons-vue";
 
 export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
@@ -41,6 +41,47 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
         images: {
           title: "图片",
           type: "image-uploader"
+        },
+        compute: {
+          title: "compute",
+          search: { show: false },
+          type: "text",
+          column: {
+            component: {
+              name: "a-switch",
+              vModel: "checked"
+            }
+          },
+          form: {
+            component: {
+              name: "a-switch",
+              vModel: "checked"
+            },
+            helper: compute(() => {
+              return "点我触发动态计算";
+            })
+          }
+        },
+        shower: {
+          title: "根据compute显示",
+          search: { show: false },
+          type: "button",
+          form: {
+            component: {},
+            show: compute(({ form }) => {
+              console.log("form", form, form.compute);
+              return form.compute;
+            })
+          },
+          column: {
+            width: 250,
+            resizable: true,
+            component: {
+              show: compute(({ row }) => {
+                return row.compute;
+              })
+            }
+          }
         },
         price: {
           title: "价格",
@@ -122,7 +163,7 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
                   );
                 }
               },
-              columns: ["code", "title", "images", "invalidKey"]
+              columns: ["code", "title", "images", "invalidKey", "compute", "shower"]
             },
             price: {
               header: "库存价格",

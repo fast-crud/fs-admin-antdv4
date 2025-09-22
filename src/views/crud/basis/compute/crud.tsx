@@ -131,11 +131,10 @@ export default function ({ context }: CreateCrudOptionsProps): CreateCrudOptions
           search: { show: false },
           type: "button",
           form: {
-            component: {
-              show: compute(({ form }) => {
-                return form.compute;
-              })
-            }
+            component: {},
+            show: compute(({ form }) => {
+              return form.compute;
+            })
           },
           column: {
             width: 250,

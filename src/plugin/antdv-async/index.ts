@@ -61,6 +61,11 @@ export default {
     );
 
     app.component(
+      "ATabNode",
+      defineAsyncComponent(() => import("ant-design-vue/es/tabs/src/TabNavList/index"))
+    );
+
+    app.component(
       "ATabPane",
       defineAsyncComponent(() => import("ant-design-vue/es/tabs/src/TabPanelList/TabPane"))
     );
@@ -204,7 +209,11 @@ export default {
     );
     app.component(
       "ACollapse",
-      defineAsyncComponent(() => import("ant-design-vue/es/collapse"))
+      defineAsyncComponent(() => import("ant-design-vue/es/collapse/Collapse"))
+    );
+    app.component(
+      "ACollapsePanel",
+      defineAsyncComponent(() => import("ant-design-vue/es/collapse/CollapsePanel"))
     );
     app.component(
       "ADescriptions",

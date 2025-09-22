@@ -12,7 +12,8 @@ const list = [
     price: 100,
     stock: 99,
     intro: "30000毫安超大容量移动电源充电宝官方原装正品专用便携",
-    content: ""
+    content: "",
+    compute: false
   }
 ];
 
