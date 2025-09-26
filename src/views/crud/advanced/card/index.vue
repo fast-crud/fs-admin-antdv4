@@ -1,6 +1,6 @@
 <template>
   <fs-crud ref="crudRef" v-bind="crudBinding">
-    <a-row v-if="crudBinding.data" gutter="10" style="height: 100%; width: 100%; overflow: auto">
+    <a-row v-if="crudBinding?.data" gutter="10" style="height: 100%; width: 100%; overflow: auto">
       <a-col v-for="(item, index) of crudBinding.data" :key="item.id" :span="6" style="margin-bottom: 10px">
         <a-card :title="item.title">
           {{ item.content }}

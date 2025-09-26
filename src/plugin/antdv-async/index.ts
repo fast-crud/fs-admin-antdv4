@@ -248,5 +248,10 @@ export default {
       "ASlider",
       defineAsyncComponent(() => import("ant-design-vue/es/slider/index"))
     );
+    // a-statistic
+    app.component(
+      "AStatistic",
+      defineAsyncComponent(() => import("ant-design-vue/es/statistic/index"))
+    );
   }
 };
