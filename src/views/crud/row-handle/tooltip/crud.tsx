@@ -67,8 +67,12 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
                 }
               }
             },
-            click() {
+            click({ loadingRef }) {
               utils.logger.log("test");
+              loadingRef.value = true;
+              setTimeout(() => {
+                loadingRef.value = false;
+              }, 1000);
             }
           }
         }
