@@ -1,8 +1,9 @@
 import * as api from "./api";
 import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
-import { computed, ref, shallowRef } from "vue";
+import { computed, ref, shallowRef, markRaw } from "vue";
 import ShallowComponent from "/@/views/crud/basis/compute-more/shallow-component.vue";
 import CustomComponent from "/@/views/crud/basis/compute-more/custom-component.vue";
+import CustomTag from "/@/views/crud/basis/compute-more/custom-tag.vue";
 
 export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -158,6 +159,29 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
                 })
               }
             ]
+          }
+        },
+        color: {
+          title: "颜色切换",
+          type: "dict-radio",
+          dict: dict({
+            data: [
+              { value: "red", label: "red" },
+              { value: "green", label: "green" },
+              { value: "blue", label: "blue" }
+            ]
+          })
+        },
+        componentProps: {
+          title: "动态组件属性",
+          type: "text",
+          form: {
+            component: {
+              name: () => CustomTag,
+              color: compute(({ form }) => {
+                return form.color;
+              })
+            }
           }
         }
       }
