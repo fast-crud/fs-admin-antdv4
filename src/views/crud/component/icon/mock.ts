@@ -5,12 +5,14 @@ const options: any = {
 };
 const list = [
   {
-    icon: "ri:24-hours-fill",
-    svg: "svg:icon-compass"
+    icon: "ri:24-hours-fill:green",
+    svg: "svg:icon-compass",
+    http: "http:images/logo/logo.svg"
   },
   {
-    icon: "ion:add-circle-outline",
-    svg: "svg:icon-left-circle"
+    icon: "ion:add-circle-outline:blue",
+    svg: "svg:icon-left-circle",
+    http: "https://certd.docmirror.cn/static/logo/logo.svg"
   },
   {
     icon: "ion:american-football-sharp",
