@@ -25,7 +25,6 @@ export default defineComponent({
   setup() {
     const { crudRef, crudBinding, crudExpose, context } = useFsRef();
 
-    const selectedRowKeys = context.selectedRowKeys;
     // 页面打开后获取列表数据
     onMounted(async () => {
       await useFsAsync({ crudBinding, crudRef, crudExpose, context, createCrudOptions });
@@ -33,6 +32,7 @@ export default defineComponent({
     });
 
     const handleBatchDelete = () => {
+      const selectedRowKeys = context.selectedRowKeys;
       if (selectedRowKeys.value?.length > 0) {
         Modal.confirm({
           title: "确认",
