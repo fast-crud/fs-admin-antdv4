@@ -73,6 +73,18 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
             }
           }
         },
+        http: {
+          title: "http",
+          search: { show: true },
+          type: "text",
+          column: {
+            component: {
+              name: "fs-icon",
+              vModel: "icon",
+              style: "width:30px"
+            }
+          }
+        },
         selector: {
           title: "图标选择器",
           search: { show: true },

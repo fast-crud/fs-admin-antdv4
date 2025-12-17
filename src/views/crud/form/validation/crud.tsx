@@ -1,5 +1,5 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
+import { AddReq, compute, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
 
 export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -129,6 +129,19 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           type: "text",
           form: {
             rules: [{ type: "url", message: "请填写正确的url" }]
+          }
+        },
+        computedRules: {
+          title: "动态计算",
+          type: "text",
+          form: {
+            helper: "当url填写时，此项不校验",
+            rules: compute(({ form }) => {
+              if (form.url) {
+                return [{ required: false, message: "url不填写时，此项必填" }];
+              }
+              return [{ required: true, message: "url不填写时，此项必填" }];
+            })
           }
         }
       }
