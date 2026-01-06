@@ -36,7 +36,7 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
         }
       },
       pagination: {
-        _onPageSizeChange: (ctx :{ pageSize:any }) => {
+        _onPageSizeChange: (ctx: { pageSize: any }) => {
           utils.logger.info("pageSize", ctx.pageSize);
         }
       },

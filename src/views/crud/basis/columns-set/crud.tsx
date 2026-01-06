@@ -1,7 +1,7 @@
 import * as api from "./api.js";
 import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
 import { message } from "ant-design-vue";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const { crudBinding } = crudExpose;
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -20,6 +20,7 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
   const addRequest = async ({ form }: AddReq) => {
     return await api.AddObj(form);
   };
+  const dynamicShow = ref(true);
   return {
     crudOptions: {
       request: {
@@ -57,6 +58,13 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
             click() {
               crudBinding.value.toolbar.columnsFilter.originalColumns.disabled.columnSetDisabled = !crudBinding.value.toolbar.columnsFilter.originalColumns.disabled.columnSetDisabled;
               message.info("切换第3列的列设置禁用启用");
+            }
+          },
+          toggleDynamic: {
+            text: "切换动态显隐",
+            click() {
+              dynamicShow.value = !dynamicShow.value;
+              message.info("切换列动态显隐");
             }
           },
           desc: {
@@ -101,6 +109,16 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           type: "text",
           column: {
             columnSetShow: false
+          }
+        },
+        dynamic: {
+          title: "列动态显隐",
+          type: "text",
+          column: {
+            columnSetShow: false,
+            show: computed(() => {
+              return dynamicShow.value;
+            })
           }
         }
       }
