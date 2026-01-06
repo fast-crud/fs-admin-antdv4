@@ -105,12 +105,12 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
           type: "datetime",
           valueBuilder({ row, value, key }) {
             if (value) {
-              row[key] = dayjs(value);
+              return dayjs(value);
             }
           },
           valueResolve({ form, value, key }) {
             if (value) {
-              form[key] = dayjs(value).unix();
+              return dayjs(value).valueOf();
             }
           }
         }

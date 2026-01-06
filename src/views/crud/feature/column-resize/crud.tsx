@@ -1,5 +1,5 @@
 import * as api from "./api";
-import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes } from "@fast-crud/fast-crud";
+import { AddReq, CreateCrudOptionsProps, CreateCrudOptionsRet, DelReq, dict, EditReq, UserPageQuery, UserPageRes, utils } from "@fast-crud/fast-crud";
 
 export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<CreateCrudOptionsRet> {
   const pageRequest = async (query: UserPageQuery): Promise<UserPageRes> => {
@@ -33,6 +33,11 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           //触发resize事件后，修改column宽度，width只能配置为number类型
           //可以将此方法写在app.use()中的commonOptions里面
           crudBinding.value.table.columnsMap[col.key].width = w;
+        }
+      },
+      pagination: {
+        _onPageSizeChange: (ctx :{ pageSize:any }) => {
+          utils.logger.info("pageSize", ctx.pageSize);
         }
       },
       columns: {
