@@ -12,7 +12,10 @@ const list = [
     remote: "2",
     shower: "---> 点右边编辑查看示例效果",
     remote2: "2",
-    editable: true
+    editable: true,
+    switch: "shallow",
+    color: "red",
+    allComponent: "shallow"
   },
   {
     compute: false,
