@@ -30,6 +30,7 @@ export default async function ({ crudExpose, context }: CreateCrudOptionsProps):
         delRequest
       },
       form: {
+        uniKey: "baseForm",
         layout: context.labelLayoutRef,
         labelCol: {
           //固定label宽度
