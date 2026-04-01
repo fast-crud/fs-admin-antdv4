@@ -98,6 +98,12 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
             order: compute(({ form }) => {
               return -1;
             })
+          },
+          column: {
+            component: {
+              name: "fs-dict-radio",
+              vModel: "value"
+            }
           }
         },
         componentName: {
@@ -182,6 +188,38 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
                 return form.color;
               })
             }
+          }
+        },
+        allComponent: {
+          title: "整个组件动态",
+          type: "text",
+          form: {
+            component: compute(({ form }) => {
+              if (form.switch === "shallow") {
+                return {
+                  name: ShallowComponent,
+                  color: form.color
+                };
+              }
+              return {
+                name: () => CustomTag,
+                color: form.color
+              };
+            })
+          },
+          column: {
+            component: compute(({ form }) => {
+              if (form.switch === "shallow") {
+                return {
+                  name: ShallowComponent,
+                  color: form.color
+                };
+              }
+              return {
+                name: () => CustomTag,
+                color: form.color
+              };
+            })
           }
         }
       }
