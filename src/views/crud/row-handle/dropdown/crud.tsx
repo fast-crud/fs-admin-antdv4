@@ -29,7 +29,7 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
         delRequest
       },
       rowHandle: {
-        width: 240,
+        width: 350,
         align: "left",
         buttons: {
           edit: {
@@ -43,6 +43,39 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
               return row.radio !== "0";
             }),
             dropdown: true //---------》给想要折叠的按钮配置dropdown为true，就会放入dropdown中《---------------
+          },
+          audit: {
+            show: true,
+            dropdown: true,
+            dropdownItem: {
+              danger: false
+            },
+            render(scope: any) {
+              const confirm = () => {
+                message.success(`已审核 ID 为 ${scope.row.id} 的记录`);
+              };
+              const stopMenuClick = (event: MouseEvent) => {
+                event.stopPropagation();
+              };
+              return (
+                <a-popconfirm title="确认审核这条记录吗？" ok-text="审核" cancel-text="取消" onConfirm={confirm}>
+                  <a-button type="link" onClick={stopMenuClick}>
+                    审核
+                  </a-button>
+                </a-popconfirm>
+              );
+            }
+          },
+          disabledExample: {
+            text: "禁用示例",
+            dropdown: true,
+            disabled: true,
+            dropdownItem: {
+              danger: true
+            },
+            click() {
+              message.success("此操作已被禁用，不会触发");
+            }
           },
           orderExample: {
             text: "我排前面",
