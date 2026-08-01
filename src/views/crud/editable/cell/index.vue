@@ -12,27 +12,44 @@
         <span>{{ scope.row.slot }}=插槽显示</span>
       </template>
       <template v-if="crudBinding" #actionbar-right>
-        <!--      <fs-button class="ml-1" @click="addRow">添加行</fs-button>-->
-        <a-radio-group v-model:value="crudBinding.table.editable.enabled" class="ml-5">
-          <a-radio-button :value="true">启用编辑</a-radio-button>
-          <a-radio-button :value="false">退出编辑</a-radio-button>
-        </a-radio-group>
-        <fs-label label="排他式激活" class="ml-5" title="激活某个cell时，其他已激活的自动关闭，永远只有一个cell被激活">
-          <a-switch v-model:checked="crudBinding.table.editable.exclusive" class="ml-5"> </a-switch>
-        </fs-label>
-
-        <fs-label label="排他式激活效果" class="ml-5" title="排他式激活时，将未关闭的自动保存还是取消">
-          <a-radio-group v-model:value="crudBinding.table.editable.exclusiveEffect" class="ml-5">
-            <a-radio-button value="cancel">自动取消</a-radio-button>
-            <a-radio-button value="save">自动保存</a-radio-button>
+        <div style="font-size: 12px" class="flex">
+          <!--      <fs-button class="ml-1" @click="addRow">添加行</fs-button>-->
+          <a-radio-group v-model:value="crudBinding.table.editable.enabled" class="mr-1">
+            <a-radio-button :value="true">启用编辑</a-radio-button>
+            <a-radio-button :value="false">退出编辑</a-radio-button>
           </a-radio-group>
-        </fs-label>
+          <fs-label compact label="显示确认" title="单元格进入编辑状态后，是否显示确认操作">
+            <a-switch v-model:checked="crudBinding.table.editable.showAction.submit" />
+          </fs-label>
+          <fs-label compact label="显示取消" title="单元格进入编辑状态后，是否显示取消操作">
+            <a-switch v-model:checked="crudBinding.table.editable.showAction.cancel" />
+          </fs-label>
+          <fs-label compact label="回车确认" title="编辑普通输入框时，按 Enter 直接确认提交">
+            <a-switch v-model:checked="crudBinding.table.editable.submitOnEnter" />
+          </fs-label>
+          <fs-label compact title="通过单击、双击或上方按钮激活单元格编辑">
+            <a-radio-group v-model:value="crudBinding.table.editable.activeTrigger">
+              <a-radio-button value="onClick">单击</a-radio-button>
+              <a-radio-button value="onDblclick">双击</a-radio-button>
+            </a-radio-group>
+          </fs-label>
+          <fs-label compact label="排他式激活" title="激活某个cell时，其他已激活的自动关闭，永远只有一个cell被激活">
+            <a-switch v-model:checked="crudBinding.table.editable.exclusive"> </a-switch>
+          </fs-label>
 
-        <template v-if="crudBinding.table.editable.enabled">
-          <fs-button class="ml-5" @click="active">激活全部编辑</fs-button>
-          <fs-button class="ml-5" @click="cancel">取消/恢复原状</fs-button>
-          <fs-button class="ml-5" @click="log">log</fs-button>
-        </template>
+          <fs-label compact label="排他式激活效果" title="排他式激活时，将未关闭的自动保存还是取消">
+            <a-radio-group v-model:value="crudBinding.table.editable.exclusiveEffect">
+              <a-radio-button value="cancel">自动取消</a-radio-button>
+              <a-radio-button value="save">自动保存</a-radio-button>
+            </a-radio-group>
+          </fs-label>
+
+          <template v-if="crudBinding.table.editable.enabled">
+            <fs-button class="ml-1" @click="active">激活全部编辑</fs-button>
+            <fs-button class="ml-1" @click="cancel">取消/恢复原状</fs-button>
+            <fs-button class="ml-1" @click="log">log</fs-button>
+          </template>
+        </div>
       </template>
     </fs-crud>
   </fs-page>

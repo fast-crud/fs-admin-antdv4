@@ -35,6 +35,10 @@ export default {
       defineAsyncComponent(() => import("ant-design-vue/es/radio/Group"))
     );
     app.component(
+      "ARadioButton",
+      defineAsyncComponent(() => import("ant-design-vue/es/radio/RadioButton"))
+    );
+    app.component(
       "ATable",
       defineAsyncComponent(() => import("ant-design-vue/es/table/Table"))
     );

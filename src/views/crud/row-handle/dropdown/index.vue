@@ -12,9 +12,6 @@
           <fs-label label="禁用普通菜单项">
             <a-switch v-model:checked="crudBinding.rowHandle.buttons.disabledExample.disabled" />
           </fs-label>
-          <fs-label label="折叠删除按钮">
-            <a-switch v-model:checked="crudBinding.rowHandle.buttons.remove.dropdown" />
-          </fs-label>
         </a-space>
       </template>
     </fs-crud>

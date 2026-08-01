@@ -106,6 +106,12 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
       table: {
         editable: {
           mode: "cell",
+          showAction: {
+            submit: true,
+            cancel: true
+          },
+          submitOnEnter: true,
+          activeTrigger: "onClick",
           exclusive: true,
           //排他式激活效果，将其他行的编辑状态触发保存
           exclusiveEffect: "save", //自动保存其他行编辑状态，cancel = 自动关闭其他行编辑状态
