@@ -16,6 +16,17 @@
             </template>
           </fs-table-select>
         </fs-label>
+
+        <fs-label label="当前选中省略">
+          <fs-table-select
+            v-model="multiValue"
+            :dict="singleDictRef"
+            :multiple="true"
+            :values-format="{ maxVisible: 1, labelFormatter: formatLabel }"
+            :create-crud-options="createCrudOptionsText"
+          />
+          <a-button @click="setMultiValue"> 设置三项 </a-button>
+        </fs-label>
       </div>
     </template>
     <fs-crud ref="crudRef" v-bind="crudBinding" />
@@ -42,6 +53,7 @@ export default defineComponent({
     });
 
     const value = ref(null);
+    const multiValue = ref([1, 2, 3]);
 
     const singleDictRef = dict({
       value: "id",
@@ -54,13 +66,22 @@ export default defineComponent({
     function setValue() {
       value.value = 1;
     }
+    function setMultiValue() {
+      multiValue.value = [1, 2, 3];
+    }
+    function formatLabel(item: any) {
+      return `${item.id}.${item.name}`;
+    }
     return {
       crudBinding,
       crudRef,
       value,
+      multiValue,
       singleDictRef,
       createCrudOptionsText,
-      setValue
+      setValue,
+      setMultiValue,
+      formatLabel
     };
   }
 });

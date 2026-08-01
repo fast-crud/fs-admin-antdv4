@@ -119,6 +119,7 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
               crossPage: true,
               multiple: true,
               valuesFormat: {
+                maxVisible: 1,
                 labelFormatter: (item: any) => {
                   return `${item.id}.${item.name}`;
                 }
