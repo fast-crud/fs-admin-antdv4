@@ -311,6 +311,12 @@ export const crudResources = [
             component: "/crud/component/code/index.vue"
           },
           {
+            title: "Markdown 编辑器",
+            name: "ComponentMarkdown",
+            path: "/crud/component/markdown",
+            component: "/crud/component/markdown/index.vue"
+          },
+          {
             title: "图标",
             name: "ComponentIcon",
             path: "/crud/component/icon",

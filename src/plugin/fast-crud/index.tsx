@@ -13,7 +13,9 @@ import { notification } from "ant-design-vue";
 import { usePreferences } from "/@/vben/preferences";
 import { columnSizeSaver } from "/@/plugin/fast-crud/column-size-saver";
 import { FsEditorCode } from "@fast-crud/editor-code";
-import "@fast-crud/editor-code/dist/style.css"
+import "@fast-crud/editor-code/dist/style.css";
+import { FsEditorMarkdown } from "@fast-crud/editor-markdown";
+import "@fast-crud/editor-markdown/dist/style.css";
 function install(app: any, options: any = {}) {
   app.use(UiAntdv);
   //设置日志级别
@@ -345,6 +347,7 @@ function install(app: any, options: any = {}) {
   app.use(FsExtendsCopyable);
   app.use(FsExtendsInput);
   app.use(FsEditorCode);
+  app.use(FsEditorMarkdown);
 
   const { addTypes, getType } = useTypes();
   //此处演示修改官方字段类型
