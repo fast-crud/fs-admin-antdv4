@@ -101,7 +101,8 @@ export default async function ({ crudExpose }: CreateCrudOptionsProps): Promise<
           title: "列设置禁用",
           type: "text",
           column: {
-            columnSetDisabled: true
+            columnSetDisabled: true,
+            columnSetTitle: "禁用（标题自定义）"
           }
         },
         hidden: {
