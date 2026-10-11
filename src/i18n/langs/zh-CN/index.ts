@@ -1,3 +1,5 @@
+import vben from "./vben";
+// @ts-ignore
 //注意： @符号是保留字符，需要用{'@'}替换
 export default {
   app: {
@@ -11,5 +13,6 @@ export default {
     rowHandle: {
       title: "操作列"
     }
-  }
+  },
+  ...vben
 };
