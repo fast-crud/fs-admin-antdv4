@@ -1,3 +1,4 @@
+//注意： @符号是保留字符，需要用{'@'}替换
 export default {
   app: {
     crud: { i18n: { name: "姓名", city: "城市", status: "状态" } },

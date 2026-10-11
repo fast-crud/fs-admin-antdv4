@@ -3,7 +3,7 @@ import App from "./App.vue";
 // import Antd from "ant-design-vue";
 import Antd from "./plugin/antdv-async/index";
 import "./style/common.less";
-import i18n from "./i18n";
+import { i18n, loadLocaleMessages } from "/@/i18n";
 import components from "./components";
 import router from "./router";
 import plugin from "./plugin/";
@@ -17,7 +17,7 @@ async function bootstrap() {
   const app = createApp(App);
   // app.use(Antd);
   app.use(Antd);
-  await setupVben(app);
+  await setupVben(app, { loadLocaleMessages, router });
   app.use(router);
   app.use(i18n);
   // app.use(store);

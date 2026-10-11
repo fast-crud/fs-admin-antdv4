@@ -1,20 +1,12 @@
-import { createI18n } from "vue-i18n";
-import en from "./locale/en";
-import zh from "./locale/zh_CN";
-const messages = {
-  en: {
-    label: "English",
-    ...en
-  },
-  "zh-cn": {
-    label: "简体中文",
-    ...zh
-  }
-};
+import { i18n, loadLocaleMessages, loadLocalesMap, loadLocalesMapFromDir, setupI18n, setI18nLanguage, useI18n } from "./i18n";
 
-export default createI18n({
-  legacy: false,
-  locale: "zh-cn",
-  fallbackLocale: "zh-cn",
-  messages
-});
+const $t = i18n.global.t;
+const $te = i18n.global.te;
+
+export { $t, $te, i18n, loadLocaleMessages, loadLocalesMap, loadLocalesMapFromDir, setupI18n, setI18nLanguage, useI18n };
+export { type ImportLocaleFn, type LocaleSetupOptions, type SupportedLanguagesType } from "./typing";
+// export type { CompileError } from "@intlify/core-base";
+
+// export { useI18n } from "vue-i18n";
+
+export type { Locale } from "vue-i18n";

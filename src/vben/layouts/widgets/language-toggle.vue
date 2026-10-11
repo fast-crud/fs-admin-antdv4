@@ -3,7 +3,7 @@ import type { SupportedLanguagesType } from "/@/vben/locales";
 
 import { SUPPORT_LANGUAGES } from "/@/vben/constants";
 import { Languages } from "/@/vben/icons";
-import { loadLocaleMessages } from "/@/vben/locales";
+import { loadLocaleMessages } from "/@/i18n";
 import { preferences, updatePreferences } from "/@/vben/preferences";
 
 import { VbenDropdownRadioMenu, VbenIconButton } from "/@/vben//shadcn-ui";

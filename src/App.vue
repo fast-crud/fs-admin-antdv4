@@ -1,5 +1,5 @@
 <template>
-  <AConfigProvider :locale="locale" :theme="tokenTheme">
+  <AConfigProvider :locale="antdvLocale" :theme="tokenTheme">
     <fs-form-provider>
       <router-view v-if="routerEnabled" />
     </fs-form-provider>
@@ -17,31 +17,25 @@ import { usePreferences, preferences } from "/@/vben/preferences";
 import { useAntdDesignTokens } from "/@/vben/hooks";
 import { theme } from "ant-design-vue";
 import AConfigProvider from "ant-design-vue/es/config-provider";
+import { antdvLocale } from "./i18n/antdv";
+import { setI18nLanguage } from "./i18n";
 defineOptions({
   name: "App"
 });
 
 //刷新页面方法
 const routerEnabled = ref(true);
-const locale = ref(zhCN);
 async function reload() {
   // routerEnabled.value = false;
   // await nextTick();
   // routerEnabled.value = true;
 }
-function localeChanged(value: any) {
-  console.log("locale changed:", value);
-  if (value === "zh-cn") {
-    locale.value = zhCN;
-    dayjs.locale("zh-cn");
-  } else if (value === "en") {
-    locale.value = enUS;
-    dayjs.locale("en");
-  }
-}
-localeChanged("zh-cn");
+
 provide("fn:router.reload", reload);
-provide("fn:locale.changed", localeChanged);
+provide("fn:locale.changed", setI18nLanguage);
+
+const locale = preferences.app.locale;
+setI18nLanguage(locale);
 
 const { isDark } = usePreferences();
 const { tokens } = useAntdDesignTokens();

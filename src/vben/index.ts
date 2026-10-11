@@ -9,10 +9,10 @@ import "./styles";
 import "./styles/antd/index.css";
 
 import { useTitle } from "@vueuse/core";
-import { setupI18n } from "/@/vben/locales";
+import { setupI18n, useI18n } from "../i18n";
 
-export async function setupVben(app: any) {
-  await setupI18n(app);
+export async function setupVben(app: any, { loadMessages, router }: any) {
+  await setupI18n(app, { loadMessages });
   const store = await initStores(app, { namespace: "fs" });
 
   return { store };
